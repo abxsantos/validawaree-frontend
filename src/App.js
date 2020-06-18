@@ -1,10 +1,12 @@
 import React from 'react';
 import './App.css';
 
-import IncRow from './components/IncRowNumber';
-import DecRow from './components/DecRowNumber';
-import AddColumnNumber from './components/AddColumnNumber';
-import DelColumnNumber from './components/DelColumnNumber';
+import IncRow from './components/buttons/IncRowNumber';
+import DecRow from './components/buttons/DecRowNumber';
+import AddColumnNumber from './components/buttons/AddColumnNumber';
+import DelColumnNumber from './components/buttons/DelColumnNumber';
+import SimpleTable from './components/table/LinearityTable';
+// import FocusableCell from './components/table/EditableTable';
 
 
 
@@ -15,6 +17,8 @@ function App() {
       <DecRow />
       <AddColumnNumber />
       <DelColumnNumber />
+      <SimpleTable />
+      {/* <FocusableCell /> */}
     </div>
   );
 }

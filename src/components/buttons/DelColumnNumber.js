@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button';
 
-import { delColumn } from '../actions'
+import { delColumn } from '../../actions'
 
 const DelColumn = ({column_number, delColumn}) => {
   return (

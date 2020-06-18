@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button';
 
-import { incNumber } from '../actions'
+import { decNumber } from '../../actions'
 
-const IncRow = ({number, incNumber}) => {
+const DecRow = ({number, decNumber}) => {
   return (
     <div>
-      <Button variant="contained" onClick={incNumber}>Add Row</Button>
+      <Button variant="contained" onClick={decNumber}>Remove Row</Button>
       Rows: {number}
     </div>
   );
@@ -21,8 +21,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    incNumber: () => {dispatch(incNumber())}
+    decNumber: () => {dispatch(decNumber())}
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(IncRow);
+export default connect(mapStateToProps, mapDispatchToProps)(DecRow);
