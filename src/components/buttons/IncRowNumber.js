@@ -16,7 +16,8 @@ const IncRow = ({number, incNumber}) => {
 
 
 const mapStateToProps = state => ({
-  number: state.change_row_number.number
+  number: state.change_row_number.number,
+  row_data: state.change_row_number.row_data
 })
 
 const mapDispatchToProps = dispatch => {

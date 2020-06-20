@@ -6,7 +6,7 @@ import DecRow from './components/buttons/DecRowNumber';
 import AddColumnNumber from './components/buttons/AddColumnNumber';
 import DelColumnNumber from './components/buttons/DelColumnNumber';
 import SimpleTable from './components/table/LinearityTable';
-// import FocusableCell from './components/table/EditableTable';
+
 
 
 
@@ -18,7 +18,6 @@ function App() {
       <AddColumnNumber />
       <DelColumnNumber />
       <SimpleTable />
-      {/* <FocusableCell /> */}
     </div>
   );
 }
