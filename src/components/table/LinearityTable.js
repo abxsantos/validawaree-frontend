@@ -25,8 +25,7 @@ function SimpleTable({ row_data }) {
             <TableCell>Dessert (10 g serving)</TableCell>
             <TableCell align="right">Calories</TableCell>
             <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            {/* <TableCell align="right">ADDED&nbsp;(g)</TableCell> */}
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>  
+            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
             <TableCell align="right">Protein&nbsp;(g)</TableCell>
           </TableRow>
         </TableHead>
@@ -42,23 +41,26 @@ const mapStateToProps = (state) => ({
 });
 
 function buildNewRows(row_data) {
-  var row_cell = [];
-  for (var value of Object.entries(row_data)) {
-    value.forEach((data) => {
-      row_cell.push(
-        <TableRow key={data.name}>
-          <TableCell component="th" scope="row">
-            {data.name}
-          </TableCell>
-          <TableCell align="right">{data.calories}</TableCell>
-          <TableCell align="right">{data.fat}</TableCell>
-          <TableCell align="right">{data.carbs}</TableCell>
-          <TableCell align="right">{data.protein}</TableCell>
-        </TableRow>
-      );
-    });
-  }
-  return row_cell;
+  var table_row = [];
+  row_data.forEach((row_set) => {
+    table_row.push(<TableRow key={row_set[0]}>{buildNewRowCells(row_set)}</TableRow>);
+  });
+  return table_row;
 }
+
+function buildNewRowCells(row_set) {
+  var cell_data = [];
+  row_set.forEach((cell_value) => {
+    cell_value === row_set[0]  // Check if its the first value (concentration)
+      ? cell_data.push(
+          <TableCell component="th" scope="row">
+            {cell_value}
+          </TableCell>
+        )
+      : cell_data.push(<TableCell align="center">{cell_value}</TableCell>);
+  });
+  return cell_data;
+}
+
 
 export default connect(mapStateToProps)(SimpleTable);

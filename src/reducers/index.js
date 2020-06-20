@@ -19,9 +19,7 @@ const initialState = {
 // initial value for the 'number' value in the correspondant type
 const change_row_number = (state = initialState, action) => {
   switch (action.type) {
-    case INC_NUMBER:
-      console.log(rows)
-      console.log(state)     
+    case INC_NUMBER:  
       return { ...state, number: action.number, row_data: action.row_data };      
     case DEC_NUMBER:
       return { ...state, number: action.number };
