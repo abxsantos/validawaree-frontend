@@ -12,33 +12,40 @@ import TextField from '@material-ui/core/TextField';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
+    minWidth: 650
   },
 });
 
-function SamplesTable({rows, columns, data}) {
+function SamplesTable({rows, columns, data, concentrations, averages, stdDeviations}) {
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">Concentration</TableCell>
+            <TableCell align="right">concentrations</TableCell>
             {buildColumns(columns)}
             <TableCell align="right">Avg</TableCell>
             <TableCell align="right">Std. Dev</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{buildRows(rows, columns, data)}</TableBody>
+        <TableBody>{buildRows(rows, columns, data, concentrations, averages, stdDeviations)}</TableBody>
       </Table>
     </TableContainer>
   );
+}
+
+function handleChange(event, id) {
+  console.log(id);
 }
 
 const mapStateToProps = (state) => ({
   rows: state.samples.numRows,
   columns: state.samples.numColumns,
   data: state.samples.data,
+  concentrations: state.samples.concentrations,
+  averages: state.samples.averages,
+  stdDeviations: state.samples.stdDeviations,
 });
 
 function buildColumns(columns) {
@@ -49,16 +56,16 @@ function buildColumns(columns) {
   return items;
 }
 
-function buildRows(rows, columns, data) {
+function buildRows(rows, columns, data, concentrations, averages, stdDeviations) {
   let rowItems = [];
   for (let i = 0; i < rows; ++i) {
     let items = [];
-    items.push(<TableCell align="right"><TextField id="standard-basic" label="Concentration" defaultValue={data[i][0]}/></TableCell>);
+    items.push(<TableCell align="right"><TextField id="standard-basic" label="concentrations" defaultValue={concentrations[i]}/></TableCell>);
     for (let j = 1; j <= columns; ++j) {
-      items.push(<TableCell align="right"><TextField id="standard-basic" label="Sample #{j}" defaultValue={data[i][j]}/></TableCell>);
+      items.push(<TableCell align="right"><TextField id="standard-basic" label="Sample #{j}" defaultValue={data[i][j]} onChange={(e) => handleChange(e, "swqjekqwj")}/></TableCell>);
     }
-    items.push(<TableCell align="right">{data[i][columns+1]}</TableCell>);
-    items.push(<TableCell align="right">{data[i][columns+2]}</TableCell>);
+    items.push(<TableCell align="right">{averages[i]}</TableCell>);
+    items.push(<TableCell align="right">{stdDeviations[i]}</TableCell>);
     rowItems.push(<TableRow>{items}</TableRow>);
   }
   return rowItems;

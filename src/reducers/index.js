@@ -4,7 +4,10 @@ import { INC_ROW, INC_COLUMN } from "../actions";
 const initialState = {
   numRows: 1,
   numColumns: 3,
-  data: [[0, 0, 0, 0, 0, 0]],
+  data: [[0, 0, 0]],
+  concentrations: [undefined],
+  averages: [1],
+  stdDeviations: [10],
 };
 
 const addRow = (columns, data) => {
@@ -13,7 +16,6 @@ const addRow = (columns, data) => {
 }
 
 const addColumn = (rows, columns, data) => {
-  debugger
   for (let i = 0; i < rows; ++i) {
     data[i].splice(columns, 0, 0);
   }
@@ -27,6 +29,9 @@ const samples = (state = initialState, action) => {
         ...state,
         numRows: state.numRows + 1,
         data: addRow(state.numColumns, [...state.data]),
+        concentrations: state.concentrations.concat(undefined),
+        averages: state.averages.concat(undefined),
+        stdDeviations: state.stdDeviations.concat(undefined),
       }
     case INC_COLUMN:
       return { 
@@ -38,6 +43,8 @@ const samples = (state = initialState, action) => {
       return state;
   }
 };
+
+
 
 export default combineReducers({
   samples,
