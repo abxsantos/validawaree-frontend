@@ -57,7 +57,7 @@ function buildNewRowCells(row_set) {
             {cell_value}
           </TableCell>
         )
-      : cell_data.push(<TableCell align="center">{cell_value}</TableCell>);
+      : cell_data.push(<TableCell align="right">{cell_value}</TableCell>);
   });
   return cell_data;
 }
