@@ -1,47 +1,44 @@
 import { combineReducers } from "redux";
-import {
-  row,
-  column,
-  rows,
-  ADD_COLUMN,
-  DEL_COLUMN,
-  INC_NUMBER,
-  DEC_NUMBER,
-} from "../actions";
+import { INC_ROW, INC_COLUMN } from "../actions";
 
-// This is the initial value
 const initialState = {
-  number: row,
-  column_number: column,
-  row_data: rows,
+  numRows: 1,
+  numColumns: 3,
+  data: [[0, 0, 0, 0, 0, 0]],
 };
-// this will go into the action/index.js and change the
-// initial value for the 'number' value in the correspondant type
-const change_row_number = (state = initialState, action) => {
-  switch (action.type) {
-    case INC_NUMBER:  
-      return { ...state, number: action.number, row_data: action.row_data };      
-    case DEC_NUMBER:
-      return { ...state, number: action.number };
 
-    default:
-      return state;
+const addRow = (columns, data) => {
+  data.push(new Array(columns + 3).fill(0));
+  return data;
+}
+
+const addColumn = (rows, columns, data) => {
+  debugger
+  for (let i = 0; i < rows; ++i) {
+    data[i].splice(columns, 0, 0);
   }
-};
+  return data;
+}
 
-const change_column_number = (state = initialState, action) => {
+const samples = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_COLUMN:
-      return { ...state, column_number: action.column_number };
-    case DEL_COLUMN:
-      return { ...state, column_number: action.column_number };
-
+    case INC_ROW:  
+      return {
+        ...state,
+        numRows: state.numRows + 1,
+        data: addRow(state.numColumns, [...state.data]),
+      }
+    case INC_COLUMN:
+      return { 
+        ...state,
+        numColumns: state.numColumns + 1,
+        data: addColumn(state.numRows, state.numColumns + 1, [...state.data]),
+      };
     default:
       return state;
   }
 };
 
 export default combineReducers({
-  change_row_number,
-  change_column_number,
+  samples,
 });
