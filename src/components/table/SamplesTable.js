@@ -13,6 +13,8 @@ import TextField from '@material-ui/core/TextField';
 
 import { updateSampleValue } from '../../actions';
 
+import { updateSampleValue } from '../../actions';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650
