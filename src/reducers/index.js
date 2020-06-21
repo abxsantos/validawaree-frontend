@@ -22,9 +22,18 @@ const addColumn = (rows, columns, data) => {
   return data;
 }
 
-const updateValue = (action, data) => {
+// https://dev.to/sagar/three-dots---in-javascript-26ci
+const updateValues = (action, state) => {
+  let data = [...state.data];
   data[action.row][action.column] = action.updatedValue;
-  return data
+
+  let averages = state.averages;
+  averages[action.row] = 10;
+
+  let stdDeviations = state.stdDeviations;
+  stdDeviations[action.row] = 10;
+
+  return {data: data, averages: averages, stdDeviations: stdDeviations};
 }
 
 const samples = (state = initialState, action) => {
@@ -33,7 +42,7 @@ const samples = (state = initialState, action) => {
       return {
         ...state,
         numRows: state.numRows + 1,
-        data: addRow(state.numColumns, [...state.data]),
+        data: addRow(state.numColumns, state.data),
         concentrations: state.concentrations.concat(undefined),
         averages: state.averages.concat(undefined),
         stdDeviations: state.stdDeviations.concat(undefined),
@@ -42,13 +51,13 @@ const samples = (state = initialState, action) => {
       return { 
         ...state,
         numColumns: state.numColumns + 1,
-        data: addColumn(state.numRows, state.numColumns + 1, [...state.data]),
+        data: addColumn(state.numRows, state.numColumns + 1, state.data),
       };
     case UPD_SAMPLE_VALUE:
       return {
         ...state,
-        data: updateValue(action, [...state.data]),
-      };
+        ...updateValues(action, state)
+      }
     default:
       return state;
   }
