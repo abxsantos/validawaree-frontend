@@ -13,14 +13,14 @@ const initialState = {
 const addRow = (columns, data) => {
   data.push(new Array(columns + 3).fill(0));
   return data;
-}
+};
 
 const addColumn = (rows, columns, data) => {
   for (let i = 0; i < rows; ++i) {
     data[i].splice(columns, 0, 0);
   }
   return data;
-}
+};
 
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 const updateValues = (action, state) => {
@@ -28,13 +28,21 @@ const updateValues = (action, state) => {
   data[action.row][action.column] = action.updatedValue;
 
   let averages = state.averages;
-  averages[action.row] = 10;
+  averages[action.row] = data[action.row].reduce(
+    (a, b) => parseFloat(a) + parseFloat(b)
+  );
+  averages[action.row] /= data[action.row].length;
 
   let stdDeviations = state.stdDeviations;
-  stdDeviations[action.row] = 10;
+  stdDeviations[action.row] = Math.sqrt(
+    data[action.row]
+      .map((value) => Math.pow(parseFloat(value) - averages[action.row], 2))
+      .reduce((a, b) => a + b) /
+      (data[action.row].length - 1)
+  );
 
-  return {data: data, averages: averages, stdDeviations: stdDeviations};
-}
+  return { data: data, averages: averages, stdDeviations: stdDeviations };
+};
 
 const samples = (state = initialState, action) => {
   switch (action.type) {
@@ -48,7 +56,7 @@ const samples = (state = initialState, action) => {
         stdDeviations: state.stdDeviations.concat(undefined),
       };
     case INC_COLUMN:
-      return { 
+      return {
         ...state,
         numColumns: state.numColumns + 1,
         data: addColumn(state.numRows, state.numColumns + 1, state.data),
@@ -56,13 +64,12 @@ const samples = (state = initialState, action) => {
     case UPD_SAMPLE_VALUE:
       return {
         ...state,
-        ...updateValues(action, state)
-      }
+        ...updateValues(action, state),
+      };
     default:
       return state;
   }
 };
-
 
 export default combineReducers({
   samples,
