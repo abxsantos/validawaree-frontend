@@ -9,7 +9,9 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
+
+import { updateSampleValue } from '../../actions';
 
 import { updateSampleValue } from '../../actions';
 
@@ -19,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SamplesTable({rows, columns, data, concentrations, averages, stdDeviations}) {
+function SamplesTable(props) {
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -27,19 +29,19 @@ function SamplesTable({rows, columns, data, concentrations, averages, stdDeviati
         <TableHead>
           <TableRow>
             <TableCell align="right">concentrations</TableCell>
-            {buildColumns(columns)}
+            {buildColumns(props.columns)}
             <TableCell align="right">Avg</TableCell>
             <TableCell align="right">Std. Dev</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{buildRows(rows, columns, data, concentrations, averages, stdDeviations)}</TableBody>
+        <TableBody>{buildRows(props)}</TableBody>
       </Table>
     </TableContainer>
   );
 }
 
-function handleChange(event, row, column) {
-  updateSampleValue(event.target.value, row, column);
+function handleChange(event, row, column, props) {
+  props.updateSampleValue(event.target.value, row, column);
 }
 
 const mapStateToProps = (state) => ({
@@ -65,16 +67,16 @@ function buildColumns(columns) {
   return items;
 }
 
-function buildRows(rows, columns, data, concentrations, averages, stdDeviations) {
+function buildRows(props) {
   let rowItems = [];
-  for (let i = 0; i < rows; ++i) {
+  for (let i = 0; i < props.rows; ++i) {
     let items = [];
-    items.push(<TableCell key={`concentration-${i}`} align="right"><Input label="concentrations" value={concentrations[i]}/></TableCell>);
-    for (let j = 0; j < columns; ++j) {
-      items.push(<TableCell key={`sample-${i}${j}`} align="right"><Input label={`Sample ${j}`} onChange={(e) => handleChange(e, i, j)}/></TableCell>);
+    items.push(<TableCell key={`concentration-${i}`} align="right"><TextField label="concentrations" value={props.concentrations[i]}/></TableCell>);
+    for (let j = 0; j < props.columns; ++j) {
+      items.push(<TableCell key={`sample-${i}${j}`} align="right"><TextField label={`Sample ${j+1}`} value={props.data[i][j]} onChange={(e) => handleChange(e, i, j, props)}/></TableCell>);
     }
-    items.push(<TableCell key={`avg-${i}`} align="right">{averages[i]}</TableCell>);
-    items.push(<TableCell key={`stddev-${i}`} align="right">{stdDeviations[i]}</TableCell>);
+    items.push(<TableCell key={`avg-${i}`} align="right">{props.averages[i]}</TableCell>);
+    items.push(<TableCell key={`stddev-${i}`} align="right">{props.stdDeviations[i]}</TableCell>);
     rowItems.push(<TableRow key={`row-${i}`}>{items}</TableRow>);
   }
   return rowItems;

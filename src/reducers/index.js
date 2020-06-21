@@ -22,10 +22,9 @@ const addColumn = (rows, columns, data) => {
   return data;
 }
 
-const updateValue = (action, state) => {
-  console.log(action);
-  console.log(state);
-  return state.data
+const updateValue = (action, data) => {
+  data[action.row][action.column] = action.updatedValue;
+  return data
 }
 
 const samples = (state = initialState, action) => {
@@ -48,7 +47,7 @@ const samples = (state = initialState, action) => {
     case UPD_SAMPLE_VALUE:
       return {
         ...state,
-        data: updateValue(action, [...state])
+        data: updateValue(action, [...state.data]),
       };
     default:
       return state;
