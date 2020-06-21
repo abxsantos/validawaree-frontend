@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -10,13 +11,15 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TextField from '@material-ui/core/TextField';
 
+import { updateSampleValue } from '../../actions';
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650
   },
 });
 
-function SamplesTable({rows, columns, data, concentrations, averages, stdDeviations}) {
+function SamplesTable(props) {
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -24,19 +27,19 @@ function SamplesTable({rows, columns, data, concentrations, averages, stdDeviati
         <TableHead>
           <TableRow>
             <TableCell align="right">concentrations</TableCell>
-            {buildColumns(columns)}
+            {buildColumns(props.columns)}
             <TableCell align="right">Avg</TableCell>
             <TableCell align="right">Std. Dev</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>{buildRows(rows, columns, data, concentrations, averages, stdDeviations)}</TableBody>
+        <TableBody>{buildRows(props)}</TableBody>
       </Table>
     </TableContainer>
   );
 }
 
-function handleChange(event, id) {
-  console.log(id);
+function handleChange(event, row, column, props) {
+  props.updateSampleValue(event.target.value, row, column);
 }
 
 const mapStateToProps = (state) => ({
@@ -48,27 +51,33 @@ const mapStateToProps = (state) => ({
   stdDeviations: state.samples.stdDeviations,
 });
 
+const mapDispatchToProps = dispatch => {
+  return {
+    updateSampleValue: (updatedValue, row, column) => {dispatch(updateSampleValue(updatedValue, row, column))}
+  }
+}
+
 function buildColumns(columns) {
   let items = [];
   for (let i = 1; i <= columns; ++i) {
-    items.push(<TableCell align="right">Sample #{i}</TableCell>)
+    items.push(<TableCell key={`head-${i}`} align="right">Sample #{i}</TableCell>)
   }
   return items;
 }
 
-function buildRows(rows, columns, data, concentrations, averages, stdDeviations) {
+function buildRows(props) {
   let rowItems = [];
-  for (let i = 0; i < rows; ++i) {
+  for (let i = 0; i < props.rows; ++i) {
     let items = [];
-    items.push(<TableCell align="right"><TextField id="standard-basic" label="concentrations" defaultValue={concentrations[i]}/></TableCell>);
-    for (let j = 1; j <= columns; ++j) {
-      items.push(<TableCell align="right"><TextField id="standard-basic" label="Sample #{j}" defaultValue={data[i][j]} onChange={(e) => handleChange(e, "swqjekqwj")}/></TableCell>);
+    items.push(<TableCell key={`concentration-${i}`} align="right"><TextField label="concentrations" value={props.concentrations[i]}/></TableCell>);
+    for (let j = 0; j < props.columns; ++j) {
+      items.push(<TableCell key={`sample-${i}${j}`} align="right"><TextField label={`Sample ${j+1}`} value={props.data[i][j]} onChange={(e) => handleChange(e, i, j, props)}/></TableCell>);
     }
-    items.push(<TableCell align="right">{averages[i]}</TableCell>);
-    items.push(<TableCell align="right">{stdDeviations[i]}</TableCell>);
-    rowItems.push(<TableRow>{items}</TableRow>);
+    items.push(<TableCell key={`avg-${i}`} align="right">{props.averages[i]}</TableCell>);
+    items.push(<TableCell key={`stddev-${i}`} align="right">{props.stdDeviations[i]}</TableCell>);
+    rowItems.push(<TableRow key={`row-${i}`}>{items}</TableRow>);
   }
   return rowItems;
 }
 
-export default connect(mapStateToProps)(SamplesTable);
+export default connect(mapStateToProps, mapDispatchToProps)(SamplesTable);
