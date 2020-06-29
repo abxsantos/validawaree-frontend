@@ -1,11 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 
 import Button from "@material-ui/core/Button";
+import { updateLinearityResults } from "../../actions";
 
-// import { incColumn } from '../../actions'
-
-var json = {
+const jsonInputLinearityData = {
   analytical_data:
     "[[0.188, 0.192, 0.203], [0.349, 0.346, 0.348], [0.489, 0.482, 0.492], [0.637, 0.641, 0.641], [0.762, 0.768, 0.786], [0.931, 0.924, 0.925]]",
   concentration_data:
@@ -13,19 +12,19 @@ var json = {
 };
 
 function handleLinearityCalculation() {
-  fetch("/linearity_data", {
+  fetch("/linearity_result", {
     method: "POST",
     cache: "no-cache",
     headers: {
       content_type: "application/json",
     },
-    body: JSON.stringify(json),
+    body: JSON.stringify(jsonInputLinearityData),
   })
     .then((response) => {
       return response.json();
     })
-    .then((json) => {
-      console.log(json);
+    .then((jsonResultLinearityData) => {
+      updateLinearityResults(jsonResultLinearityData);
     });
 }
 
@@ -37,12 +36,10 @@ const CalculateLinearityButton = () => {
   );
 };
 
-export default CalculateLinearityButton;
+const mapDispatchToProps = dispatch => {
+  return {
+    updateLinearityResults: () => {dispatch(updateLinearityResults())}
+    }
+}
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     incColumn: () => {dispatch(incColumn())}
-//   }
-// }
-
-// export default connect(null, mapDispatchToProps)(IncColumnButton);
+export default connect(null, mapDispatchToProps)(CalculateLinearityButton);
