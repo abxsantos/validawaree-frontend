@@ -11,7 +11,7 @@ const jsonInputLinearityData = {
     "[[0.008, 0.008016, 0.008128], [0.016, 0.016032, 0.016256], [0.02, 0.02004, 0.02032],[0.027999996640000406, 0.028055996633280407, 0.02844799658624041], [0.032, 0.032064, 0.032512], [0.04, 0.04008, 0.04064]]",
 };
 
-function handleLinearityCalculation() {
+function handleLinearityCalculation(updateLinearityResults) {
   fetch("/linearity_result", {
     method: "POST",
     cache: "no-cache",
@@ -24,6 +24,7 @@ function handleLinearityCalculation() {
       return response.json();
     })
     .then((jsonResultLinearityData) => {
+      debugger
       updateLinearityResults(jsonResultLinearityData);
     });
 }
@@ -38,8 +39,8 @@ const CalculateLinearityButton = () => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateLinearityResults: () => {dispatch(updateLinearityResults())}
+    updateLinearityResults: (jsonResultLinearityData) => {dispatch(updateLinearityResults(jsonResultLinearityData))}
     }
 }
 
-export default connect(null, mapDispatchToProps)(CalculateLinearityButton);
+export default connect(mapDispatchToProps)(CalculateLinearityButton);

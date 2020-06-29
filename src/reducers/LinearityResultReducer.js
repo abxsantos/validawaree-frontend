@@ -5,12 +5,13 @@ const initialState = {
 };
 
 const linearity = (state = initialState, action) => {
+  
   switch (action.type) {
     case UPD_LINEARITY_RESULT:
+      debugger
       return {
         ...state,
-        linearityResult: action.linearityResult,
-        
+        linearityResult: Object.assign(state.linearityResult, action.linearityResult)// action.linearityResult,
       };
     default:
       return state;

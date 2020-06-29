@@ -23,8 +23,9 @@ export function updateSampleValue(updatedValue, row, column) {
 };
 
 export function updateLinearityResults(jsonLinearityResultData) {
+  debugger
   return {
     type: UPD_LINEARITY_RESULT,
-    linearityResults: jsonLinearityResultData,
+    linearityResults: jsonLinearityResultData
   }
 };
