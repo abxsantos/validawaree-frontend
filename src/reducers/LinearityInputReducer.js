@@ -1,4 +1,4 @@
-import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE } from "../actions";
+import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE } from "../actions";
 
 const initialState = {
   numRows: 1,
@@ -43,6 +43,12 @@ const updateValues = (action, state) => {
   return { data: data, averages: averages, stdDeviations: stdDeviations };
 };
 
+const updateConcentrationValues = (action, state) => {
+  let concentrations = state.concentrations;
+  concentrations[action.row] = action.updatedValue;
+  return { concentrations: concentrations };
+};
+
 const samples = (state = initialState, action) => {
   switch (action.type) {
     case INC_ROW:
@@ -64,6 +70,11 @@ const samples = (state = initialState, action) => {
       return {
         ...state,
         ...updateValues(action, state),
+      };
+    case UPD_CONCENTRATION_VALUE: 
+      return {
+        ...state,
+        ...updateConcentrationValues(action, state),
       };
     default:
       return state;

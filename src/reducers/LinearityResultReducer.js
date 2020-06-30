@@ -9,6 +9,7 @@ const linearity = (state = initialState, action) => {
     case UPD_LINEARITY_RESULT:
       return {
         ...state,
+        // TODO: split this result
         linearityResult: action.linearityResults
       };
     default:

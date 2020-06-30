@@ -11,7 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TextField from '@material-ui/core/TextField';
 
-import { updateSampleValue } from '../../actions';
+import { updateSampleValue, updateConcentrationValue } from '../../actions';
 
 const useStyles = makeStyles({
   table: {
@@ -42,6 +42,10 @@ function handleChange(event, row, column, props) {
   props.updateSampleValue(event.target.value, row, column);
 }
 
+function handleChangeC(event, row, props) {
+  props.updateConcentrationValue(event.target.value, row);
+}
+
 const mapStateToProps = (state) => ({
   rows: state.samples.numRows,
   columns: state.samples.numColumns,
@@ -53,7 +57,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = dispatch => {
   return {
-    updateSampleValue: (updatedValue, row, column) => {dispatch(updateSampleValue(updatedValue, row, column))}
+    updateSampleValue: (updatedValue, row, column) => {dispatch(updateSampleValue(updatedValue, row, column))},
+    updateConcentrationValue: (updatedValue, row) => {dispatch(updateConcentrationValue(updatedValue, row))}
   }
 }
 
@@ -69,7 +74,7 @@ function buildRows(props) {
   let rowItems = [];
   for (let i = 0; i < props.rows; ++i) {
     let items = [];
-    items.push(<TableCell key={`concentration-${i}`} align="right"><TextField label="concentrations" value={props.concentrations[i]}/></TableCell>);
+    items.push(<TableCell key={`concentration-${i}`} align="right"><TextField label="concentrations" value={props.concentrations[i]} onChange={(e) => handleChangeC(e, i, props)}/></TableCell>);
     for (let j = 0; j < props.columns; ++j) {
       items.push(<TableCell key={`sample-${i}${j}`} align="right"><TextField label={`Sample ${j+1}`} value={props.data[i][j]} onChange={(e) => handleChange(e, i, j, props)}/></TableCell>);
     }
