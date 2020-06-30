@@ -26,13 +26,13 @@ const updateValues = (action, state) => {
   let data = [...state.data];
   data[action.row][action.column] = action.updatedValue;
 
-  let averages = state.averages;
+  let averages = [...state.averages];
   averages[action.row] = data[action.row].reduce(
     (a, b) => parseFloat(a) + parseFloat(b)
   );
   averages[action.row] /= data[action.row].length;
 
-  let stdDeviations = state.stdDeviations;
+  let stdDeviations = [...state.stdDeviations];
   stdDeviations[action.row] = Math.sqrt(
     data[action.row]
       .map((value) => Math.pow(parseFloat(value) - averages[action.row], 2))
@@ -44,7 +44,7 @@ const updateValues = (action, state) => {
 };
 
 const updateConcentrationValues = (action, state) => {
-  let concentrations = state.concentrations;
+  let concentrations = [...state.concentrations];
   concentrations[action.row] = action.updatedValue;
   return { concentrations: concentrations };
 };
