@@ -1,23 +1,18 @@
 import React from 'react';
 import './App.css';
 
-import IncRow from './components/buttons/IncRowNumber';
-import DecRow from './components/buttons/DecRowNumber';
-import AddColumnNumber from './components/buttons/AddColumnNumber';
-import DelColumnNumber from './components/buttons/DelColumnNumber';
-import SimpleTable from './components/table/LinearityTable';
-
-
-
+import IncRowButton from './components/button/IncRowButton';
+import IncColumnButton from './components/button/IncColumnButton';
+import SamplesTable from './components/table/SamplesTable';
+import CalculateLinearityButton from './components/button/CalculateLinearityButton';
 
 function App() {
   return (
     <div className="App">
-      <IncRow />
-      <DecRow />
-      <AddColumnNumber />
-      <DelColumnNumber />
-      <SimpleTable />
+      <IncRowButton />
+      <IncColumnButton />
+      <SamplesTable />
+      <CalculateLinearityButton />
     </div>
   );
 }
