@@ -4,7 +4,9 @@ import './App.css';
 import IncRowButton from './components/button/IncRowButton';
 import IncColumnButton from './components/button/IncColumnButton';
 import SamplesTable from './components/table/SamplesTable';
-import CalculateLinearityButton from './components/button/CalculateLinearityButton';
+import CalculateLinearityButton from './components/regressionAnovaResults/CalculateLinearityButton';
+import LinearityAnovaTable from './components/regressionAnovaResults/RegressionAnovaTable';
+
 
 function App() {
   return (
@@ -13,6 +15,7 @@ function App() {
       <IncColumnButton />
       <SamplesTable />
       <CalculateLinearityButton />
+      <LinearityAnovaTable />
     </div>
   );
 }
