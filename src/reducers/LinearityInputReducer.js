@@ -3,20 +3,20 @@ import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE } from "
 const initialState = {
   numRows: 1,
   numColumns: 3,
-  data: [[0, 0, 0]],
+  data: [[undefined, undefined, undefined]],
   concentrations: [undefined],
   averages: [undefined],
   stdDeviations: [undefined],
 };
 
 const addRow = (columns, data) => {
-  data.push(new Array(columns + 3).fill(0));
+  data.push(new Array(columns).fill(undefined));
   return data;
 };
 
 const addColumn = (rows, columns, data) => {
   for (let i = 0; i < rows; ++i) {
-    data[i].splice(columns, 0, 0);
+    data[i].splice(columns, undefined, undefined);
   }
   return data;
 };

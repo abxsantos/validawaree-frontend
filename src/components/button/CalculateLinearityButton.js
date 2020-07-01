@@ -14,6 +14,7 @@ const CalculateLinearityButton = (props) => {
     <Button variant="contained" onClick={props.handleLinearityCalculation}>
     Calculate
     </Button>
+    <p>{JSON.stringify(props.linearityResults)}</p>
     <ComposedChart
         width={500}
         height={400}
