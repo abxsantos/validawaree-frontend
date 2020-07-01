@@ -32,9 +32,18 @@ export function updateConcentrationValue(updatedValue, row) {
 };
 
 export function updateLinearityResults(jsonLinearityResultData) {
+  console.log(jsonLinearityResultData.anova)
   return {
     type: UPD_LINEARITY_RESULT,
-    linearityResults: jsonLinearityResultData
+    regressionCoefficients: jsonLinearityResultData.regression_coefficients,
+    regressionAnova: jsonLinearityResultData.regression_anova,
+    // TODO: Implement outliers
+    // outliers: jsonLinearityResultData.regression_coefficients,
+    // cleaned_analytical_data: jsonLinearityResultData.regression_coefficients,
+    // cleaned_concentration_data: jsonLinearityResultData.regression_coefficients,
+    isNormalDistribution: jsonLinearityResultData.is_normal_distribution,
+    isHomokedastic: jsonLinearityResultData.is_homokedastic,
+    durbinWatsonValue: jsonLinearityResultData.durbin_watson_value,
   }
 };
 

@@ -14,7 +14,11 @@ const CalculateLinearityButton = (props) => {
     <Button variant="contained" onClick={props.handleLinearityCalculation}>
     Calculate
     </Button>
-    <p>{JSON.stringify(props.linearityResults)}</p>
+    <p>{JSON.stringify(props.regressionCoefficients)}</p>
+    <p>{JSON.stringify(props.regressionAnova)}</p>
+    <p>{JSON.stringify(props.isNormalDistribution)}</p>
+    <p>{JSON.stringify(props.isHomokedastic)}</p>
+    <p>{JSON.stringify(props.durbinWatsonValue)}</p>
     <ComposedChart
         width={500}
         height={400}
@@ -40,7 +44,16 @@ const CalculateLinearityButton = (props) => {
 
 const mapStateToProps = function (state) {
   return {
-    linearityResults: state.linearity.linearityResult,
+    regressionCoefficients: state.linearity.regressionCoefficients,
+    regressionAnova: state.linearity.regressionAnova,
+    // TODO: Implement outliers
+    // outliers: '',
+    // cleaned_analytical_data: '',
+    // cleaned_concentration_data: '',
+    isNormalDistribution: state.linearity.isNormalDistribution,
+    isHomokedastic: state.linearity.isHomokedastic,
+    durbinWatsonValue: state.linearity.durbinWatsonValue,
+
     lineChartData: state.linearity.lineChartData,
     composedChartData: state.linearity.composedChartData,
   };
