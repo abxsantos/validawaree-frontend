@@ -10,7 +10,7 @@ const initialState = {
 };
 
 const addRow = (columns, data) => {
-  data.push(new Array(columns + 3).fill(0));
+  data.push(new Array(columns).fill(0));
   return data;
 };
 
