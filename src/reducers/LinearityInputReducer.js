@@ -24,7 +24,7 @@ const addColumn = (rows, columns, data) => {
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 const updateValues = (action, state) => {
   let data = [...state.data];
-  data[action.row][action.column] = action.updatedValue;
+  data[action.row][action.column] = (action.updatedValue).replace(",", ".");
 
   let averages = [...state.averages];
   averages[action.row] = data[action.row].reduce(
@@ -45,7 +45,7 @@ const updateValues = (action, state) => {
 
 const updateConcentrationValues = (action, state) => {
   let concentrations = [...state.concentrations];
-  concentrations[action.row] = action.updatedValue;
+  concentrations[action.row] = (action.updatedValue).replace(",", ".");
   return { concentrations: concentrations };
 };
 
