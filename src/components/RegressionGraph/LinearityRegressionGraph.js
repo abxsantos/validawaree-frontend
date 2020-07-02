@@ -18,7 +18,7 @@ const LinearityRegressionChart = (props) => {
       <ComposedChart
         width={500}
         height={400}
-        data={props.composedChartData}
+        data={props.linearityChartData}
         margin={{
           top: 20,
           right: 80,
@@ -49,18 +49,13 @@ const LinearityRegressionChart = (props) => {
           legendType='none'
         />
       </ComposedChart>
-      <p>{JSON.stringify(props.linearityChartData)}</p>
-
     </div>
   );
 };
 
 const mapStateToProps = function (state) {
   return {
-    lineChartData: state.linearity.lineChartData,
-    composedChartData: state.linearity.composedChartData,
-
-    linearityChartData: state.linearityChartData,
+    linearityChartData: state.linearity.linearityChartData,
   };
 };
 
