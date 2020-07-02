@@ -1,4 +1,4 @@
-import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE, UPD_VOLUME_VALUE, UPD_MASS_VALUE } from "../actions";
+import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE, UPD_VOLUME_VALUE, UPD_MASS_VALUE, UPD_DILUTION_FACTOR_VALUE } from "../actions";
 
 const initialState = {
   numRows: 1,
@@ -6,7 +6,9 @@ const initialState = {
   volume: undefined,
   mass: [],
   data: [[undefined, undefined, undefined]],
-  concentrations: [undefined],
+  dilutionFactor: [],
+  concentrations: [[undefined, undefined, undefined]],
+  initialConcentration: [0,0,0], // ci = mass/volume
   averages: [undefined],
   stdDeviations: [undefined],
 };
@@ -26,14 +28,20 @@ const addColumn = (rows, columns, data) => {
 const updateVolumeValue = (action, state) => {
   let volume = state.volume;
   volume = (action.updatedVolumeValue).replace(',', '.');
-  console.log(volume)
-  return volume;
+  
+  let initialConcentration = [...state.mass].map(function(value) {return value/volume})
+  
+  return { volume: volume, initialConcentration: initialConcentration }
 }
 
-const updateMassvalue = (action, state) => {
+const updateMassValue = (action, state) => {
   let mass = [...state.mass];
   mass[action.column] = (action.updatedMassValue).replace(",", ".");
-  return {mass: mass};
+  
+  let initialConcentration = [...state.initialConcentration];
+  initialConcentration[action.column] = mass[action.column] / state.volume
+  
+  return {mass: mass, initialConcentration: initialConcentration};
 }
 
 
@@ -59,10 +67,10 @@ const updateValues = (action, state) => {
   return { data: data, averages: averages, stdDeviations: stdDeviations };
 };
 
-const updateConcentrationValues = (action, state) => {
-  let concentrations = [...state.concentrations];
-  concentrations[action.row] = (action.updatedValue).replace(",", ".");
-  return { concentrations: concentrations };
+const updateDilutionFactorValue = (action, state) => {
+  let dilutionFactor = [...state.dilutionFactor];
+  dilutionFactor[action.row] = (action.updatedValue).replace(",", ".");
+  return { dilutionFactor: dilutionFactor };
 };
 
 const samples = (state = initialState, action) => {
@@ -86,21 +94,22 @@ const samples = (state = initialState, action) => {
       return {
         ...state,
         ...updateVolumeValue(action, state),
+
       }
     case UPD_MASS_VALUE:
       return {
         ...state,
-        ...updateMassvalue(action, state),
+        ...updateMassValue(action, state),
       }
     case UPD_SAMPLE_VALUE:
       return {
         ...state,
         ...updateValues(action, state),
       };
-    case UPD_CONCENTRATION_VALUE: 
+    case UPD_DILUTION_FACTOR_VALUE: 
       return {
         ...state,
-        ...updateConcentrationValues(action, state),
+        ...updateDilutionFactorValue(action, state),
       };
     default:
       return state;
