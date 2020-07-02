@@ -60,7 +60,52 @@ function calculateRegressionLine(
   chartData.push(maxDict);
   chartData.push(minDict);
 
-  return chartData
+  return chartData;
+}
+
+function predictValuesWithModel(data, intercept, slope) {
+  let predictedModelValues = [];
+  
+  data.forEach(element => {
+    predictedModelValues.push(slope * element + intercept);
+  });
+  return predictedModelValues;
+}
+
+function organizeResiduesChartData(
+  concentrationData,
+  regressionResidues,
+  intercept,
+  slope
+) {
+  let flattenedConcentrationData = flattenListOfLists(concentrationData);
+  let predictedModelValues = predictValuesWithModel(
+    flattenedConcentrationData,
+    intercept,
+    slope
+  );
+
+  var residuesChartData = [];
+  var i = 0;
+  while (i < flattenedConcentrationData.length) {
+    var dataDict = {};
+    dataDict['fittedValues'] = predictedModelValues[i];
+    dataDict['regressionResidue'] = regressionResidues[i];
+    residuesChartData.push(dataDict);
+    i++;
+  }
+
+  let minResidueLine = {};
+  minResidueLine['fittedValues'] = 0;
+  minResidueLine['ResiduesLine'] = 0;
+  residuesChartData.push(minResidueLine);
+
+  let maxResidueLine = {};
+  maxResidueLine['fittedValues'] = 1;
+  maxResidueLine['ResiduesLine'] = 0;
+  residuesChartData.push(maxResidueLine);
+
+  return residuesChartData;
 }
 
 function organizeLinearityGraphData(
@@ -89,8 +134,6 @@ function organizeLinearityGraphData(
     chartData
   );
 
-  console.log(regressionChartData);
-
   return regressionChartData;
 }
 
@@ -98,6 +141,13 @@ export function updateLinearityResults(jsonLinearityResultData) {
   let linearityChartData = organizeLinearityGraphData(
     jsonLinearityResultData.cleaned_data.cleaned_analytical_data,
     jsonLinearityResultData.cleaned_data.cleaned_concentration_data,
+    jsonLinearityResultData.regression_coefficients.intercept,
+    jsonLinearityResultData.regression_coefficients.slope
+  );
+
+  let residuesChartData = organizeResiduesChartData(
+    jsonLinearityResultData.cleaned_data.cleaned_concentration_data,
+    jsonLinearityResultData.regression_residues,
     jsonLinearityResultData.regression_coefficients.intercept,
     jsonLinearityResultData.regression_coefficients.slope
   );
@@ -119,6 +169,7 @@ export function updateLinearityResults(jsonLinearityResultData) {
     isHomokedastic: jsonLinearityResultData.is_homokedastic,
     durbinWatsonValue: jsonLinearityResultData.durbin_watson_value,
 
+    regressionChartData: residuesChartData,
     linearityChartData: linearityChartData,
   };
 }

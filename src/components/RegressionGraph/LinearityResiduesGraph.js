@@ -12,13 +12,14 @@ import {
   Legend,
 } from 'recharts';
 
-const LinearityRegressionChart = (props) => {
+// Residues are predicted analytical values X resid
+const LinearityResiduesChart = (props) => {
   return (
     <div>
       <ComposedChart
         width={500}
         height={400}
-        data={props.linearityChartData}
+        data={props.regressionChartData}
         margin={{
           top: 20,
           right: 80,
@@ -31,19 +32,19 @@ const LinearityRegressionChart = (props) => {
         <Legend />
 
         <XAxis
-          dataKey='concentration'
+          dataKey='fittedValues'
           type='number'
-          label={{ value: 'Concentration', position: 'insideBottomRight', offset: 0 }}
+          label={{ value: 'Fitted Values', position: 'insideBottomRight', offset: 0 }}
         />
         <YAxis
           unit=''
           type='number'
-          label={{ value: 'Analytical Signal', angle: -90, position: 'insideLeft' }}
+          label={{ value: 'Residuals', angle: -90, position: 'insideLeft' }}
         />
-        <Scatter name='Analytical Signal' dataKey='analyticalSignal' fill='red' />
+        <Scatter name='Regression Residue' dataKey='regressionResidue' fill='black' />
         <Line
-          dataKey='RegressionLine'
-          stroke='red'
+          dataKey='ResiduesLine'
+          stroke='black'
           dot={false}
           activeDot={false}
           legendType='none'
@@ -55,8 +56,8 @@ const LinearityRegressionChart = (props) => {
 
 const mapStateToProps = function (state) {
   return {
-    linearityChartData: state.linearity.linearityChartData,
+    regressionChartData: state.linearity.regressionChartData,
   };
 };
 
-export default connect(mapStateToProps)(LinearityRegressionChart);
+export default connect(mapStateToProps)(LinearityResiduesChart);
