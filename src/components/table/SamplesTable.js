@@ -28,38 +28,28 @@ function SamplesTable(props) {
     // TODO: With these values, calculate the concentration for each value in the cell
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label='simple table'>
-        
-      <TableHead>
+        <TableHead>
           <TableRow>
-            <TableCell component="th" scope="row">
-              Volume (mL)
+            <TableCell align='center'>
+              Volume
             </TableCell>
-            {buildColumns(props.columns, "Mass")}
+            {buildColumns(props.columns, 'Mass')}
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow key={"Model"}>
-            <TableCell component="th" scope="row">
-              <TextField label="volume" value="" />
+          <TableRow key={'Model'}>
+            <TableCell align='center'>
+              <TextField label='volume' value='' />
             </TableCell>
-            <TableCell align="center">
-              <TextField label="mass" value="" />
-            </TableCell>
-            <TableCell align="center">
-              {" "}
-              <TextField label="mass" value="" />
-            </TableCell>
-            <TableCell align="center">
-              {" "}
-              <TextField label="mass" value="" />
-            </TableCell>
+
+            {buildColumns(props.columns, 'Mass', false)}
           </TableRow>
         </TableBody>
 
         <TableHead>
           <TableRow>
             <TableCell align='center'>Concentrations</TableCell>
-            {buildColumns(props.columns, "Sample")}
+            {buildColumns(props.columns, 'Sample')}
             <TableCell align='center'>Avg</TableCell>
             <TableCell align='center'>Std. Dev</TableCell>
           </TableRow>
@@ -98,14 +88,24 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-function buildColumns(columns, dataType) {
+function buildColumns(columns, dataType, isHeader = true, props) {
   let items = [];
   for (let i = 1; i <= columns; ++i) {
-    items.push(
-      <TableCell key={`head-${i}`} align='center'>
-        {dataType} #{i}
-      </TableCell>
-    );
+    isHeader
+      ? items.push(
+          <TableCell key={`head-${i}`} align='center'>
+            {dataType} #{i}
+          </TableCell>
+        )
+      : items.push(
+          <TableCell key={`mass-${i}`} align='center'>
+            <TextField 
+            label='mass'
+            value='' 
+            onChange={(e) => undefined}
+            />
+          </TableCell>
+        );
   }
   return items;
 }
@@ -127,7 +127,7 @@ function buildRows(props) {
       items.push(
         <TableCell key={`sample-${i}${j}`} align='center'>
           <TextField
-            label={`Sample ${j + 1}`} 
+            label={`Sample ${j + 1}`}
             helperText={`Concentration: `} //TODO: place concentration value
             value={props.data[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
