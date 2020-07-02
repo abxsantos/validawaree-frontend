@@ -28,12 +28,40 @@ function SamplesTable(props) {
     // TODO: With these values, calculate the concentration for each value in the cell
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label='simple table'>
+        
+      <TableHead>
+          <TableRow>
+            <TableCell component="th" scope="row">
+              Volume (mL)
+            </TableCell>
+            {buildColumns(props.columns, "Mass")}
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          <TableRow key={"Model"}>
+            <TableCell component="th" scope="row">
+              <TextField label="volume" value="" />
+            </TableCell>
+            <TableCell align="center">
+              <TextField label="mass" value="" />
+            </TableCell>
+            <TableCell align="center">
+              {" "}
+              <TextField label="mass" value="" />
+            </TableCell>
+            <TableCell align="center">
+              {" "}
+              <TextField label="mass" value="" />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+
         <TableHead>
           <TableRow>
-            <TableCell align='right'>Concentrations</TableCell>
-            {buildColumns(props.columns)}
-            <TableCell align='right'>Avg</TableCell>
-            <TableCell align='right'>Std. Dev</TableCell>
+            <TableCell align='center'>Concentrations</TableCell>
+            {buildColumns(props.columns, "Sample")}
+            <TableCell align='center'>Avg</TableCell>
+            <TableCell align='center'>Std. Dev</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{buildRows(props)}</TableBody>
@@ -70,12 +98,12 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-function buildColumns(columns) {
+function buildColumns(columns, dataType) {
   let items = [];
   for (let i = 1; i <= columns; ++i) {
     items.push(
-      <TableCell key={`head-${i}`} align='right'>
-        Sample #{i}
+      <TableCell key={`head-${i}`} align='center'>
+        {dataType} #{i}
       </TableCell>
     );
   }
@@ -87,7 +115,7 @@ function buildRows(props) {
   for (let i = 0; i < props.rows; ++i) {
     let items = [];
     items.push(
-      <TableCell key={`concentration-${i}`} align='right'>
+      <TableCell key={`concentration-${i}`} align='center'>
         <TextField
           label='concentrations'
           value={props.concentrations[i]}
@@ -97,7 +125,7 @@ function buildRows(props) {
     );
     for (let j = 0; j < props.columns; ++j) {
       items.push(
-        <TableCell key={`sample-${i}${j}`} align='right'>
+        <TableCell key={`sample-${i}${j}`} align='center'>
           <TextField
             label={`Sample ${j + 1}`} 
             helperText={`Concentration: `} //TODO: place concentration value
@@ -108,12 +136,12 @@ function buildRows(props) {
       );
     }
     items.push(
-      <TableCell key={`avg-${i}`} align='right'>
+      <TableCell key={`avg-${i}`} align='center'>
         {props.averages[i]}
       </TableCell>
     );
     items.push(
-      <TableCell key={`stddev-${i}`} align='right'>
+      <TableCell key={`stddev-${i}`} align='center'>
         {props.stdDeviations[i]}
       </TableCell>
     );
