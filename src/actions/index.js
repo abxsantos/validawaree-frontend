@@ -36,6 +36,14 @@ function flattenListOfLists(data) {
   return flattenedData;
 }
 
+function makeChartLinePoint(xPoint, yPoint, xKey, yKey) {
+  let linePoint = {
+    [xKey]: xPoint,
+    [yKey]: yPoint,
+  };
+  return linePoint;
+}
+
 function calculateRegressionLine(
   flattenedConcentrationData,
   intercept,
@@ -48,25 +56,30 @@ function calculateRegressionLine(
   let maxLinePoint = slope * maxConcentrationPoint + intercept;
   let minLinePoint = slope * minConcentrationPoint + intercept;
 
-  //TODO: Make something better!
-  var maxDict = {};
-  maxDict['concentration'] = maxConcentrationPoint;
-  maxDict['RegressionLine'] = maxLinePoint;
-
-  var minDict = {};
-  minDict['concentration'] = minConcentrationPoint;
-  minDict['RegressionLine'] = minLinePoint;
-
-  chartData.push(maxDict);
-  chartData.push(minDict);
+  chartData.push(
+    makeChartLinePoint(
+      maxConcentrationPoint,
+      maxLinePoint,
+      'concentration',
+      'RegressionLine'
+    )
+  );
+  chartData.push(
+    makeChartLinePoint(
+      minConcentrationPoint,
+      minLinePoint,
+      'concentration',
+      'RegressionLine'
+    )
+  );
 
   return chartData;
 }
 
 function predictValuesWithModel(data, intercept, slope) {
   let predictedModelValues = [];
-  
-  data.forEach(element => {
+
+  data.forEach((element) => {
     predictedModelValues.push(slope * element + intercept);
   });
   return predictedModelValues;
@@ -86,24 +99,19 @@ function organizeResiduesChartData(
   );
 
   var residuesChartData = [];
-  var i = 0;
-  while (i < flattenedConcentrationData.length) {
+  for (let i in flattenedConcentrationData) {
     var dataDict = {};
     dataDict['fittedValues'] = predictedModelValues[i];
     dataDict['regressionResidue'] = regressionResidues[i];
     residuesChartData.push(dataDict);
-    i++;
   }
 
-  let minResidueLine = {};
-  minResidueLine['fittedValues'] = 0;
-  minResidueLine['ResiduesLine'] = 0;
-  residuesChartData.push(minResidueLine);
-
-  let maxResidueLine = {};
-  maxResidueLine['fittedValues'] = 1;
-  maxResidueLine['ResiduesLine'] = 0;
-  residuesChartData.push(maxResidueLine);
+  residuesChartData.push(
+    makeChartLinePoint(0, 0, 'fittedValues', 'ResiduesLine')
+  );
+  residuesChartData.push(
+    makeChartLinePoint(1, 0, 'fittedValues', 'ResiduesLine')
+  );
 
   return residuesChartData;
 }
@@ -119,13 +127,11 @@ function organizeLinearityGraphData(
 
   var chartData = [];
 
-  var i = 0;
-  while (i < flattenedAnalyticalData.length) {
+  for (let i in flattenedConcentrationData) {
     var dataDict = {};
     dataDict['concentration'] = flattenedConcentrationData[i];
     dataDict['analyticalSignal'] = flattenedAnalyticalData[i];
     chartData.push(dataDict);
-    i++;
   }
   let regressionChartData = calculateRegressionLine(
     flattenedConcentrationData,

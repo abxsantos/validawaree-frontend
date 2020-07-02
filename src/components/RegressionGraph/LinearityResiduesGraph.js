@@ -12,9 +12,9 @@ import {
   Legend,
 } from 'recharts';
 
-// Residues are predicted analytical values X resid
 const LinearityResiduesChart = (props) => {
   return (
+    // Show the concentration value in the tooltip of points
     <div>
       <ComposedChart
         width={500}
