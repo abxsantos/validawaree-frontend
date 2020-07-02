@@ -4,15 +4,14 @@ const initialState = {
   linearityResult: '',
   regressionCoefficients: '',
   regressionAnova: '',
-  // TODO: Implement outliers
-  // outliers: '',
-  // cleaned_analytical_data: '',
-  // cleaned_concentration_data: '',
+  outliers: '',
+  cleaned_analytical_data: '',
+  cleaned_concentration_data: '',
   isNormalDistribution: '',
   isHomokedastic: '',
   durbinWatsonValue: '',
-  lineChartData: [],
-  composedChartData: [],
+  linearityChartData: [],
+
 };
 
 const linearity = (state = initialState, action) => {
@@ -22,24 +21,16 @@ const linearity = (state = initialState, action) => {
         ...state,
         regressionCoefficients: action.regressionCoefficients,
         regressionAnova: action.regressionAnova,
-        // TODO: Implement outliers
-        // outliers: '',
-        // cleaned_analytical_data: '',
-        // cleaned_concentration_data: '',
+        outliers: action.Outliers,
+        cleanedAnalyticalData: action.cleanedAnalyticalData,
+        cleanedConcentrationData: action.cleanedConcentrationData,
         isNormalDistribution: action.isNormalDistribution,
         isHomokedastic: action.isHomokedastic,
         durbinWatsonValue: action.durbinWatsonValue,
+
+        // linearityChartData: action.linearityChartData,
     
-        composedChartData: [
-          { index: 10000, red: 1643, blue: 790 },
-          { index: 1666, red: 182, blue: 42 },
-          { index: 625, red: 56, blue: 11 },
-          // Calculation of line of best fit is not included in this demo
-          { index: 300, redLine: 0 },
-          { index: 10000, redLine: 1522 },
-          { index: 600, blueLine: 0 },
-          { index: 10000, blueLine: 678 },
-        ],
+        linearityChartData: action.linearityChartData,
       };
     default:
       return state;
