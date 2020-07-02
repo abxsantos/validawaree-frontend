@@ -4,12 +4,16 @@ const initialState = {
   linearityResult: '',
   regressionCoefficients: '',
   regressionAnova: '',
+  
   outliers: '',
   cleaned_analytical_data: '',
   cleaned_concentration_data: '',
+
   isNormalDistribution: '',
   isHomokedastic: '',
   durbinWatsonValue: '',
+
+  regressionChartData: [],
   linearityChartData: [],
 
 };
@@ -28,8 +32,7 @@ const linearity = (state = initialState, action) => {
         isHomokedastic: action.isHomokedastic,
         durbinWatsonValue: action.durbinWatsonValue,
 
-        // linearityChartData: action.linearityChartData,
-    
+        regressionChartData: action.regressionChartData,    
         linearityChartData: action.linearityChartData,
       };
     default:

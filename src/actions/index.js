@@ -36,6 +36,14 @@ function flattenListOfLists(data) {
   return flattenedData;
 }
 
+function makeChartLinePoint(xPoint, yPoint, xKey, yKey) {
+  let linePoint = {
+    [xKey]: xPoint,
+    [yKey]: yPoint,
+  };
+  return linePoint;
+}
+
 function calculateRegressionLine(
   flattenedConcentrationData,
   intercept,
@@ -48,19 +56,64 @@ function calculateRegressionLine(
   let maxLinePoint = slope * maxConcentrationPoint + intercept;
   let minLinePoint = slope * minConcentrationPoint + intercept;
 
-  //TODO: Make something better!
-  var maxDict = {};
-  maxDict['concentration'] = maxConcentrationPoint;
-  maxDict['RegressionLine'] = maxLinePoint;
+  chartData.push(
+    makeChartLinePoint(
+      maxConcentrationPoint,
+      maxLinePoint,
+      'concentration',
+      'RegressionLine'
+    )
+  );
+  chartData.push(
+    makeChartLinePoint(
+      minConcentrationPoint,
+      minLinePoint,
+      'concentration',
+      'RegressionLine'
+    )
+  );
 
-  var minDict = {};
-  minDict['concentration'] = minConcentrationPoint;
-  minDict['RegressionLine'] = minLinePoint;
+  return chartData;
+}
 
-  chartData.push(maxDict);
-  chartData.push(minDict);
+function predictValuesWithModel(data, intercept, slope) {
+  let predictedModelValues = [];
 
-  return chartData
+  data.forEach((element) => {
+    predictedModelValues.push(slope * element + intercept);
+  });
+  return predictedModelValues;
+}
+
+function organizeResiduesChartData(
+  concentrationData,
+  regressionResidues,
+  intercept,
+  slope
+) {
+  let flattenedConcentrationData = flattenListOfLists(concentrationData);
+  let predictedModelValues = predictValuesWithModel(
+    flattenedConcentrationData,
+    intercept,
+    slope
+  );
+
+  var residuesChartData = [];
+  for (let i in flattenedConcentrationData) {
+    var dataDict = {};
+    dataDict['fittedValues'] = predictedModelValues[i];
+    dataDict['regressionResidue'] = regressionResidues[i];
+    residuesChartData.push(dataDict);
+  }
+
+  residuesChartData.push(
+    makeChartLinePoint(0, 0, 'fittedValues', 'ResiduesLine')
+  );
+  residuesChartData.push(
+    makeChartLinePoint(1, 0, 'fittedValues', 'ResiduesLine')
+  );
+
+  return residuesChartData;
 }
 
 function organizeLinearityGraphData(
@@ -74,13 +127,11 @@ function organizeLinearityGraphData(
 
   var chartData = [];
 
-  var i = 0;
-  while (i < flattenedAnalyticalData.length) {
+  for (let i in flattenedConcentrationData) {
     var dataDict = {};
     dataDict['concentration'] = flattenedConcentrationData[i];
     dataDict['analyticalSignal'] = flattenedAnalyticalData[i];
     chartData.push(dataDict);
-    i++;
   }
   let regressionChartData = calculateRegressionLine(
     flattenedConcentrationData,
@@ -89,8 +140,6 @@ function organizeLinearityGraphData(
     chartData
   );
 
-  console.log(regressionChartData);
-
   return regressionChartData;
 }
 
@@ -98,6 +147,13 @@ export function updateLinearityResults(jsonLinearityResultData) {
   let linearityChartData = organizeLinearityGraphData(
     jsonLinearityResultData.cleaned_data.cleaned_analytical_data,
     jsonLinearityResultData.cleaned_data.cleaned_concentration_data,
+    jsonLinearityResultData.regression_coefficients.intercept,
+    jsonLinearityResultData.regression_coefficients.slope
+  );
+
+  let residuesChartData = organizeResiduesChartData(
+    jsonLinearityResultData.cleaned_data.cleaned_concentration_data,
+    jsonLinearityResultData.regression_residues,
     jsonLinearityResultData.regression_coefficients.intercept,
     jsonLinearityResultData.regression_coefficients.slope
   );
@@ -119,6 +175,7 @@ export function updateLinearityResults(jsonLinearityResultData) {
     isHomokedastic: jsonLinearityResultData.is_homokedastic,
     durbinWatsonValue: jsonLinearityResultData.durbin_watson_value,
 
+    regressionChartData: residuesChartData,
     linearityChartData: linearityChartData,
   };
 }
