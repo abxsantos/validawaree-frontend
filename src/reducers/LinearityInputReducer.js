@@ -1,10 +1,21 @@
-import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE } from "../actions";
+import {
+  INC_ROW,
+  INC_COLUMN,
+  UPD_SAMPLE_VALUE,
+  UPD_VOLUME_VALUE,
+  UPD_MASS_VALUE,
+  UPD_DILUTION_FACTOR_VALUE,
+} from '../actions';
 
 const initialState = {
   numRows: 1,
   numColumns: 3,
+  volume: undefined,
+  mass: [],
   data: [[undefined, undefined, undefined]],
-  concentrations: [undefined],
+  dilutionFactor: [],
+  concentration: [[undefined, undefined, undefined]],
+  initialConcentration: [undefined, undefined, undefined], // ci = mass/volume
   averages: [undefined],
   stdDeviations: [undefined],
 };
@@ -21,10 +32,54 @@ const addColumn = (rows, columns, data) => {
   return data;
 };
 
+const updateVolumeValue = (action, state) => {
+  let volume = state.volume;
+  volume = action.updatedVolumeValue.replace(',', '.');
+
+  let initialConcentration = [...state.mass].map(function (value) {
+    return value / volume;
+  });
+
+  let concentration = [...state.concentration];
+
+  for (let i = 0; i < state.dilutionFactor.length; ++i) {
+    for (let j = 0; j < state.initialConcentration.length; ++j) {
+      concentration[i][j] =
+        state.initialConcentration[j] / state.dilutionFactor[i];
+    }
+  }
+
+  return {
+    volume: volume,
+    initialConcentration: initialConcentration,
+    concentration: concentration,
+  };
+};
+
+const updateMassValue = (action, state) => {
+  let mass = [...state.mass];
+  mass[action.column] = action.updatedMassValue.replace(',', '.');
+
+  let initialConcentration = [...state.initialConcentration];
+  initialConcentration[action.column] = mass[action.column] / state.volume;
+
+  let concentration = [...state.concentration];
+
+  for (let i = 0; i < state.dilutionFactor.length; ++i) {
+    concentration[i][action.column] =
+      state.initialConcentration[action.column] / state.dilutionFactor[i];
+  }
+  return {
+    mass: mass,
+    initialConcentration: initialConcentration,
+    concentration: concentration,
+  };
+};
+
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 const updateValues = (action, state) => {
   let data = [...state.data];
-  data[action.row][action.column] = (action.updatedValue).replace(",", ".");
+  data[action.row][action.column] = action.updatedValue.replace(',', '.');
 
   let averages = [...state.averages];
   averages[action.row] = data[action.row].reduce(
@@ -43,10 +98,17 @@ const updateValues = (action, state) => {
   return { data: data, averages: averages, stdDeviations: stdDeviations };
 };
 
-const updateConcentrationValues = (action, state) => {
-  let concentrations = [...state.concentrations];
-  concentrations[action.row] = (action.updatedValue).replace(",", ".");
-  return { concentrations: concentrations };
+const updateDilutionFactorValue = (action, state) => {
+  let dilutionFactor = [...state.dilutionFactor];
+  dilutionFactor[action.row] = action.updatedValue.replace(',', '.');
+
+  let concentration = [...state.concentration];
+  concentration[action.row] = [...state.initialConcentration].map(function (
+    value
+  ) {
+    return value / dilutionFactor[action.row];
+  });
+  return { dilutionFactor: dilutionFactor, concentration: concentration };
 };
 
 const samples = (state = initialState, action) => {
@@ -56,7 +118,8 @@ const samples = (state = initialState, action) => {
         ...state,
         numRows: state.numRows + 1,
         data: addRow(state.numColumns, state.data),
-        concentrations: state.concentrations.concat(undefined),
+        dilutionFactor: state.dilutionFactor.concat(undefined),
+        concentration: state.concentration.concat([0, 0, 0]),
         averages: state.averages.concat(undefined),
         stdDeviations: state.stdDeviations.concat(undefined),
       };
@@ -66,15 +129,25 @@ const samples = (state = initialState, action) => {
         numColumns: state.numColumns + 1,
         data: addColumn(state.numRows, state.numColumns + 1, state.data),
       };
+    case UPD_VOLUME_VALUE:
+      return {
+        ...state,
+        ...updateVolumeValue(action, state),
+      };
+    case UPD_MASS_VALUE:
+      return {
+        ...state,
+        ...updateMassValue(action, state),
+      };
     case UPD_SAMPLE_VALUE:
       return {
         ...state,
         ...updateValues(action, state),
       };
-    case UPD_CONCENTRATION_VALUE: 
+    case UPD_DILUTION_FACTOR_VALUE:
       return {
         ...state,
-        ...updateConcentrationValues(action, state),
+        ...updateDilutionFactorValue(action, state),
       };
     default:
       return state;
