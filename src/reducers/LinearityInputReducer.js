@@ -3,6 +3,8 @@ import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE } from "
 const initialState = {
   numRows: 1,
   numColumns: 3,
+  volume: undefined,
+  massData: [undefined, undefined, undefined],
   data: [[undefined, undefined, undefined]],
   concentrations: [undefined],
   averages: [undefined],
@@ -20,6 +22,14 @@ const addColumn = (rows, columns, data) => {
   }
   return data;
 };
+
+const updateVolumeValues = (action, state) => {
+  let volume = [...state.volume];
+  volume = (action.updatedVolumeValue).replace(',', '.');
+  return { volume: volume };
+}
+
+
 
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 const updateValues = (action, state) => {

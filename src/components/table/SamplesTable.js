@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
-import { updateSampleValue, updateConcentrationValue } from '../../actions';
+import { updateSampleValue, updateConcentrationValue, updateVolumeValue } from '../../actions';
 
 const useStyles = makeStyles({
   table: {
@@ -37,11 +37,14 @@ function SamplesTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow key={'Model'}>
+          <TableRow key={'volume'}>
             <TableCell align='center'>
-              <TextField label='volume' value='' />
+              <TextField 
+              label='volume' 
+              value={props.volume}
+              onChange={(e) => handleVolumeChange(e, props)}
+              />
             </TableCell>
-
             {buildColumns(props.columns, 'Mass', false)}
           </TableRow>
         </TableBody>
@@ -60,6 +63,10 @@ function SamplesTable(props) {
   );
 }
 
+function handleVolumeChange(event, props){
+  props.updateVolumeValue(event.target.value);
+}
+
 function handleChange(event, row, column, props) {
   props.updateSampleValue(event.target.value, row, column);
 }
@@ -73,12 +80,17 @@ const mapStateToProps = (state) => ({
   columns: state.samples.numColumns,
   data: state.samples.data,
   concentrations: state.samples.concentrations,
+  volume: state.samples.volume,
+
   averages: state.samples.averages,
   stdDeviations: state.samples.stdDeviations,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateVolumeValue: (updatedValue) => {
+      dispatch(updateVolumeValue(updatedValue));
+    },
     updateSampleValue: (updatedValue, row, column) => {
       dispatch(updateSampleValue(updatedValue, row, column));
     },
