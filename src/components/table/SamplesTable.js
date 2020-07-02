@@ -83,8 +83,10 @@ const mapStateToProps = (state) => ({
 
   dilutionFactor: state.samples.dilutionFactor,
 
+  concentration: state.samples.concentration,
   initialConcentration: state.samples.initialConcentration,
-  concentrations: state.samples.concentrations,
+
+  concentrations: state.samples.concentrations,//excluir
 
   mass: state.samples.mass,
   volume: state.samples.volume,
@@ -151,7 +153,7 @@ function buildRows(props) {
         <TableCell key={`sample-${i}${j}`} align='center'>
           <TextField
             label={`Sample ${j + 1}`}
-            helperText={`Concentration: ${props.concentrations[i][j]}`} //TODO: place concentration value
+            helperText={`Concentration: ${props.concentration[i][j]}`}
             value={props.data[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />
