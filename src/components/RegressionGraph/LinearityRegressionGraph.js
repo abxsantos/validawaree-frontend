@@ -31,32 +31,26 @@ const LinearityRegressionChart = (props) => {
         <Legend />
 
         <XAxis
-          dataKey='index'
+          dataKey='concentration'
           type='number'
-          label={{ value: 'Index', position: 'insideBottomRight', offset: 0 }}
+          label={{ value: 'Concentration', position: 'insideBottomRight', offset: 0 }}
         />
         <YAxis
           unit='ms'
           type='number'
-          label={{ value: 'Time', angle: -90, position: 'insideLeft' }}
+          label={{ value: 'Analytical Signal', angle: -90, position: 'insideLeft' }}
         />
-        <Scatter name='red' dataKey='red' fill='red' />
-        <Scatter name='blue' dataKey='blue' fill='blue' />
+        <Scatter name='Analytical Signal' dataKey='analyticalSignal' fill='red' />
         <Line
-          dataKey='blueLine'
-          stroke='blue'
-          dot={false}
-          activeDot={false}
-          legendType='none'
-        />
-        <Line
-          dataKey='redLine'
+          dataKey='RegressionLine'
           stroke='red'
           dot={false}
           activeDot={false}
           legendType='none'
         />
       </ComposedChart>
+      <p>{JSON.stringify(props.linearityChartData)}</p>
+
     </div>
   );
 };
@@ -65,6 +59,8 @@ const mapStateToProps = function (state) {
   return {
     lineChartData: state.linearity.lineChartData,
     composedChartData: state.linearity.composedChartData,
+
+    linearityChartData: state.linearityChartData,
   };
 };
 

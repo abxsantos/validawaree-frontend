@@ -20,10 +20,9 @@ const CalculateLinearityButton = (props) => {
 const mapStateToProps = function (state) {
   return {
     regressionCoefficients: state.linearity.regressionCoefficients,
-    // TODO: Implement outliers
-    // outliers: '',
-    // cleaned_analytical_data: '',
-    // cleaned_concentration_data: '',
+    outliers: state.linearity.outliers,
+    cleanedAnalyticalData: state.linearity.cleanedAnalyticalData,
+    cleanedConcentrationData: state.linearity.cleanedConcentrationData,
     isNormalDistribution: state.linearity.isNormalDistribution,
     isHomokedastic: state.linearity.isHomokedastic,
     durbinWatsonValue: state.linearity.durbinWatsonValue,
