@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
-import { updateSampleValue, updateConcentrationValue, updateVolumeValue, updateMassValue } from '../../actions';
+import { updateSampleValue, updateDilutionFactorValue, updateVolumeValue, updateMassValue } from '../../actions';
 
 const useStyles = makeStyles({
   table: {
@@ -22,10 +22,6 @@ const useStyles = makeStyles({
 function SamplesTable(props) {
   const classes = useStyles();
   return (
-    // TODO: Cell for mass of each sample
-    // TODO: Cell for volume of stock sample
-    // TODO: Dilution factor or % cell instead of concentration
-    // TODO: With these values, calculate the concentration for each value in the cell
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label='simple table'>
         <TableHead>
@@ -51,10 +47,10 @@ function SamplesTable(props) {
 
         <TableHead>
           <TableRow>
-            <TableCell align='center'>Concentrations</TableCell>
+            <TableCell align='center'>Dilution Factor</TableCell>
             {buildColumns(props.columns, 'Sample')}
             <TableCell align='center'>Avg</TableCell>
-            <TableCell align='center'>Std. Dev</TableCell>
+            <TableCell align='center'>Std. Dev.</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{buildRows(props)}</TableBody>
@@ -75,8 +71,8 @@ function handleChange(event, row, column, props) {
   props.updateSampleValue(event.target.value, row, column);
 }
 
-function handleChangeC(event, row, props) {
-  props.updateConcentrationValue(event.target.value, row);
+function handleChangeDilutionFactor(event, row, props) {
+  props.updateDilutionFactorValue(event.target.value, row);
 }
 
 const mapStateToProps = (state) => ({
@@ -84,7 +80,14 @@ const mapStateToProps = (state) => ({
   columns: state.samples.numColumns,
 
   data: state.samples.data,
-  concentrations: state.samples.concentrations,
+
+  dilutionFactor: state.samples.dilutionFactor,
+
+  concentration: state.samples.concentration,
+  initialConcentration: state.samples.initialConcentration,
+
+  concentrations: state.samples.concentrations,//excluir
+
   mass: state.samples.mass,
   volume: state.samples.volume,
 
@@ -103,8 +106,8 @@ const mapDispatchToProps = (dispatch) => {
     updateSampleValue: (updatedValue, row, column) => {
       dispatch(updateSampleValue(updatedValue, row, column));
     },
-    updateConcentrationValue: (updatedValue, row) => {
-      dispatch(updateConcentrationValue(updatedValue, row));
+    updateDilutionFactorValue: (updatedValue, row) => {
+      dispatch(updateDilutionFactorValue(updatedValue, row));
     },
   };
 };
@@ -122,6 +125,7 @@ function buildColumns(columns, dataType, isHeader = true, props) {
           <TableCell key={`mass-${i}`} align='center'>
             <TextField 
             label='mass'
+            helperText={`Concentration: ${props.initialConcentration[i-1]}`}
             value={props.mass[i-1]}
             onChange={(e) => handleMassChange(e, i-1, props)}
             />
@@ -136,11 +140,11 @@ function buildRows(props) {
   for (let i = 0; i < props.rows; ++i) {
     let items = [];
     items.push(
-      <TableCell key={`concentration-${i}`} align='center'>
+      <TableCell key={`dilutionFactor-${i}`} align='center'>
         <TextField
-          label='concentrations'
-          value={props.concentrations[i]}
-          onChange={(e) => handleChangeC(e, i, props)}
+          label='Factor'
+          value={props.dilutionFactor[i]}
+          onChange={(e) => handleChangeDilutionFactor(e, i, props)}
         />
       </TableCell>
     );
@@ -149,7 +153,7 @@ function buildRows(props) {
         <TableCell key={`sample-${i}${j}`} align='center'>
           <TextField
             label={`Sample ${j + 1}`}
-            helperText={`Concentration: `} //TODO: place concentration value
+            helperText={`Concentration: ${props.concentration[i][j]}`}
             value={props.data[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />

@@ -4,6 +4,7 @@ export const INC_COLUMN = 'INC_COLUMN';
 export const UPD_SAMPLE_VALUE = 'UPD_SAMPLE_VALUE';
 export const UPD_LINEARITY_RESULT = 'UPD_LINEARITY_RESULT';
 export const UPD_CONCENTRATION_VALUE = 'UPD_CONCENTRATION_VALUE';
+export const UPD_DILUTION_FACTOR_VALUE = 'UPD_DILUTION_FACTOR_VALUE';
 export const UPD_MASS_VALUE = 'UPD_MASS_VALUE';
 export const UPD_VOLUME_VALUE = 'UPD_VOLUME_VALUE';
 
@@ -41,9 +42,9 @@ export function updateSampleValue(updatedValue, row, column) {
   };
 }
 
-export function updateConcentrationValue(updatedValue, row) {
+export function updateDilutionFactorValue(updatedValue, row) {
   return {
-    type: UPD_CONCENTRATION_VALUE,
+    type: UPD_DILUTION_FACTOR_VALUE,
     updatedValue: updatedValue,
     row: row,
   };
