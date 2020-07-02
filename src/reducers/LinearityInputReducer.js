@@ -1,10 +1,10 @@
-import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE } from "../actions";
+import { INC_ROW, INC_COLUMN, UPD_SAMPLE_VALUE, UPD_CONCENTRATION_VALUE, UPD_VOLUME_VALUE, UPD_MASS_VALUE } from "../actions";
 
 const initialState = {
   numRows: 1,
   numColumns: 3,
   volume: undefined,
-  massData: [undefined, undefined, undefined],
+  mass: [],
   data: [[undefined, undefined, undefined]],
   concentrations: [undefined],
   averages: [undefined],
@@ -23,12 +23,18 @@ const addColumn = (rows, columns, data) => {
   return data;
 };
 
-const updateVolumeValues = (action, state) => {
-  let volume = [...state.volume];
+const updateVolumeValue = (action, state) => {
+  let volume = state.volume;
   volume = (action.updatedVolumeValue).replace(',', '.');
-  return { volume: volume };
+  console.log(volume)
+  return volume;
 }
 
+const updateMassvalue = (action, state) => {
+  let mass = [...state.mass];
+  mass[action.column] = (action.updatedMassValue).replace(",", ".");
+  return {mass: mass};
+}
 
 
 // https://dev.to/sagar/three-dots---in-javascript-26ci
@@ -76,6 +82,16 @@ const samples = (state = initialState, action) => {
         numColumns: state.numColumns + 1,
         data: addColumn(state.numRows, state.numColumns + 1, state.data),
       };
+    case UPD_VOLUME_VALUE:
+      return {
+        ...state,
+        ...updateVolumeValue(action, state),
+      }
+    case UPD_MASS_VALUE:
+      return {
+        ...state,
+        ...updateMassvalue(action, state),
+      }
     case UPD_SAMPLE_VALUE:
       return {
         ...state,

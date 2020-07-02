@@ -11,7 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
-import { updateSampleValue, updateConcentrationValue, updateVolumeValue } from '../../actions';
+import { updateSampleValue, updateConcentrationValue, updateVolumeValue, updateMassValue } from '../../actions';
 
 const useStyles = makeStyles({
   table: {
@@ -45,7 +45,7 @@ function SamplesTable(props) {
               onChange={(e) => handleVolumeChange(e, props)}
               />
             </TableCell>
-            {buildColumns(props.columns, 'Mass', false)}
+            {buildColumns(props.columns, 'Mass', false, props)}
           </TableRow>
         </TableBody>
 
@@ -67,6 +67,10 @@ function handleVolumeChange(event, props){
   props.updateVolumeValue(event.target.value);
 }
 
+function handleMassChange(event, column, props) {
+  props.updateMassValue(event.target.value, column);
+}
+
 function handleChange(event, row, column, props) {
   props.updateSampleValue(event.target.value, row, column);
 }
@@ -78,8 +82,10 @@ function handleChangeC(event, row, props) {
 const mapStateToProps = (state) => ({
   rows: state.samples.numRows,
   columns: state.samples.numColumns,
+
   data: state.samples.data,
   concentrations: state.samples.concentrations,
+  mass: state.samples.mass,
   volume: state.samples.volume,
 
   averages: state.samples.averages,
@@ -90,6 +96,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     updateVolumeValue: (updatedValue) => {
       dispatch(updateVolumeValue(updatedValue));
+    },
+    updateMassValue: (updatedValue, column) => {
+      dispatch(updateMassValue(updatedValue, column))
     },
     updateSampleValue: (updatedValue, row, column) => {
       dispatch(updateSampleValue(updatedValue, row, column));
@@ -113,8 +122,8 @@ function buildColumns(columns, dataType, isHeader = true, props) {
           <TableCell key={`mass-${i}`} align='center'>
             <TextField 
             label='mass'
-            value='' 
-            onChange={(e) => undefined}
+            value={props.mass[i-1]}
+            onChange={(e) => handleMassChange(e, i-1, props)}
             />
           </TableCell>
         );

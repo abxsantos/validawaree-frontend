@@ -16,18 +16,19 @@ export const incColumn = () => ({
   type: INC_COLUMN,
 });
 
-export function updateMassValue(updatedValue, column) {
-  return {
-    type: UPD_MASS_VALUE,
-    updatedMassValue: updatedValue,
-    column: column,
-  };
-}
 
 export function updateVolumeValue(updatedValue) {
   return {
     type: UPD_VOLUME_VALUE,
     updatedVolumeValue: updatedValue,
+  };
+}
+
+export function updateMassValue(updatedValue, column) {
+  return{
+    type: UPD_MASS_VALUE,
+    updatedMassValue: updatedValue,
+    column: column
   };
 }
 
