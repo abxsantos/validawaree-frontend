@@ -2,7 +2,6 @@ import {
   INC_ROW,
   INC_COLUMN,
   UPD_SAMPLE_VALUE,
-  UPD_CONCENTRATION_VALUE,
   UPD_VOLUME_VALUE,
   UPD_MASS_VALUE,
   UPD_DILUTION_FACTOR_VALUE,
@@ -16,8 +15,6 @@ const initialState = {
   data: [[undefined, undefined, undefined]],
   dilutionFactor: [],
   concentration: [[undefined, undefined, undefined]],
-
-  concentrations: [[undefined, undefined, undefined]], // excluir
   initialConcentration: [undefined, undefined, undefined], // ci = mass/volume
   averages: [undefined],
   stdDeviations: [undefined],
@@ -49,10 +46,14 @@ const updateVolumeValue = (action, state) => {
     for (let j = 0; j < state.initialConcentration.length; ++j) {
       concentration[i][j] =
         state.initialConcentration[j] / state.dilutionFactor[i];
-    };
-  };
+    }
+  }
 
-  return { volume: volume, initialConcentration: initialConcentration, concentration: concentration};
+  return {
+    volume: volume,
+    initialConcentration: initialConcentration,
+    concentration: concentration,
+  };
 };
 
 const updateMassValue = (action, state) => {
@@ -62,12 +63,17 @@ const updateMassValue = (action, state) => {
   let initialConcentration = [...state.initialConcentration];
   initialConcentration[action.column] = mass[action.column] / state.volume;
 
-  let concentration = [...state.concentration]
+  let concentration = [...state.concentration];
 
-  for (let i = 0; i < state.dilutionFactor.length; ++i){
-      concentration[i][action.column] = state.initialConcentration[action.column]/state.dilutionFactor[i]
+  for (let i = 0; i < state.dilutionFactor.length; ++i) {
+    concentration[i][action.column] =
+      state.initialConcentration[action.column] / state.dilutionFactor[i];
+  }
+  return {
+    mass: mass,
+    initialConcentration: initialConcentration,
+    concentration: concentration,
   };
-  return { mass: mass, initialConcentration: initialConcentration, concentration: concentration };
 };
 
 // https://dev.to/sagar/three-dots---in-javascript-26ci
@@ -97,7 +103,9 @@ const updateDilutionFactorValue = (action, state) => {
   dilutionFactor[action.row] = action.updatedValue.replace(',', '.');
 
   let concentration = [...state.concentration];
-  concentration[action.row] = [...state.initialConcentration].map(function (value) {
+  concentration[action.row] = [...state.initialConcentration].map(function (
+    value
+  ) {
     return value / dilutionFactor[action.row];
   });
   return { dilutionFactor: dilutionFactor, concentration: concentration };
@@ -110,7 +118,8 @@ const samples = (state = initialState, action) => {
         ...state,
         numRows: state.numRows + 1,
         data: addRow(state.numColumns, state.data),
-        concentrations: state.concentrations.concat(undefined),
+        dilutionFactor: state.dilutionFactor.concat(undefined),
+        concentration: state.concentration.concat([0, 0, 0]),
         averages: state.averages.concat(undefined),
         stdDeviations: state.stdDeviations.concat(undefined),
       };

@@ -11,7 +11,12 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
 
-import { updateSampleValue, updateDilutionFactorValue, updateVolumeValue, updateMassValue } from '../../actions';
+import {
+  updateSampleValue,
+  updateDilutionFactorValue,
+  updateVolumeValue,
+  updateMassValue,
+} from '../../actions';
 
 const useStyles = makeStyles({
   table: {
@@ -26,19 +31,17 @@ function SamplesTable(props) {
       <Table className={classes.table} aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell align='center'>
-              Volume
-            </TableCell>
+            <TableCell align='center'>Volume</TableCell>
             {buildColumns(props.columns, 'Mass')}
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow key={'volume'}>
             <TableCell align='center'>
-              <TextField 
-              label='volume' 
-              value={props.volume}
-              onChange={(e) => handleVolumeChange(e, props)}
+              <TextField
+                label='volume'
+                value={props.volume}
+                onChange={(e) => handleVolumeChange(e, props)}
               />
             </TableCell>
             {buildColumns(props.columns, 'Mass', false, props)}
@@ -59,7 +62,7 @@ function SamplesTable(props) {
   );
 }
 
-function handleVolumeChange(event, props){
+function handleVolumeChange(event, props) {
   props.updateVolumeValue(event.target.value);
 }
 
@@ -86,8 +89,6 @@ const mapStateToProps = (state) => ({
   concentration: state.samples.concentration,
   initialConcentration: state.samples.initialConcentration,
 
-  concentrations: state.samples.concentrations,//excluir
-
   mass: state.samples.mass,
   volume: state.samples.volume,
 
@@ -101,7 +102,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(updateVolumeValue(updatedValue));
     },
     updateMassValue: (updatedValue, column) => {
-      dispatch(updateMassValue(updatedValue, column))
+      dispatch(updateMassValue(updatedValue, column));
     },
     updateSampleValue: (updatedValue, row, column) => {
       dispatch(updateSampleValue(updatedValue, row, column));
@@ -123,11 +124,11 @@ function buildColumns(columns, dataType, isHeader = true, props) {
         )
       : items.push(
           <TableCell key={`mass-${i}`} align='center'>
-            <TextField 
-            label='mass'
-            helperText={`Concentration: ${props.initialConcentration[i-1]}`}
-            value={props.mass[i-1]}
-            onChange={(e) => handleMassChange(e, i-1, props)}
+            <TextField
+              label='mass'
+              helperText={`Concentration: ${props.initialConcentration[i - 1]}`}
+              value={props.mass[i - 1]}
+              onChange={(e) => handleMassChange(e, i - 1, props)}
             />
           </TableCell>
         );
@@ -153,7 +154,7 @@ function buildRows(props) {
         <TableCell key={`sample-${i}${j}`} align='center'>
           <TextField
             label={`Sample ${j + 1}`}
-            helperText={`Concentration: ${props.concentration[i][j]}`}
+            helperText={`Concentration: ${props.concentration[i][j]}`} //${props.concentration[i][j]}
             value={props.data[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />
