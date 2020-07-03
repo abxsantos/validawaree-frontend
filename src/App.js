@@ -1,22 +1,22 @@
 import React from 'react';
 import './App.css';
 
-import IncRowButton from './components/Linearity/button/IncRowButton';
-import IncColumnButton from './components/Linearity/button/IncColumnButton';
-import SamplesTable from './components/Linearity/tables/SamplesTable';
-import CalculateLinearityButton from './components/Linearity/button/CalculateLinearityButton';
-import LinearityAnovaTable from './components/Linearity/tables/RegressionAnovaTable';
-import LinearityRegressionChart from './components/Linearity/charts/LinearityRegressionGraph';
-import LinearityResiduesChart from './components/Linearity/charts/LinearityResiduesGraph';
+import AddRowButton from './Linearity/components/button/AddRowButton';
+import AddColumnButton from './Linearity/components/button/AddColumnButton';
+import LinearitySampleInputTable from './Linearity/components/tables/LinearitySampleInputTable';
+import CalculateLinearityButton from './Linearity/components/button/CalculateLinearityButton';
+import LinearityRegressionAnovaTable from './Linearity/components/tables/LinearityRegressionAnovaTable';
+import LinearityRegressionChart from './Linearity/components/charts/LinearityRegressionGraph';
+import LinearityResiduesChart from './Linearity/components/charts/LinearityResiduesGraph';
 
 function App() {
   return (
     <div className="App">
-      <IncRowButton />
-      <IncColumnButton />
-      <SamplesTable />
+      <AddRowButton />
+      <AddColumnButton />
+      <LinearitySampleInputTable />
       <CalculateLinearityButton />
-      <LinearityAnovaTable />
+      <LinearityRegressionAnovaTable />
       <LinearityRegressionChart />
       <LinearityResiduesChart />
     </div>

@@ -1,16 +1,9 @@
-// action types
-export const INC_ROW = 'INC_ROW';
-export const INC_COLUMN = 'INC_COLUMN';
-export const UPD_SAMPLE_VALUE = 'UPD_SAMPLE_VALUE';
+//action types
 export const UPD_LINEARITY_RESULT = 'UPD_LINEARITY_RESULT';
-export const UPD_DILUTION_FACTOR_VALUE = 'UPD_DILUTION_FACTOR_VALUE';
-export const UPD_MASS_VALUE = 'UPD_MASS_VALUE';
-export const UPD_VOLUME_VALUE = 'UPD_VOLUME_VALUE';
 
 // auxiliar functions
-
-function flattenListOfLists(data) {
-  let flattenedData = [].concat(...data);
+function flattenListOfLists(analyticalData) {
+  let flattenedData = [].concat(...analyticalData);
   return flattenedData;
 }
 
@@ -54,10 +47,10 @@ function calculateRegressionLine(
   return chartData;
 }
 
-function predictValuesWithModel(data, intercept, slope) {
+function predictValuesWithModel(analyticalData, intercept, slope) {
   let predictedModelValues = [];
 
-  data.forEach((element) => {
+  analyticalData.forEach((element) => {
     predictedModelValues.push(slope * element + intercept);
   });
   return predictedModelValues;
@@ -121,47 +114,6 @@ function organizeLinearityGraphData(
   return regressionChartData;
 }
 
-// action creators
-export const incRow = () => ({
-  type: INC_ROW,
-});
-
-export const incColumn = () => ({
-  type: INC_COLUMN,
-});
-
-export function updateVolumeValue(updatedValue) {
-  return {
-    type: UPD_VOLUME_VALUE,
-    updatedVolumeValue: updatedValue,
-  };
-}
-
-export function updateMassValue(updatedValue, column) {
-  return {
-    type: UPD_MASS_VALUE,
-    updatedMassValue: updatedValue,
-    column: column,
-  };
-}
-
-export function updateSampleValue(updatedValue, row, column) {
-  return {
-    type: UPD_SAMPLE_VALUE,
-    updatedValue: updatedValue,
-    row: row,
-    column: column,
-  };
-}
-
-export function updateDilutionFactorValue(updatedValue, row) {
-  return {
-    type: UPD_DILUTION_FACTOR_VALUE,
-    updatedValue: updatedValue,
-    row: row,
-  };
-}
-
 export function updateLinearityResults(jsonLinearityResultData) {
   let linearityChartData = organizeLinearityGraphData(
     jsonLinearityResultData.cleaned_data.cleaned_analytical_data,
@@ -204,10 +156,10 @@ export function getLinearityResults() {
   return (dispatch, getState) => {
     const { samples } = getState();
 
-    let analyticalData = samples.data;
-    let concentrationData = samples.concentration;
+    let analyticalData = samples.analyticalData;
+    let concentrationData = samples.concentrations;
 
-    // This is test data
+    // This is test analyticalData
     // analyticalData = [
     //   [0.188, 0.192, 0.203],
     //   [0.349, 0.346, 0.348],

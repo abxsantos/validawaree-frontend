@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { applyMiddleware, createStore } from 'redux'
-import reducers from './reducers'
+import reducers from './Linearity/reducers'
 
 import thunk from 'redux-thunk';
 import './index.css';

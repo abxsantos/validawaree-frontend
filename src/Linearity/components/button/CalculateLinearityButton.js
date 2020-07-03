@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Button from "@material-ui/core/Button";
 
-import { getLinearityResults } from "../../../actions";
+import { getLinearityResults } from "../../actions";
 
 // https://github.com/recharts/recharts/issues/1156
 // https://recharts.org/en-US/examples/ScatterAndLineOfBestFit

@@ -16,7 +16,7 @@ import {
   updateDilutionFactorValue,
   updateVolumeValue,
   updateMassValue,
-} from '../../../actions';
+} from '../../actions';
 
 const useStyles = makeStyles({
   table: {
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-function SamplesTable(props) {
+function LinearitySampleInputTable(props) {
   const classes = useStyles();
 
   return (
@@ -90,12 +90,12 @@ const mapStateToProps = (state) => ({
   rows: state.samples.numRows,
   columns: state.samples.numColumns,
 
-  data: state.samples.data,
+  analyticalData: state.samples.analyticalData,
 
   dilutionFactor: state.samples.dilutionFactor,
 
-  concentration: state.samples.concentration,
-  initialConcentration: state.samples.initialConcentration,
+  concentrations: state.samples.concentrations,
+  initialConcentrations: state.samples.initialConcentrations,
 
   mass: state.samples.mass,
   volume: state.samples.volume,
@@ -134,7 +134,7 @@ function buildColumns(columns, dataType, isHeader = true, props) {
           <TableCell key={`mass-${i}`} align='center'>
             <TextField
               label='mass'
-              helperText={`Concentration: ${props.initialConcentration[i - 1]}`}
+              helperText={`Concentration: ${props.initialConcentrations[i - 1]}`}
               value={props.mass[i - 1]}
               onChange={(e) => handleMassChange(e, i - 1, props)}
             />
@@ -162,8 +162,8 @@ function buildRows(props) {
         <TableCell key={`sample-${i}${j}`} align='center'>
           <TextField
             label={`Sample ${j + 1}`}
-            helperText={`Concentration: ${props.concentration[i][j]}`} //${props.concentration[i][j]}
-            value={props.data[i][j]}
+            helperText={`Concentration: ${props.concentrations[i][j]}`} //${props.concentrations[i][j]}
+            value={props.analyticalData[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />
         </TableCell>
@@ -184,4 +184,4 @@ function buildRows(props) {
   return rowItems;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SamplesTable);
+export default connect(mapStateToProps, mapDispatchToProps)(LinearitySampleInputTable);
