@@ -26,6 +26,7 @@ const useStyles = makeStyles({
 
 function SamplesTable(props) {
   const classes = useStyles();
+
   return (
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label='simple table'>
@@ -47,7 +48,6 @@ function SamplesTable(props) {
             {buildColumns(props.columns, 'Mass', false, props)}
           </TableRow>
         </TableBody>
-
         <TableHead>
           <TableRow>
             <TableCell align='center'>Dilution Factor</TableCell>
@@ -63,19 +63,27 @@ function SamplesTable(props) {
 }
 
 function handleVolumeChange(event, props) {
-  props.updateVolumeValue(event.target.value);
+  if (!isNaN(event.target.value)) {
+    props.updateVolumeValue(event.target.value);
+  }
 }
 
 function handleMassChange(event, column, props) {
-  props.updateMassValue(event.target.value, column);
+  if (!isNaN(event.target.value)) {
+    props.updateMassValue(event.target.value, column);
+  }
 }
 
 function handleChange(event, row, column, props) {
-  props.updateSampleValue(event.target.value, row, column);
+  if (!isNaN(event.target.value)) {
+    props.updateSampleValue(event.target.value, row, column);
+  }
 }
 
 function handleChangeDilutionFactor(event, row, props) {
-  props.updateDilutionFactorValue(event.target.value, row);
+  if (!isNaN(event.target.value)) {
+    props.updateDilutionFactorValue(event.target.value, row);
+  }
 }
 
 const mapStateToProps = (state) => ({
