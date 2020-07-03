@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 import { incRow } from '../../actions'
 
-const IncRowButton = ({incRow}) => {
+const AddRowButton = ({incRow}) => {
   return (
     <Button variant="contained" onClick={incRow}>Add Row</Button>
   );
@@ -17,4 +17,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null, mapDispatchToProps)(IncRowButton);
+export default connect(null, mapDispatchToProps)(AddRowButton);

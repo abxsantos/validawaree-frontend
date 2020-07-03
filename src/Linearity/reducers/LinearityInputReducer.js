@@ -12,47 +12,47 @@ const initialState = {
   numColumns: 3,
   volume: undefined,
   mass: [],
-  data: [[undefined, undefined, undefined]],
+  analyticalData: [[undefined, undefined, undefined]],
   dilutionFactor: [],
-  concentration: [[undefined, undefined, undefined]],
-  initialConcentration: [undefined, undefined, undefined], // ci = mass/volume
+  concentrations: [[undefined, undefined, undefined]],
+  initialConcentrations: [undefined, undefined, undefined], // ci = mass/volume
   averages: [undefined],
   stdDeviations: [undefined],
 };
 
-const addRow = (columns, data) => {
-  data.push(new Array(columns).fill(undefined));
-  return data;
+const addRow = (columns, analyticalData) => {
+  analyticalData.push(new Array(columns).fill(undefined));
+  return analyticalData;
 };
 
-const addColumn = (rows, columns, data) => {
+const addColumn = (rows, columns, analyticalData) => {
   for (let i = 0; i < rows; ++i) {
-    data[i].splice(columns, undefined, undefined);
+    analyticalData[i].splice(columns, undefined, undefined);
   }
-  return data;
+  return analyticalData;
 };
 
 const updateVolumeValue = (action, state) => {
   let volume = state.volume;
   volume = action.updatedVolumeValue.replace(',', '.');
 
-  let initialConcentration = [...state.mass].map(function (value) {
+  let initialConcentrations = [...state.mass].map(function (value) {
     return value / volume;
   });
 
-  let concentration = [...state.concentration];
+  let concentrations = [...state.concentrations];
 
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    for (let j = 0; j < state.initialConcentration.length; ++j) {
-      concentration[i][j] =
-        state.initialConcentration[j] / state.dilutionFactor[i];
+    for (let j = 0; j < state.initialConcentrations.length; ++j) {
+      concentrations[i][j] =
+        state.initialConcentrations[j] / state.dilutionFactor[i];
     }
   }
 
   return {
     volume: volume,
-    initialConcentration: initialConcentration,
-    concentration: concentration,
+    initialConcentrations: initialConcentrations,
+    concentrations: concentrations,
   };
 };
 
@@ -60,55 +60,55 @@ const updateMassValue = (action, state) => {
   let mass = [...state.mass];
   mass[action.column] = action.updatedMassValue.replace(',', '.');
 
-  let initialConcentration = [...state.initialConcentration];
-  initialConcentration[action.column] = mass[action.column] / state.volume;
+  let initialConcentrations = [...state.initialConcentrations];
+  initialConcentrations[action.column] = mass[action.column] / state.volume;
 
-  let concentration = [...state.concentration];
+  let concentrations = [...state.concentrations];
 
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    concentration[i][action.column] =
-      state.initialConcentration[action.column] / state.dilutionFactor[i];
+    concentrations[i][action.column] =
+      state.initialConcentrations[action.column] / state.dilutionFactor[i];
   }
   return {
     mass: mass,
-    initialConcentration: initialConcentration,
-    concentration: concentration,
+    initialConcentrations: initialConcentrations,
+    concentrations: concentrations,
   };
 };
 
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 const updateValues = (action, state) => {
-  let data = [...state.data];
-  data[action.row][action.column] = action.updatedValue.replace(',', '.');
+  let analyticalData = [...state.analyticalData];
+  analyticalData[action.row][action.column] = action.updatedValue.replace(',', '.');
 
   let averages = [...state.averages];
-  averages[action.row] = data[action.row].reduce(
+  averages[action.row] = analyticalData[action.row].reduce(
     (a, b) => parseFloat(a) + parseFloat(b)
   );
-  averages[action.row] /= data[action.row].length;
+  averages[action.row] /= analyticalData[action.row].length;
 
   let stdDeviations = [...state.stdDeviations];
   stdDeviations[action.row] = Math.sqrt(
-    data[action.row]
+    analyticalData[action.row]
       .map((value) => Math.pow(parseFloat(value) - averages[action.row], 2))
       .reduce((a, b) => a + b) /
-      (data[action.row].length - 1)
+      (analyticalData[action.row].length - 1)
   );
 
-  return { data: data, averages: averages, stdDeviations: stdDeviations };
+  return { analyticalData: analyticalData, averages: averages, stdDeviations: stdDeviations };
 };
 
 const updateDilutionFactorValue = (action, state) => {
   let dilutionFactor = [...state.dilutionFactor];
   dilutionFactor[action.row] = action.updatedValue.replace(',', '.');
 
-  let concentration = [...state.concentration];
-  concentration[action.row] = [...state.initialConcentration].map(function (
+  let concentrations = [...state.concentrations];
+  concentrations[action.row] = [...state.initialConcentrations].map(function (
     value
   ) {
     return value / dilutionFactor[action.row];
   });
-  return { dilutionFactor: dilutionFactor, concentration: concentration };
+  return { dilutionFactor: dilutionFactor, concentrations: concentrations };
 };
 
 const samples = (state = initialState, action) => {
@@ -117,9 +117,9 @@ const samples = (state = initialState, action) => {
       return {
         ...state,
         numRows: state.numRows + 1,
-        data: addRow(state.numColumns, state.data),
+        analyticalData: addRow(state.numColumns, state.analyticalData),
         dilutionFactor: state.dilutionFactor.concat(undefined),
-        concentration: state.concentration.concat([0, 0, 0]),
+        concentrations: state.concentrations.concat([0]),
         averages: state.averages.concat(undefined),
         stdDeviations: state.stdDeviations.concat(undefined),
       };
@@ -127,7 +127,7 @@ const samples = (state = initialState, action) => {
       return {
         ...state,
         numColumns: state.numColumns + 1,
-        data: addColumn(state.numRows, state.numColumns + 1, state.data),
+        analyticalData: addColumn(state.numRows, state.numColumns + 1, state.analyticalData),
       };
     case UPD_VOLUME_VALUE:
       return {

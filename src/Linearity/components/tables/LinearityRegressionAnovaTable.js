@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-function LinearityAnovaTable(props) {
+function LinearityRegressionAnovaTable(props) {
   const classes = useStyles();
   return (
     <TableContainer component={Paper}>
@@ -93,4 +93,4 @@ const mapStateToProps = function (state) {
   };
 };
 
-export default connect(mapStateToProps)(LinearityAnovaTable);
+export default connect(mapStateToProps)(LinearityRegressionAnovaTable);
