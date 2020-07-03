@@ -16,7 +16,7 @@ import {
   updateDilutionFactorValue,
   updateVolumeValue,
   updateMassValue,
-} from '../../actions';
+} from '../../../actions';
 
 const useStyles = makeStyles({
   table: {

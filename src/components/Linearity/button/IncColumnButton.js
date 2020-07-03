@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import Button from '@material-ui/core/Button';
 
-import { incColumn } from '../../actions'
+import { incColumn } from '../../../actions'
 
 const IncColumnButton = ({incColumn}) => {
   return (

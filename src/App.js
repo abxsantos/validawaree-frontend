@@ -1,13 +1,13 @@
 import React from 'react';
 import './App.css';
 
-import IncRowButton from './components/button/IncRowButton';
-import IncColumnButton from './components/button/IncColumnButton';
-import SamplesTable from './components/table/SamplesTable';
-import CalculateLinearityButton from './components/RegressionAnovaResults/CalculateLinearityButton';
-import LinearityAnovaTable from './components/RegressionAnovaResults/RegressionAnovaTable';
-import LinearityRegressionChart from './components/RegressionGraph/LinearityRegressionGraph';
-import LinearityResiduesChart from './components/RegressionGraph/LinearityResiduesGraph';
+import IncRowButton from './components/Linearity/button/IncRowButton';
+import IncColumnButton from './components/Linearity/button/IncColumnButton';
+import SamplesTable from './components/Linearity/tables/SamplesTable';
+import CalculateLinearityButton from './components/Linearity/button/CalculateLinearityButton';
+import LinearityAnovaTable from './components/Linearity/tables/RegressionAnovaTable';
+import LinearityRegressionChart from './components/Linearity/charts/LinearityRegressionGraph';
+import LinearityResiduesChart from './components/Linearity/charts/LinearityResiduesGraph';
 
 function App() {
   return (
