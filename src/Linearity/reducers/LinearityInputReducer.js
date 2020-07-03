@@ -119,7 +119,7 @@ const samples = (state = initialState, action) => {
         numRows: state.numRows + 1,
         analyticalData: addRow(state.numColumns, state.analyticalData),
         dilutionFactor: state.dilutionFactor.concat(undefined),
-        concentrations: state.concentrations.concat([0, 0, 0]),
+        concentrations: state.concentrations.concat([0]),
         averages: state.averages.concat(undefined),
         stdDeviations: state.stdDeviations.concat(undefined),
       };

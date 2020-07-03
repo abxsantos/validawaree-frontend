@@ -21,6 +21,7 @@ function calculateRegressionLine(
   slope,
   chartData
 ) {
+
   let maxConcentrationPoint = Math.max(...flattenedConcentrationData);
   let minConcentrationPoint = Math.min(...flattenedConcentrationData);
 
@@ -69,9 +70,9 @@ function organizeResiduesChartData(
     slope
   );
 
-  var residuesChartData = [];
+  let residuesChartData = [];
   for (let i in flattenedConcentrationData) {
-    var dataDict = {};
+    let dataDict = {};
     dataDict['fittedValues'] = predictedModelValues[i];
     dataDict['regressionResidue'] = regressionResidues[i];
     residuesChartData.push(dataDict);
@@ -96,10 +97,10 @@ function organizeLinearityGraphData(
   let flattenedAnalyticalData = flattenListOfLists(analyticalData);
   let flattenedConcentrationData = flattenListOfLists(concentrationData);
 
-  var chartData = [];
+  let chartData = [];
 
   for (let i in flattenedConcentrationData) {
-    var dataDict = {};
+    let dataDict = {};
     dataDict['concentration'] = flattenedConcentrationData[i];
     dataDict['analyticalSignal'] = flattenedAnalyticalData[i];
     chartData.push(dataDict);
@@ -133,19 +134,18 @@ export function updateLinearityResults(jsonLinearityResultData) {
     type: UPD_LINEARITY_RESULT,
 
     regressionCoefficients: jsonLinearityResultData.regression_coefficients,
-
     regressionAnova: jsonLinearityResultData.regression_anova,
-
     outliers: jsonLinearityResultData.cleaned_dataoutliers,
+
     cleanedAnalyticalData:
       jsonLinearityResultData.cleaned_data.cleaned_analytical_data,
+
     cleanedConcentrationData:
       jsonLinearityResultData.cleaned_data.cleaned_concentration_data,
 
     isNormalDistribution: jsonLinearityResultData.is_normal_distribution,
     isHomokedastic: jsonLinearityResultData.is_homokedastic,
     durbinWatsonValue: jsonLinearityResultData.durbin_watson_value,
-
     regressionChartData: residuesChartData,
     linearityChartData: linearityChartData,
   };
@@ -158,24 +158,6 @@ export function getLinearityResults() {
 
     let analyticalData = samples.analyticalData;
     let concentrationData = samples.concentrations;
-
-    // This is test analyticalData
-    // analyticalData = [
-    //   [0.188, 0.192, 0.203],
-    //   [0.349, 0.346, 0.348],
-    //   [0.489, 0.482, 0.492],
-    //   [0.637, 0.641, 0.641],
-    //   [0.762, 0.768, 0.786],
-    //   [0.931, 0.924, 0.925],
-    // ];
-    // concentrationData = [
-    //   [0.008, 0.008, 0.008],
-    //   [0.016, 0.016, 0.016],
-    //   [0.02, 0.02, 0.02],
-    //   [0.028, 0.028, 0.028],
-    //   [0.032, 0.032, 0.032],
-    //   [0.04, 0.04, 0.04],
-    // ];
 
     const jsonLinearityInputData = {
       analytical_data: JSON.stringify(analyticalData),
@@ -198,3 +180,21 @@ export function getLinearityResults() {
       });
   };
 }
+
+    // This is test analyticalData
+    // analyticalData = [
+    //   [0.188, 0.192, 0.203],
+    //   [0.349, 0.346, 0.348],
+    //   [0.489, 0.482, 0.492],
+    //   [0.637, 0.641, 0.641],
+    //   [0.762, 0.768, 0.786],
+    //   [0.931, 0.924, 0.925],
+    // ];
+    // concentrationData = [
+    //   [0.008, 0.008, 0.008],
+    //   [0.016, 0.016, 0.016],
+    //   [0.02, 0.02, 0.02],
+    //   [0.028, 0.028, 0.028],
+    //   [0.032, 0.032, 0.032],
+    //   [0.04, 0.04, 0.04],
+    // ];
