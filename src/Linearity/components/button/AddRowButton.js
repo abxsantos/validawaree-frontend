@@ -15,8 +15,8 @@ const AddRowButton = ({incRow}) => {
     disableFocusListener
     disableTouchListener
   >
-    <IconButton onClick={incRow}>
-      <AddBoxIcon></AddBoxIcon>
+    <IconButton size='medium' onClick={incRow}>
+      <AddBoxIcon style={{color: '#bce784', fontSize: 50}}></AddBoxIcon>
     </IconButton>
   </Tooltip>
   );
