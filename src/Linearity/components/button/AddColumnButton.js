@@ -1,20 +1,33 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import Button from '@material-ui/core/Button';
+import { IconButton, Tooltip } from '@material-ui/core';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
-import { incColumn } from '../../actions'
+import { incColumn } from '../../actions';
 
-const AddColumnButton = ({incColumn}) => {
+const AddColumnButton = ({ incColumn }) => {
   return (
-    <Button variant="contained" onClick={incColumn}>Add Column</Button>
+    <Tooltip
+      title='Add column'
+      placement='right'
+      arrow
+      disableFocusListener
+      disableTouchListener
+    >
+      <IconButton size='medium' onClick={incColumn}>
+        <AddBoxIcon style={{color: '#bce784', fontSize: 40}}></AddBoxIcon>
+      </IconButton>
+    </Tooltip>
   );
-}
+};
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    incColumn: () => {dispatch(incColumn())}
-  }
-}
+    incColumn: () => {
+      dispatch(incColumn());
+    },
+  };
+};
 
 export default connect(null, mapDispatchToProps)(AddColumnButton);

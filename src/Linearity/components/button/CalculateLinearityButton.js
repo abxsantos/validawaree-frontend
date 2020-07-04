@@ -1,19 +1,24 @@
-import React from "react";
-import { connect } from 'react-redux'
+import React from 'react';
+import { connect } from 'react-redux';
 
-import Button from "@material-ui/core/Button";
+import { Tooltip, Button } from '@material-ui/core';
+import ScatterPlotIcon from '@material-ui/icons/ScatterPlot';
 
-import { getLinearityResults } from "../../actions";
+import { getLinearityResults } from '../../actions';
 
-// https://github.com/recharts/recharts/issues/1156
-// https://recharts.org/en-US/examples/ScatterAndLineOfBestFit
 const CalculateLinearityButton = (props) => {
   return (
-    <div>
-    <Button variant="contained" onClick={props.handleLinearityCalculation}>
-    Calculate
-    </Button>
-    </div>
+      <Tooltip
+        title='Calculate the linearity of the given data'
+        placement='bottom'
+        arrow
+        disableFocusListener
+        disableTouchListener
+      >
+        <Button startIcon={<ScatterPlotIcon />}variant="outlined" onClick={props.handleLinearityCalculation}>
+          Calculate Linearity
+        </Button>
+      </Tooltip>
   );
 };
 
@@ -29,11 +34,16 @@ const mapStateToProps = function (state) {
   };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     // This connects with the action getLinearityResult
-    handleLinearityCalculation: () => {dispatch(getLinearityResults())}
-  }
-}
+    handleLinearityCalculation: () => {
+      dispatch(getLinearityResults());
+    },
+  };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(CalculateLinearityButton);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CalculateLinearityButton);
