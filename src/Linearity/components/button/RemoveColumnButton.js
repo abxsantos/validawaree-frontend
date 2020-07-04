@@ -1,13 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import Button from '@material-ui/core/Button';
+import { IconButton, Tooltip } from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 import { removeColumn } from '../../actions'
 
 const RemoveColumnButton = ({removeColumn}) => {
   return (
-    <Button variant="contained" onClick={removeColumn}>Remove Column</Button>
+    <Tooltip
+    title='Remove last column'
+    placement='right'
+    arrow
+    disableFocusListener
+    disableTouchListener
+  >
+    <IconButton onClick={removeColumn}>
+      <DeleteIcon style={{color: '#ff6b6b'}}></DeleteIcon>
+    </IconButton>
+  </Tooltip>
   );
 }
 
