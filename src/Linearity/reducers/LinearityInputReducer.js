@@ -6,6 +6,7 @@ import {
   UPD_MASS_VALUE,
   UPD_DILUTION_FACTOR_VALUE,
   REMOVE_ROW,
+  REMOVE_COLUMN,
 } from '../actions';
 
 const initialState = {
@@ -24,8 +25,6 @@ const initialState = {
 const addRow = (columns, analyticalData, concentrations) => {
   concentrations.push(new Array(columns).fill(undefined));
   analyticalData.push(new Array(columns).fill(undefined));
-  console.log(analyticalData);
-  console.log(concentrations);
   return { analyticalData, concentrations };
 };
 
@@ -56,6 +55,27 @@ const removeRow = (
     removeDilutionFactorValue,
     removedAverages,
     removedStdDeviations,
+  };
+};
+
+const removeColumn = (
+  rows,
+  removedAnalyticalData,
+  removedConcentration,
+  removedMass,
+  removedInitialConcentration
+) => {
+  for (let i = 0; i < rows; ++i) {
+    removedAnalyticalData[i].splice(-1);
+    removedConcentration[i].splice(-1);
+  }
+  removedMass.splice(-1);
+  removedInitialConcentration.splice(-1);
+  return {
+    removedAnalyticalData,
+    removedConcentration,
+    removedMass,
+    removedInitialConcentration,
   };
 };
 
@@ -178,6 +198,23 @@ const samples = (state = initialState, action) => {
             state.dilutionFactor,
             state.averages,
             state.stdDeviations
+          ),
+        };
+      } else {
+        return state;
+      }
+
+    case REMOVE_COLUMN:
+      if (state.numColumns > 3) {
+        return {
+          ...state,
+          numColumns: state.numColumns - 1,
+          ...removeColumn(
+            state.numRows,
+            state.analyticalData,
+            state.concentrations,
+            state.mass,
+            state.initialConcentrations
           ),
         };
       } else {

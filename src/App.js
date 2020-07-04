@@ -9,6 +9,7 @@ import LinearityRegressionAnovaTable from './Linearity/components/tables/Lineari
 import LinearityRegressionChart from './Linearity/components/charts/LinearityRegressionGraph';
 import LinearityResiduesChart from './Linearity/components/charts/LinearityResiduesGraph';
 import RemoveRowButton from './Linearity/components/button/RemoveRowButton';
+import RemoveColumnButton from './Linearity/components/button/RemoveColumnButton';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <AddRowButton />
       <RemoveRowButton />
       <AddColumnButton />
+      <RemoveColumnButton />
       <LinearitySampleInputTable />
       <CalculateLinearityButton />
       <LinearityRegressionAnovaTable />
