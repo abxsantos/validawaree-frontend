@@ -1,15 +1,18 @@
 import { connect } from 'react-redux';
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import TextField from '@material-ui/core/TextField';
+import {
+  makeStyles,
+  Tooltip,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  TextField,
+} from '@material-ui/core';
 
 import {
   updateSampleValue,
@@ -23,7 +26,7 @@ import RemoveColumnButton from '../button/RemoveColumnButton';
 
 import AddRowButton from '../button/AddRowButton';
 import RemoveRowButton from '../button/RemoveRowButton';
-
+import CalculateLinearityButton from '../button/CalculateLinearityButton';
 
 const useStyles = makeStyles({
   table: {
@@ -39,15 +42,17 @@ function LinearitySampleInputTable(props) {
       <Table className={classes.table} aria-label='simple table'>
         <TableHead>
           <TableRow>
-            <TableCell align='center'>Volume</TableCell>
+            <TableCell align='center' padding='dense' size="small">Volume</TableCell>
             {buildColumns(props.columns, 'Mass')}
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow key={'volume'}>
-            <TableCell align='center'>
+            <TableCell align='center' padding='dense' size="small">
               <TextField
-                label='volume'
+                size='small'
+                helperText=' '
+                label='Volume'                
                 value={props.volume}
                 onChange={(e) => handleVolumeChange(e, props)}
               />
@@ -59,16 +64,17 @@ function LinearitySampleInputTable(props) {
         </TableBody>
         <TableHead>
           <TableRow>
-            <TableCell align='center'>Dilution Factor</TableCell>
+            <TableCell align='center' padding='dense' size="small">Dilution Factor</TableCell>
             {buildColumns(props.columns, 'Sample')}
-            <TableCell align='center'>Avg</TableCell>
-            <TableCell align='center'>Std. Dev.</TableCell>
+            <TableCell align='center' padding='dense' size="small">Average</TableCell>
+            <TableCell align='center' padding='dense' size="small">Standard Deviation</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>{buildRows(props)}</TableBody>
       </Table>
       <AddRowButton />
       <RemoveRowButton />
+      <CalculateLinearityButton />
     </TableContainer>
   );
 }
@@ -137,15 +143,18 @@ function buildColumns(columns, dataType, isHeader = true, props) {
   for (let i = 1; i <= columns; ++i) {
     isHeader
       ? items.push(
-          <TableCell key={`head-${i}`} align='center'>
+          <TableCell key={`head-${dataType}-${i}`} align='center' padding='default' size="normal">
             {dataType} #{i}
           </TableCell>
         )
       : items.push(
-          <TableCell key={`mass-${i}`} align='center'>
+          <TableCell key={`mass-${i}`} align='center' padding='none' size="small">
             <TextField
-              label='mass'
-              helperText={`Concentration: ${props.initialConcentrations[i - 1]}`} 
+              label='Mass'
+              size='small'
+              helperText={`Concentration: ${
+                props.initialConcentrations[i - 1]
+              }`}
               value={props.mass[i - 1]}
               onChange={(e) => handleMassChange(e, i - 1, props)}
             />
@@ -160,20 +169,35 @@ function buildRows(props) {
   for (let i = 0; i < props.rows; ++i) {
     let items = [];
     items.push(
-      <TableCell key={`dilutionFactor-${i}`} align='center'>
-        <TextField
-          label='Factor'
-          value={props.dilutionFactor[i]}
-          onChange={(e) => handleChangeDilutionFactor(e, i, props)}
-        />
+      <TableCell key={`dilutionFactor-${i}`} align='center' padding='none' size="small">
+        <Tooltip
+          title='Initial volume divided by Final Volume'
+          placement='bottom'
+          arrow
+          disableFocusListener
+          disableTouchListener
+        >
+          <TextField
+            label='Dilution factor'
+            size='small'
+            id='dilution-factor-text-field'
+            defaultValue={undefined}
+            helperText=' '
+            value={props.dilutionFactor[i]}
+            onChange={(e) => handleChangeDilutionFactor(e, i, props)}
+          />
+        </Tooltip>
       </TableCell>
     );
     for (let j = 0; j < props.columns; ++j) {
       items.push(
-        <TableCell key={`sample-${i}${j}`} align='center'>
+        <TableCell key={`sample-${i}${j}`} align='center' padding='none' size="small">
           <TextField
-            label={`Sample ${j + 1}`}
-            helperText={`Concentration: ${props.initialConcentrations[i - 1]}`}
+            label={`Analytical signal`}
+            id='sample-text-field'
+            size='small'
+            defaultValue={undefined}
+            helperText={`Concentration: ${props.concentrations[i][j]}`}
             value={props.analyticalData[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />
@@ -181,12 +205,12 @@ function buildRows(props) {
       );
     }
     items.push(
-      <TableCell key={`avg-${i}`} align='center'>
+      <TableCell key={`avg-${i}`} align='center' padding='none' size="small">
         {props.averages[i]}
       </TableCell>
     );
     items.push(
-      <TableCell key={`stddev-${i}`} align='center'>
+      <TableCell key={`stddev-${i}`} align='center' padding='none' size="small">
         {props.stdDeviations[i]}
       </TableCell>
     );
@@ -195,4 +219,7 @@ function buildRows(props) {
   return rowItems;
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LinearitySampleInputTable);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LinearitySampleInputTable);
