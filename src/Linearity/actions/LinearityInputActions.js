@@ -5,6 +5,7 @@ export const UPD_MASS_VALUE = 'UPD_MASS_VALUE';
 export const UPD_SAMPLE_VALUE = 'UPD_SAMPLE_VALUE';
 export const UPD_VOLUME_VALUE = 'UPD_VOLUME_VALUE';
 export const UPD_DILUTION_FACTOR_VALUE = 'UPD_DILUTION_FACTOR_VALUE';
+export const REMOVE_ROW = 'REMOVE_ROW';
 
 // Linearity user input action creators
 export const incRow = () => ({
@@ -13,6 +14,10 @@ export const incRow = () => ({
 
 export const incColumn = () => ({
   type: INC_COLUMN,
+});
+
+export const removeRow = () => ({
+  type: REMOVE_ROW
 });
 
 export function updateVolumeValue(updatedValue) {

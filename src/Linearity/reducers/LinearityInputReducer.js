@@ -5,6 +5,7 @@ import {
   UPD_VOLUME_VALUE,
   UPD_MASS_VALUE,
   UPD_DILUTION_FACTOR_VALUE,
+  REMOVE_ROW,
 } from '../actions';
 
 const initialState = {
@@ -20,9 +21,12 @@ const initialState = {
   stdDeviations: [undefined],
 };
 
-const addRow = (columns, analyticalData) => {
+const addRow = (columns, analyticalData, concentrations) => {
+  concentrations.push(new Array(columns).fill(undefined));
   analyticalData.push(new Array(columns).fill(undefined));
-  return analyticalData;
+  console.log(analyticalData);
+  console.log(concentrations);
+  return { analyticalData, concentrations };
 };
 
 const addColumn = (rows, columns, analyticalData) => {
@@ -30,6 +34,29 @@ const addColumn = (rows, columns, analyticalData) => {
     analyticalData[i].splice(columns, undefined, undefined);
   }
   return analyticalData;
+};
+
+const removeRow = (
+  removedAnalyticalData,
+  removedConcentrationData,
+  removeDilutionFactorValue,
+  removedAverages,
+  removedStdDeviations
+) => {
+  removedAnalyticalData.splice(-1);
+  removedConcentrationData.splice(-1);
+  removeDilutionFactorValue.splice(-1);
+  removedAverages.splice(-1);
+  removedStdDeviations.splice(-1);
+  console.log(removedAnalyticalData);
+  console.log(removedConcentrationData);
+  return {
+    removedAnalyticalData,
+    removedConcentrationData,
+    removeDilutionFactorValue,
+    removedAverages,
+    removedStdDeviations,
+  };
 };
 
 const updateVolumeValue = (action, state) => {
@@ -79,7 +106,10 @@ const updateMassValue = (action, state) => {
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 const updateValues = (action, state) => {
   let analyticalData = [...state.analyticalData];
-  analyticalData[action.row][action.column] = action.updatedValue.replace(',', '.');
+  analyticalData[action.row][action.column] = action.updatedValue.replace(
+    ',',
+    '.'
+  );
 
   let averages = [...state.averages];
   averages[action.row] = analyticalData[action.row].reduce(
@@ -95,7 +125,11 @@ const updateValues = (action, state) => {
       (analyticalData[action.row].length - 1)
   );
 
-  return { analyticalData: analyticalData, averages: averages, stdDeviations: stdDeviations };
+  return {
+    analyticalData: analyticalData,
+    averages: averages,
+    stdDeviations: stdDeviations,
+  };
 };
 
 const updateDilutionFactorValue = (action, state) => {
@@ -117,9 +151,8 @@ const samples = (state = initialState, action) => {
       return {
         ...state,
         numRows: state.numRows + 1,
-        analyticalData: addRow(state.numColumns, state.analyticalData),
+        ...addRow(state.numColumns, state.analyticalData, state.concentrations),
         dilutionFactor: state.dilutionFactor.concat(undefined),
-        concentrations: state.concentrations.concat([0]),
         averages: state.averages.concat(undefined),
         stdDeviations: state.stdDeviations.concat(undefined),
       };
@@ -127,8 +160,30 @@ const samples = (state = initialState, action) => {
       return {
         ...state,
         numColumns: state.numColumns + 1,
-        analyticalData: addColumn(state.numRows, state.numColumns + 1, state.analyticalData),
+        analyticalData: addColumn(
+          state.numRows,
+          state.numColumns + 1,
+          state.analyticalData
+        ),
       };
+
+    case REMOVE_ROW:
+      if (state.numRows > 1) {
+        return {
+          ...state,
+          numRows: state.numRows - 1,
+          ...removeRow(
+            state.analyticalData,
+            state.concentrations,
+            state.dilutionFactor,
+            state.averages,
+            state.stdDeviations
+          ),
+        };
+      } else {
+        return state;
+      }
+
     case UPD_VOLUME_VALUE:
       return {
         ...state,

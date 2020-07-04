@@ -134,7 +134,7 @@ function buildColumns(columns, dataType, isHeader = true, props) {
           <TableCell key={`mass-${i}`} align='center'>
             <TextField
               label='mass'
-              helperText={`Concentration: ${props.initialConcentrations[i - 1]}`}
+              helperText={`Concentration: ${props.initialConcentrations[i - 1]}`} 
               value={props.mass[i - 1]}
               onChange={(e) => handleMassChange(e, i - 1, props)}
             />
@@ -162,7 +162,7 @@ function buildRows(props) {
         <TableCell key={`sample-${i}${j}`} align='center'>
           <TextField
             label={`Sample ${j + 1}`}
-            helperText={`Concentration: ${props.concentrations[i][j]}`} //${props.concentrations[i][j]}
+            helperText={`Concentration: ${props.initialConcentrations[i - 1]}`}
             value={props.analyticalData[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />
