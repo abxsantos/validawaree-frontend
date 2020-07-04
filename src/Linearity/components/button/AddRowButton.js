@@ -1,13 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import Button from '@material-ui/core/Button';
+import { IconButton, Tooltip } from '@material-ui/core';
+import AddBoxIcon from '@material-ui/icons/AddBox';
 
 import { incRow } from '../../actions'
 
 const AddRowButton = ({incRow}) => {
   return (
-    <Button variant="contained" onClick={incRow}>Add Row</Button>
+    <Tooltip
+    title='Add row'
+    placement='bottom'
+    arrow
+    disableFocusListener
+    disableTouchListener
+  >
+    <IconButton onClick={incRow}>
+      <AddBoxIcon></AddBoxIcon>
+    </IconButton>
+  </Tooltip>
   );
 }
 
