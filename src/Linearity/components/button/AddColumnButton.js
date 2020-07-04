@@ -16,7 +16,7 @@ const AddColumnButton = ({ incColumn }) => {
       disableTouchListener
     >
       <IconButton onClick={incColumn}>
-        <AddBoxIcon></AddBoxIcon>
+        <AddBoxIcon style={{color: '#bce784'}}></AddBoxIcon>
       </IconButton>
     </Tooltip>
   );
