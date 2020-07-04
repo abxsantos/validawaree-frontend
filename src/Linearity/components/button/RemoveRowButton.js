@@ -15,8 +15,8 @@ const RemoveRowButton = ({removeRow}) => {
     disableFocusListener
     disableTouchListener
   >
-    <IconButton onClick={removeRow}>
-      <DeleteIcon style={{color: '#ff6b6b'}}></DeleteIcon>
+    <IconButton size='medium' onClick={removeRow}>
+      <DeleteIcon style={{color: '#ff6b6b', fontSize: 50}}></DeleteIcon>
     </IconButton>
   </Tooltip>
   );

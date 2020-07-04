@@ -18,6 +18,13 @@ import {
   updateMassValue,
 } from '../../actions';
 
+import AddColumnButton from '../button/AddColumnButton';
+import RemoveColumnButton from '../button/RemoveColumnButton';
+
+import AddRowButton from '../button/AddRowButton';
+import RemoveRowButton from '../button/RemoveRowButton';
+
+
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -46,6 +53,8 @@ function LinearitySampleInputTable(props) {
               />
             </TableCell>
             {buildColumns(props.columns, 'Mass', false, props)}
+            <AddColumnButton />
+            <RemoveColumnButton />
           </TableRow>
         </TableBody>
         <TableHead>
@@ -58,6 +67,8 @@ function LinearitySampleInputTable(props) {
         </TableHead>
         <TableBody>{buildRows(props)}</TableBody>
       </Table>
+      <AddRowButton />
+      <RemoveRowButton />
     </TableContainer>
   );
 }

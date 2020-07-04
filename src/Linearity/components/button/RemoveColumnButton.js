@@ -16,7 +16,7 @@ const RemoveColumnButton = ({removeColumn}) => {
     disableTouchListener
   >
     <IconButton onClick={removeColumn}>
-      <DeleteIcon style={{color: '#ff6b6b'}}></DeleteIcon>
+      <DeleteIcon style={{color: '#ff6b6b', fontSize: 40}}></DeleteIcon>
     </IconButton>
   </Tooltip>
   );

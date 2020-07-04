@@ -15,8 +15,8 @@ const AddColumnButton = ({ incColumn }) => {
       disableFocusListener
       disableTouchListener
     >
-      <IconButton onClick={incColumn}>
-        <AddBoxIcon style={{color: '#bce784'}}></AddBoxIcon>
+      <IconButton size='medium' onClick={incColumn}>
+        <AddBoxIcon style={{color: '#bce784', fontSize: 40}}></AddBoxIcon>
       </IconButton>
     </Tooltip>
   );
