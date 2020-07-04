@@ -24,9 +24,9 @@ const initialState = {
 const addRow = (columns, analyticalData, concentrations) => {
   concentrations.push(new Array(columns).fill(undefined));
   analyticalData.push(new Array(columns).fill(undefined));
-  console.log(analyticalData)
-  console.log(concentrations)
-  {return analyticalData, concentrations};
+  console.log(analyticalData);
+  console.log(concentrations);
+  return { analyticalData, concentrations };
 };
 
 const addColumn = (rows, columns, analyticalData) => {
@@ -36,14 +36,20 @@ const addColumn = (rows, columns, analyticalData) => {
   return analyticalData;
 };
 
-const removeRow = (removedAnalyticalData, removedConcentrationData, removeDilutionFactorValue, removedAverages, removedStdDeviations) => {
+const removeRow = (
+  removedAnalyticalData,
+  removedConcentrationData,
+  removeDilutionFactorValue,
+  removedAverages,
+  removedStdDeviations
+) => {
   removedAnalyticalData.splice(-1);
   removedConcentrationData.splice(-1);
   removeDilutionFactorValue.splice(-1);
   removedAverages.splice(-1);
   removedStdDeviations.splice(-1);
-  console.log(removedAnalyticalData)
-  console.log(removedConcentrationData)
+  console.log(removedAnalyticalData);
+  console.log(removedConcentrationData);
   return {
     removedAnalyticalData,
     removedConcentrationData,
@@ -162,11 +168,22 @@ const samples = (state = initialState, action) => {
       };
 
     case REMOVE_ROW:
-      return{
-        ...state,
-        numRows: state.numRows - 1, 
-        ...removeRow(state.analyticalData, state.concentrations, state.dilutionFactor, state.averages, state.stdDeviations)
+      if (state.numRows > 1) {
+        return {
+          ...state,
+          numRows: state.numRows - 1,
+          ...removeRow(
+            state.analyticalData,
+            state.concentrations,
+            state.dilutionFactor,
+            state.averages,
+            state.stdDeviations
+          ),
+        };
+      } else {
+        return state;
       }
+
     case UPD_VOLUME_VALUE:
       return {
         ...state,

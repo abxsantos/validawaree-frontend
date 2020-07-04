@@ -19,7 +19,7 @@ function App() {
       <LinearitySampleInputTable />
       <CalculateLinearityButton />
       <LinearityRegressionAnovaTable />
-      <LinearityRegressionChart />
+      <LinearityRegressionChart />numRows
       <LinearityResiduesChart />
     </div>
   );
