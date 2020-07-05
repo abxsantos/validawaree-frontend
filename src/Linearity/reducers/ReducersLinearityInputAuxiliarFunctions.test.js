@@ -151,6 +151,17 @@ test('updateAverage must calculate the average if there is 2 or more numbers in 
   expect(updateAnalyticalAverage(analyticalData)).toEqual(2);
 });
 
+test('updateAverage must return undefined if there less than 2 numbers in data set.', () => {
+  const analyticalData = [1, undefined, undefined];
+  expect(updateAnalyticalAverage(analyticalData)).toEqual(undefined);
+});
+
+test('updateAverage must calculate the average if there is 2 numbers in data set.', () => {
+  const analyticalData = [1, 2, undefined];
+  expect(updateAnalyticalAverage(analyticalData)).toEqual(1.5);
+});
+
+
 test('updateStandardDeviation must calculate the standard deviation if there is 3 or more numbers in data set.', () => {
   const analyticalData = [1, 2, 3];
   expect(updateStandardDeviation(analyticalData)).toEqual({

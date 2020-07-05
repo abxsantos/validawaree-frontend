@@ -122,23 +122,31 @@ export const updateMassValue = (action, state) => {
 };
 
 export const updateAnalyticalAverage = (analyticalData) => {
-  let sum = analyticalData.reduce(
-    (cumulative, currentValue) => cumulative + currentValue,
-    0
-  );
-  let average = sum / analyticalData.length || 0;
-  return average;
+  var filteredAnalyticalData = analyticalData.filter(function (el) { return el != null; });
+  if (filteredAnalyticalData.length > 1) {
+    let sum = filteredAnalyticalData.reduce((cumulative, currentValue) => cumulative + currentValue, 0);
+    let average = parseFloat(sum) / parseFloat(filteredAnalyticalData.length);
+    return average;
+  } else {
+    return undefined
+  }
 };
 
 export const updateStandardDeviation = (analyticalData) => {
-  let average = updateAnalyticalAverage(analyticalData);
-  let stdDeviation = Math.sqrt(
-    analyticalData
-      .map((x) => Math.pow(x - average, 2))
-      .reduce((a, b) => a + b) /
-      (analyticalData.length - 1)
-  );
-  return { updatedAverage: average, updatedStdDeviation: stdDeviation };
+  var filteredAnalyticalData = analyticalData.filter(function (el) { return el != null; });
+  if (filteredAnalyticalData.length > 2) {
+    let average = updateAnalyticalAverage(filteredAnalyticalData);
+    let stdDeviation = Math.sqrt(
+      filteredAnalyticalData
+        .map((value) => Math.pow(value - average, 2))
+        .reduce((acumulatedValue, currentValue) => acumulatedValue + currentValue) /
+      (filteredAnalyticalData.length - 1)
+    );
+    return { updatedAverage: average, updatedStdDeviation: stdDeviation };
+  } else {
+    return { updatedAverage: undefined, updatedStdDeviation: undefined };
+  }
+
 };
 
 // https://dev.to/sagar/three-dots---in-javascript-26ci
@@ -159,30 +167,30 @@ export const updateValues = (action, state) => {
 
   let averages = [...state.averages];
   let stdDeviations = [...state.stdDeviations];
-  if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 3) {
-    let newValues = updateStandardDeviation(analyticalData[action.row]);
-    averages[action.row] = newValues.updatedAverage;
-    stdDeviations[action.row] = newValues.updatedStdDeviation;
+  // if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 3) {
+  //   let newValues = updateStandardDeviation(analyticalData[action.row]);
+  //   averages[action.row] = newValues.updatedAverage;
+  //   stdDeviations[action.row] = newValues.updatedStdDeviation;
 
-    return {
-      analyticalData: analyticalData,
-      averages: averages,
-      stdDeviations: stdDeviations,
-    };
-  } else if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 2) {
-    averages[action.row] = updateAnalyticalAverage(analyticalData[action.row]);
-    return {
-      averages: averages,
-      stdDeviations: stdDeviations,
-      analyticalData: analyticalData,
-    };
-  } else {
-    return {
-      averages: averages,
-      stdDeviations: stdDeviations,
-      analyticalData: analyticalData,
-    };
-  }
+  //   return {
+  //     analyticalData: analyticalData,
+  //     averages: averages,
+  //     stdDeviations: stdDeviations,
+  //   };
+  // } else if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 2) {
+  //   averages[action.row] = updateAnalyticalAverage(analyticalData[action.row]);
+  //   return {
+  //     averages: averages,
+  //     stdDeviations: stdDeviations,
+  //     analyticalData: analyticalData,
+  //   };
+  // } else {
+  //   return {
+  //     averages: averages,
+  //     stdDeviations: stdDeviations,
+  //     analyticalData: analyticalData,
+  //   };
+  // }
 };
 
 export const updateDilutionFactorValue = (action, state) => {
