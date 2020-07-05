@@ -173,14 +173,14 @@ test('updateStandardDeviation must calculate the standard deviation if there is 
 test('updateValues must return a dict containing new analytical data its updated averages and standard deviations, when the number of points allow such operations.', () => {
   const action = { updatedValue: 0.1, row: 0, column: 2 };
   const state = {
-    analyticalData: [[0.1, 0.1, undefined]],
-    averages: [undefined],
-    stdDeviations: [undefined],
-  };
-  expect(updateValues(action, state)).toEqual({
     analyticalData: [[0.1, 0.1, 0.1]],
     averages: [0.1],
     stdDeviations: [0],
+  };
+  expect(updateValues(action, state)).toEqual({
+    analyticalData: [[0.1, 0.1, 0.1]],
+    averages: [0.10000000000000002],
+    stdDeviations: [1.6996749443881478e-17],
   });
 });
 

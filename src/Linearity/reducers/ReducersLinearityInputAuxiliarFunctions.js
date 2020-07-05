@@ -143,10 +143,13 @@ export const updateStandardDeviation = (analyticalData) => {
       (filteredAnalyticalData.length - 1)
     );
     return { updatedAverage: average, updatedStdDeviation: stdDeviation };
-  } else {
+  } else if (filteredAnalyticalData.length === 2) {
+    let average = updateAnalyticalAverage(filteredAnalyticalData);
+    return { updatedAverage: average, updatedStdDeviation: undefined };
+  }
+  else {
     return { updatedAverage: undefined, updatedStdDeviation: undefined };
   }
-
 };
 
 // https://dev.to/sagar/three-dots---in-javascript-26ci
@@ -167,30 +170,14 @@ export const updateValues = (action, state) => {
 
   let averages = [...state.averages];
   let stdDeviations = [...state.stdDeviations];
-  // if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 3) {
-  //   let newValues = updateStandardDeviation(analyticalData[action.row]);
-  //   averages[action.row] = newValues.updatedAverage;
-  //   stdDeviations[action.row] = newValues.updatedStdDeviation;
-
-  //   return {
-  //     analyticalData: analyticalData,
-  //     averages: averages,
-  //     stdDeviations: stdDeviations,
-  //   };
-  // } else if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 2) {
-  //   averages[action.row] = updateAnalyticalAverage(analyticalData[action.row]);
-  //   return {
-  //     averages: averages,
-  //     stdDeviations: stdDeviations,
-  //     analyticalData: analyticalData,
-  //   };
-  // } else {
-  //   return {
-  //     averages: averages,
-  //     stdDeviations: stdDeviations,
-  //     analyticalData: analyticalData,
-  //   };
-  // }
+  let newValues = updateStandardDeviation(analyticalData[action.row])
+  averages[action.row] = newValues.updatedAverage
+  stdDeviations[action.row] = newValues.updatedStdDeviation
+  return {
+    analyticalData: analyticalData,
+    averages: averages,
+    stdDeviations: stdDeviations,
+  };
 };
 
 export const updateDilutionFactorValue = (action, state) => {
