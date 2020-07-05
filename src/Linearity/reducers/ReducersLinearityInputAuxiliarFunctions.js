@@ -15,13 +15,13 @@ export const addColumn = (rows, columns, analyticalData) => {
 export const removeRow = (
   removedAnalyticalData,
   removedConcentrationData,
-  removeDilutionFactorValue,
+  removedDilutionFactorValue,
   removedAverages,
   removedStdDeviations
 ) => {
   removedAnalyticalData.splice(-1);
   removedConcentrationData.splice(-1);
-  removeDilutionFactorValue.splice(-1);
+  removedDilutionFactorValue.splice(-1);
   removedAverages.splice(-1);
   removedStdDeviations.splice(-1);
   console.log(removedAnalyticalData);
@@ -29,7 +29,7 @@ export const removeRow = (
   return {
     removedAnalyticalData,
     removedConcentrationData,
-    removeDilutionFactorValue,
+    removedDilutionFactorValue,
     removedAverages,
     removedStdDeviations,
   };
@@ -58,7 +58,16 @@ export const removeColumn = (
 
 export const updateVolumeValue = (action, state) => {
   let volume = state.volume;
-  volume = action.updatedVolumeValue.replace(',', '.');
+  if (typeof action.updatedVolumeValue === 'string') {
+    volume = parseFloat(action.updatedVolumeValue.replace(',', '.'));
+  } else if (
+    typeof action.updatedVolumeValue === 'number' &&
+    action.updatedVolumeValue > 0
+  ) {
+    volume = parseFloat(action.updatedVolumeValue);
+  } else {
+    throw new Error('Volume value not accepted!');
+  }
 
   let initialConcentrations = [...state.mass].map(function (value) {
     return value / volume;
@@ -67,9 +76,10 @@ export const updateVolumeValue = (action, state) => {
   let concentrations = [...state.concentrations];
 
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    for (let j = 0; j < state.initialConcentrations.length; ++j) {
+    for (let j = 0; j < initialConcentrations.length; ++j) {
       concentrations[i][j] =
-        state.initialConcentrations[j] / state.dilutionFactor[i];
+        parseFloat(initialConcentrations[j]) /
+        parseFloat(state.dilutionFactor[i]);
     }
   }
 
@@ -82,16 +92,27 @@ export const updateVolumeValue = (action, state) => {
 
 export const updateMassValue = (action, state) => {
   let mass = [...state.mass];
-  mass[action.column] = action.updatedMassValue.replace(',', '.');
+  if (typeof action.updatedMassValue === 'string') {
+    mass[action.column - 1] = parseFloat(
+      action.updatedMassValue.replace(',', '.')
+    );
+  } else if (
+    typeof action.updatedMassValue === 'number' &&
+    action.updatedMassValue > 0
+  ) {
+    mass[action.column - 1] = parseFloat(action.updatedMassValue);
+  } else {
+    throw new Error('Mass value not accepted!');
+  }
 
   let initialConcentrations = [...state.initialConcentrations];
-  initialConcentrations[action.column] = mass[action.column] / state.volume;
+  initialConcentrations[action.column - 1] = parseFloat(action.updatedMassValue) / parseFloat(state.volume);
 
   let concentrations = [...state.concentrations];
 
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    concentrations[i][action.column] =
-      state.initialConcentrations[action.column] / state.dilutionFactor[i];
+    concentrations[i][action.column -1] =
+      (parseFloat(action.updatedMassValue / parseFloat(state.volume))) / parseFloat(state.dilutionFactor[i]);
   }
   return {
     mass: mass,
