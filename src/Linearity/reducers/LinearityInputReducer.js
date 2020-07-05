@@ -24,7 +24,7 @@ const initialState = {
   numRows: 1,
   numColumns: 3,
   volume: undefined,
-  mass: [],
+  mass: [undefined,undefined, undefined],
   analyticalData: [[undefined, undefined, undefined]],
   dilutionFactor: [],
   concentrations: [[undefined, undefined, undefined]],

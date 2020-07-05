@@ -120,12 +120,13 @@ test('removeColumn must remove the last data set of removed analytical data, con
 
 describe('checkValidTableInput', () =>{
   each([
-    ["5.2", 5.2],
+    ["5.2", "5.2"],
     ["STRING", undefined],
+    ['1.', '1.'],
     [null, undefined],
-    [-1, undefined],
-    [10, 10],    
-    ["3,2", 3.2],
+    ['-', undefined],
+    [1, 1],    
+    ["3,2", "3.2"],
   ]).it('when the table input is "%s"', (value, expected) => {
     expect(checkValidTableInput(value)).toEqual(expected);
   });
@@ -147,6 +148,25 @@ test('updateVolumeValue must alter the initial concentration, and the concentrat
     concentrations: [[0.5, 1, 2]],
   });
 });
+
+test('updateVolumeValue must mantain the initial concentration, and the concentration values when a "." is inserted.', () => {
+  const action = { updatedVolumeValue: "1." };
+  const state = {
+    volume: '1',
+    initialConcentrations: [1, 2, 4],
+    mass: [1, 2, 4],
+    dilutionFactor: [2],
+    concentrations: [[0.5, 1, 2]],
+  };
+  expect(updateVolumeValue(action, state)).toEqual({
+    volume: '1.',
+    initialConcentrations: [1, 2, 4],
+    concentrations: [[0.5, 1, 2]],
+  });
+});
+
+
+
 
 test('updateVolumeValue must return undefined when not number values are inputed on the textfield and also return undefined for concentrations and initial concentrations values', () => {
   const action = { updatedVolumeValue: "ABC"};

@@ -190,7 +190,7 @@ function buildRows(props) {
             size='small'
             defaultValue={undefined}
             helperText={`Concentration: ${props.concentrations[i][j]}`}
-            value={isNaN(props.analyticalData[i][j]) ? undefined : props.analyticalData[i][j]}
+            value={props.analyticalData[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />
         </TableCell>

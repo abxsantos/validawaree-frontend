@@ -58,9 +58,18 @@ export const removeColumn = (
 
 export const checkValidTableInput = (newValue) => {
   if (typeof newValue === 'string') {
-    newValue = parseFloat(newValue.replace(',', '.'))
-    return isNaN(newValue) ? undefined : newValue
-  } else if (typeof newValue === 'number' && newValue > 0) {
+    newValue = newValue.replace(',', '.')
+    if (newValue.includes('.')) {
+      return newValue
+    }
+    else if (isNaN(newValue)) {
+      return undefined
+    }
+    else {
+      return newValue
+    }
+  }
+  else if (typeof newValue === 'number' && newValue > 0) {
     return newValue
   }
   else {
@@ -72,7 +81,7 @@ export const updateVolumeValue = (action, state) => {
   let volume = state.volume;
   volume = checkValidTableInput(action.updatedVolumeValue)
   let initialConcentrations = [...state.mass].map(function (mass) {
-    let updatedInitialConcentrationsValue = parseFloat(mass) / parseFloat(volume);
+    let updatedInitialConcentrationsValue = parseFloat(mass) / volume;
     return checkValidTableInput(updatedInitialConcentrationsValue)
   });
   let concentrations = [...state.concentrations];
@@ -95,11 +104,11 @@ export const updateMassValue = (action, state) => {
   mass[action.column] = checkValidTableInput(action.updatedMassValue)
 
   let initialConcentrations = [...state.initialConcentrations];
-  initialConcentrations[action.column] = checkValidTableInput(parseFloat(action.updatedMassValue) / parseFloat(state.volume));
+  initialConcentrations[action.column] = checkValidTableInput(mass[action.column] / parseFloat(state.volume));
 
   let concentrations = [...state.concentrations];
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    concentrations[i][action.column] = checkValidTableInput(parseFloat(action.updatedMassValue / parseFloat(state.volume)) / parseFloat(state.dilutionFactor[i]));
+    concentrations[i][action.column] = checkValidTableInput(mass[action.column] / parseFloat(state.volume)) / parseFloat(state.dilutionFactor[i]);
   }
   return {
     mass: mass,
@@ -158,12 +167,12 @@ export const updateValues = (action, state) => {
 export const updateDilutionFactorValue = (action, state) => {
   let dilutionFactor = [...state.dilutionFactor];
   dilutionFactor[action.row] = checkValidTableInput(action.updatedValue);
-  
+
   let concentrations = [...state.concentrations];
   concentrations[action.row] = [...state.initialConcentrations].map(function (
     value
   ) {
-    return checkValidTableInput(value / dilutionFactor[action.row])
+    return checkValidTableInput(parseFloat(value) / dilutionFactor[action.row])
   });
   return { dilutionFactor: dilutionFactor, concentrations: concentrations };
 };
