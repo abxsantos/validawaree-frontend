@@ -1,7 +1,7 @@
-//action types
+// Action types
 export const UPD_LINEARITY_RESULT = 'UPD_LINEARITY_RESULT';
 
-// auxiliar functions
+// Auxiliar functions
 function flattenListOfLists(analyticalData) {
   let flattenedData = [].concat(...analyticalData);
   return flattenedData;
@@ -146,6 +146,9 @@ export function updateLinearityResults(jsonLinearityResultData) {
     isNormalDistribution: jsonLinearityResultData.is_normal_distribution,
     isHomokedastic: jsonLinearityResultData.is_homokedastic,
     durbinWatsonValue: jsonLinearityResultData.durbin_watson_value,
+    shapiropValue: jsonLinearityResultData.shapiro_pvalue,
+    breuschPaganpValue: jsonLinearityResultData.breusch_pagan_pvalue,
+
     regressionChartData: residuesChartData,
     linearityChartData: linearityChartData,
   };
@@ -156,12 +159,9 @@ export function getLinearityResults() {
   return (dispatch, getState) => {
     const { samples } = getState();
 
-    let analyticalData = samples.analyticalData;
-    let concentrationData = samples.concentrations;
-
     const jsonLinearityInputData = {
-      analytical_data: JSON.stringify(analyticalData),
-      concentration_data: JSON.stringify(concentrationData),
+      analytical_data: JSON.stringify(samples.analyticalData),
+      concentration_data: JSON.stringify(samples.concentrations),
     };
 
     fetch('/linearity_result', {
@@ -180,21 +180,3 @@ export function getLinearityResults() {
       });
   };
 }
-
-    // This is test analyticalData
-    // analyticalData = [
-    //   [0.188, 0.192, 0.203],
-    //   [0.349, 0.346, 0.348],
-    //   [0.489, 0.482, 0.492],
-    //   [0.637, 0.641, 0.641],
-    //   [0.762, 0.768, 0.786],
-    //   [0.931, 0.924, 0.925],
-    // ];
-    // concentrationData = [
-    //   [0.008, 0.008, 0.008],
-    //   [0.016, 0.016, 0.016],
-    //   [0.02, 0.02, 0.02],
-    //   [0.028, 0.028, 0.028],
-    //   [0.032, 0.032, 0.032],
-    //   [0.04, 0.04, 0.04],
-    // ];
