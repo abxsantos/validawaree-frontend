@@ -52,7 +52,7 @@ function LinearitySampleInputTable(props) {
               <TextField
                 size='small'
                 helperText=' '
-                label='Volume'                
+                label='Volume'
                 value={props.volume}
                 onChange={(e) => handleVolumeChange(e, props)}
               />
@@ -80,27 +80,19 @@ function LinearitySampleInputTable(props) {
 }
 
 function handleVolumeChange(event, props) {
-  if (!isNaN(event.target.value)) {
-    props.updateVolumeValue(event.target.value);
-  }
+  props.updateVolumeValue(event.target.value);
 }
 
 function handleMassChange(event, column, props) {
-  if (!isNaN(event.target.value)) {
-    props.updateMassValue(event.target.value, column);
-  }
+  props.updateMassValue(event.target.value, column);
 }
 
 function handleChange(event, row, column, props) {
-  if (!isNaN(event.target.value)) {
-    props.updateSampleValue(event.target.value, row, column);
-  }
+  props.updateSampleValue(event.target.value, row, column);
 }
 
 function handleChangeDilutionFactor(event, row, props) {
-  if (!isNaN(event.target.value)) {
-    props.updateDilutionFactorValue(event.target.value, row);
-  }
+  props.updateDilutionFactorValue(event.target.value, row);
 }
 
 const mapStateToProps = (state) => ({
@@ -143,23 +135,23 @@ function buildColumns(columns, dataType, isHeader = true, props) {
   for (let i = 1; i <= columns; ++i) {
     isHeader
       ? items.push(
-          <TableCell key={`head-${dataType}-${i}`} align='center' padding='default' size="normal">
-            {dataType} #{i}
-          </TableCell>
-        )
+        <TableCell key={`head-${dataType}-${i}`} align='center' padding='default' size="normal">
+          {dataType} #{i}
+        </TableCell>
+      )
       : items.push(
-          <TableCell key={`mass-${i}`} align='center' padding='none' size="small">
-            <TextField
-              label='Mass'
-              size='small'
-              helperText={`Concentration: ${
-                props.initialConcentrations[i - 1]
+        <TableCell key={`mass-${i}`} align='center' padding='none' size="small">
+          <TextField
+            label='Mass'
+            size='small'
+            helperText={`Concentration: ${
+              props.initialConcentrations[i - 1]
               }`}
-              value={props.mass[i - 1]}
-              onChange={(e) => handleMassChange(e, i - 1, props)}
-            />
-          </TableCell>
-        );
+            value={props.mass[i - 1]}
+            onChange={(e) => handleMassChange(e, i - 1, props)}
+          />
+        </TableCell>
+      );
   }
   return items;
 }
@@ -198,7 +190,7 @@ function buildRows(props) {
             size='small'
             defaultValue={undefined}
             helperText={`Concentration: ${props.concentrations[i][j]}`}
-            value={props.analyticalData[i][j]}
+            value={isNaN(props.analyticalData[i][j]) ? undefined : props.analyticalData[i][j]}
             onChange={(e) => handleChange(e, i, j, props)}
           />
         </TableCell>
