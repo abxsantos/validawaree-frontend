@@ -9,8 +9,8 @@ import {
   updateMassValue,
   updateValues,
   updateDilutionFactorValue,
-  updateAnalyticalAverage,
-  updateStandardDeviation,
+  calculateAnalyticalAverage,
+  calculateStandardDeviation,
 } from './ReducersLinearityInputAuxiliarFunctions';
 
 test('addRow must return concentrations and analyticalData list of lists containing a new set filled with undefined that will be the same sumber of columns.', () => {
@@ -146,28 +146,16 @@ test('updateMassValue must return a dict containing new mass value and alter the
   });
 });
 
-test('updateAverage must calculate the average if there is 2 or more numbers in data set.', () => {
-  const analyticalData = [1, 2, 3];
-  expect(updateAnalyticalAverage(analyticalData)).toEqual(2);
+test('calculateAnalyticalAverage must calculate the average if there is 2 or more numbers in data set.', () => {
+  const filteredAnalyticalData = [1, 2, 3];
+  expect(calculateAnalyticalAverage(filteredAnalyticalData)).toEqual(2);
 });
 
-test('updateAverage must return undefined if there less than 2 numbers in data set.', () => {
-  const analyticalData = [1, undefined, undefined];
-  expect(updateAnalyticalAverage(analyticalData)).toEqual(undefined);
-});
-
-test('updateAverage must calculate the average if there is 2 numbers in data set.', () => {
-  const analyticalData = [1, 2, undefined];
-  expect(updateAnalyticalAverage(analyticalData)).toEqual(1.5);
-});
-
-
-test('updateStandardDeviation must calculate the standard deviation if there is 3 or more numbers in data set.', () => {
-  const analyticalData = [1, 2, 3];
-  expect(updateStandardDeviation(analyticalData)).toEqual({
-    updatedAverage: 2,
-    updatedStdDeviation: 1,
-  });
+test('calculateStandardDeviation must calculate the standard deviation if there is 3 or more numbers in data set.', () => {
+  const filteredAnalyticalData = [1, 2, 3];
+  const average = 2;
+  expect(calculateStandardDeviation(filteredAnalyticalData, average)).toEqual(1
+  );
 });
 
 test('updateValues must return a dict containing new analytical data its updated averages and standard deviations, when the number of points allow such operations.', () => {

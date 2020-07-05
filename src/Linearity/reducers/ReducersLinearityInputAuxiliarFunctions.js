@@ -121,30 +121,29 @@ export const updateMassValue = (action, state) => {
   };
 };
 
-export const updateAnalyticalAverage = (analyticalData) => {
-  var filteredAnalyticalData = analyticalData.filter(function (el) { return el != null; });
-  if (filteredAnalyticalData.length > 1) {
-    let sum = filteredAnalyticalData.reduce((cumulative, currentValue) => cumulative + currentValue, 0);
-    let average = parseFloat(sum) / parseFloat(filteredAnalyticalData.length);
-    return average;
-  } else {
-    return undefined
-  }
+export const calculateAnalyticalAverage = (filteredAnalyticalData) => {
+  let average = (filteredAnalyticalData.reduce((cumulative, currentValue) => cumulative + currentValue, 0)) / filteredAnalyticalData.length;
+  return average;
 };
 
-export const updateStandardDeviation = (analyticalData) => {
+export const calculateStandardDeviation = (filteredAnalyticalData, average) => {
+  let stdDeviation = Math.sqrt(
+    filteredAnalyticalData
+      .map((value) => Math.pow(value - average, 2))
+      .reduce((acumulatedValue, currentValue) => acumulatedValue + currentValue) /
+    (filteredAnalyticalData.length - 1)
+  );
+  return stdDeviation
+}
+
+export const updateStandardDeviationAndAverages = (analyticalData) => {
   var filteredAnalyticalData = analyticalData.filter(function (el) { return el != null; });
   if (filteredAnalyticalData.length > 2) {
-    let average = updateAnalyticalAverage(filteredAnalyticalData);
-    let stdDeviation = Math.sqrt(
-      filteredAnalyticalData
-        .map((value) => Math.pow(value - average, 2))
-        .reduce((acumulatedValue, currentValue) => acumulatedValue + currentValue) /
-      (filteredAnalyticalData.length - 1)
-    );
+    let average = calculateAnalyticalAverage(filteredAnalyticalData);
+    let stdDeviation = calculateStandardDeviation(filteredAnalyticalData, average)
     return { updatedAverage: average, updatedStdDeviation: stdDeviation };
   } else if (filteredAnalyticalData.length === 2) {
-    let average = updateAnalyticalAverage(filteredAnalyticalData);
+    let average = calculateAnalyticalAverage(filteredAnalyticalData);
     return { updatedAverage: average, updatedStdDeviation: undefined };
   }
   else {
@@ -170,7 +169,7 @@ export const updateValues = (action, state) => {
 
   let averages = [...state.averages];
   let stdDeviations = [...state.stdDeviations];
-  let newValues = updateStandardDeviation(analyticalData[action.row])
+  let newValues = updateStandardDeviationAndAverages(analyticalData[action.row])
   averages[action.row] = newValues.updatedAverage
   stdDeviations[action.row] = newValues.updatedStdDeviation
   return {
