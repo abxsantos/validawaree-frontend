@@ -130,6 +130,22 @@ test('updateVolumeValue must alter the initial concentration, and the concentrat
   });
 });
 
+test('updateVolumeValue must return undefined when not number values are inputed on the textfield and also return undefined for concentrations and initial concentrations values', () => {
+  const action = { updatedVolumeValue: ""};
+  const state = {
+    volume: 1.0,
+    initialConcentrations: [1, 2, 4],
+    mass: [1, 2, 4],
+    dilutionFactor: [2],
+    concentrations: [[0.5, 1, 2]],
+  };
+  expect(updateVolumeValue(action, state)).toEqual({
+    volume: undefined,
+    initialConcentrations: [undefined, undefined, undefined],
+    concentrations: [[undefined, undefined, undefined]],
+  });
+});
+
 test('updateMassValue must return a dict containing new mass value and alter the initial concentrations and concentrations values.', () => {
   const action = { updatedMassValue: 1.0, column: 2 };
   const state = {
