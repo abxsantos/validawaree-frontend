@@ -1,12 +1,23 @@
 // Auxiliar functions
 
 export const makeChartLinePoint = (xPoint, yPoint, xKey, yKey) => {
-  let linePoint = {
-    [xKey]: xPoint,
-    [yKey]: yPoint,
-  };
-  return linePoint;
-}
+  if (
+    typeof xPoint === 'number' &&
+    typeof yPoint === 'number' &&
+    typeof xKey === 'string' &&
+    typeof yKey === 'string'
+  ) {
+    let linePoint = {
+      [xKey]: xPoint,
+      [yKey]: yPoint,
+    };
+    return linePoint;
+  } else {
+    throw new Error(
+      "There's something wrong with the given value for plotting the regression line."
+    );
+  }
+};
 
 export const calculateRegressionLine = (
   flattenedConcentrationData,
@@ -14,7 +25,6 @@ export const calculateRegressionLine = (
   slope,
   chartData
 ) => {
-
   let maxConcentrationPoint = Math.max(...flattenedConcentrationData);
   let minConcentrationPoint = Math.min(...flattenedConcentrationData);
 
@@ -39,16 +49,16 @@ export const calculateRegressionLine = (
   );
 
   return chartData;
-}
+};
 
-export const predictValuesWithModel = (analyticalData, intercept, slope) => {
+export const predictValuesWithModel = (flattenedConcentrationData, intercept, slope) => {
   let predictedModelValues = [];
 
-  analyticalData.forEach((element) => {
+  flattenedConcentrationData.forEach((element) => {
     predictedModelValues.push(slope * element + intercept);
   });
   return predictedModelValues;
-}
+};
 
 export const organizeResiduesChartData = (
   concentrationData,
@@ -79,7 +89,7 @@ export const organizeResiduesChartData = (
   );
 
   return residuesChartData;
-}
+};
 
 export const organizeLinearityGraphData = (
   analyticalData,
@@ -106,4 +116,4 @@ export const organizeLinearityGraphData = (
   );
 
   return regressionChartData;
-}
+};
