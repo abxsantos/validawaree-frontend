@@ -129,7 +129,7 @@ test('updateVolumeValue must alter the initial concentration, and the concentrat
 });
 
 test('updateMassValue must return a dict containing new mass value and alter the initial concentrations and concentrations values.', () => {
-  const action = { updatedMassValue: 1.0, column: 3 };
+  const action = { updatedMassValue: 1.0, column: 2 };
   const state = {
     mass: [0, 0, 0],
     volume: 1.0,
@@ -137,22 +137,36 @@ test('updateMassValue must return a dict containing new mass value and alter the
     concentrations: [[0, 0, 0]],
     dilutionFactor: [2],
   };
-  expect(updateMassValue(action, state)).toEqual(
-    {
+  expect(updateMassValue(action, state)).toEqual({
     mass: [0, 0, 1],
     initialConcentrations: [0, 0, 1],
     concentrations: [[0, 0, 0.5]],
   });
 });
 
-test('updateValues must return a dict containing new analytical data its updated averages and standard deviations, when the number of points allow such operations.', () =>{
-  const action = {updateValue: 0.1, row: 1, column: 1}
-  const state = {analyticalData: [[undefined,undefined,undefined]], averages: [undefined,undefined,undefined], stdDeviations: [undefined,undefined,undefined]};
-  expect(updateValues(action, state)).toEqual(
-    {
-      analyticalData: [[0.1,undefined,undefined]],
-      averages: [undefined,undefined,undefined],
-      stdDeviations: [undefined,undefined,undefined],
-    }
-  );
+test('updateValues must return a dict containing new analytical data its updated averages and standard deviations, when the number of points allow such operations.', () => {
+  const action = { updatedValue: 0.1, row: 0, column: 2 };
+  const state = {
+    analyticalData: [[0.1, 0.1, undefined]],
+    averages: [0.1],
+    stdDeviations: [undefined],
+  };
+  expect(updateValues(action, state)).toEqual({
+    analyticalData: [[0.1, 0.1, 0.1]],
+    averages: [0.1],
+    stdDeviations: [0],
+  });
+});
+
+test('updateDilutionFactorValue must update the dilution factor and concentrations when changed.', () => {
+  const action = { updatedValue: 2.0, row: 0 };
+  const state = {
+    dilutionFactor: [undefined],
+    initialConcentrations: [1.0, 2.0, undefined],
+    concentrations: [[undefined, undefined, undefined]],
+  };
+  expect(updateDilutionFactorValue(action, state)).toEqual({
+    dilutionFactor: [2.0],
+    concentrations: [[0.5, 1, undefined]],
+  });
 });

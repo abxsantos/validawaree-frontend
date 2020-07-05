@@ -93,26 +93,26 @@ export const updateVolumeValue = (action, state) => {
 export const updateMassValue = (action, state) => {
   let mass = [...state.mass];
   if (typeof action.updatedMassValue === 'string') {
-    mass[action.column - 1] = parseFloat(
-      action.updatedMassValue.replace(',', '.')
-    );
+    mass[action.column] = parseFloat(action.updatedMassValue.replace(',', '.'));
   } else if (
     typeof action.updatedMassValue === 'number' &&
     action.updatedMassValue > 0
   ) {
-    mass[action.column - 1] = parseFloat(action.updatedMassValue);
+    mass[action.column] = parseFloat(action.updatedMassValue);
   } else {
     throw new Error('Mass value not accepted!');
   }
 
   let initialConcentrations = [...state.initialConcentrations];
-  initialConcentrations[action.column - 1] = parseFloat(action.updatedMassValue) / parseFloat(state.volume);
+  initialConcentrations[action.column] =
+    parseFloat(action.updatedMassValue) / parseFloat(state.volume);
 
   let concentrations = [...state.concentrations];
 
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    concentrations[i][action.column -1] =
-      (parseFloat(action.updatedMassValue / parseFloat(state.volume))) / parseFloat(state.dilutionFactor[i]);
+    concentrations[i][action.column] =
+      parseFloat(action.updatedMassValue / parseFloat(state.volume)) /
+      parseFloat(state.dilutionFactor[i]);
   }
   return {
     mass: mass,
@@ -124,24 +124,58 @@ export const updateMassValue = (action, state) => {
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 export const updateValues = (action, state) => {
   let analyticalData = [...state.analyticalData];
-  analyticalData[action.row][action.column] = action.updatedValue.replace(
-    ',',
-    '.'
-  );
+  if (typeof action.updatedValue == 'string') {
+    analyticalData[action.row][action.column] = parseFloat(
+      action.updatedValue.replace(',', '.')
+    );
+  } else if (
+    typeof action.updatedValue == 'number' &&
+    action.updatedValue >= 0
+  ) {
+    analyticalData[action.row][action.column] = action.updatedValue;
+  } else {
+    throw new Error('Analytical value not valid!');
+  }
 
   let averages = [...state.averages];
-  averages[action.row] = analyticalData[action.row].reduce(
-    (a, b) => parseFloat(a) + parseFloat(b)
-  );
-  averages[action.row] /= analyticalData[action.row].length;
-
   let stdDeviations = [...state.stdDeviations];
-  stdDeviations[action.row] = Math.sqrt(
-    analyticalData[action.row]
-      .map((value) => Math.pow(parseFloat(value) - averages[action.row], 2))
-      .reduce((a, b) => a + b) /
-      (analyticalData[action.row].length - 1)
-  );
+  // Standard Deviation calculation
+  if (
+    analyticalData[action.row].length -
+      analyticalData[action.row].filter((x) => x === undefined).length >=
+    3
+  ) {
+    stdDeviations[action.row] = parseFloat(Math.sqrt(
+      analyticalData[action.row]
+        .map((value) => Math.pow(parseFloat(value) - parseFloat(averages[action.row]), 2))
+        .reduce(
+          (acumulatedValue, currentValue) => acumulatedValue + currentValue
+        ) /
+        parseFloat(analyticalData[action.row].length - 1)
+    ));
+
+    averages[action.row] = analyticalData[action.row].reduce(
+      (acumulatedValue, currentValue) =>
+        parseFloat(acumulatedValue) + parseFloat(currentValue)
+    );
+    averages[action.row] /= parseFloat(analyticalData[action.row].length);
+  }
+  // Averages calculation
+  else if (
+    analyticalData[action.row].length -
+      analyticalData[action.row].filter((x) => x === undefined).length >=
+    2
+  ) {
+    averages[action.row] = analyticalData[action.row].reduce(
+      (acumulatedValue, currentValue) =>
+        parseFloat(acumulatedValue) + parseFloat(currentValue)
+    );
+    averages[action.row] /= parseFloat(analyticalData[action.row].length);
+    stdDeviations = state.stdDeviations;
+  } else {
+    stdDeviations = state.stdDeviations;
+    averages = state.averages;
+  }
 
   return {
     analyticalData: analyticalData,
@@ -150,15 +184,36 @@ export const updateValues = (action, state) => {
   };
 };
 
+export const updateStandardDeviation = (row, analyticalData) => {
+  
+}
+
+export const updateAnalyticalAverage = (row, analyticalData) => {
+
+}
+
 export const updateDilutionFactorValue = (action, state) => {
   let dilutionFactor = [...state.dilutionFactor];
-  dilutionFactor[action.row] = action.updatedValue.replace(',', '.');
+  if (typeof action.updatedValue === 'string') {
+    dilutionFactor[action.row] = action.updatedValue.replace(',', '.');
+  } else if (
+    typeof action.updatedValue == 'number' &&
+    action.updatedValue >= 0
+  ) {
+    dilutionFactor[action.row] = action.updatedValue;
+  } else {
+    throw new Error('Dilution factor value not valid!');
+  }
 
   let concentrations = [...state.concentrations];
   concentrations[action.row] = [...state.initialConcentrations].map(function (
     value
   ) {
-    return value / dilutionFactor[action.row];
+    if (typeof value === 'number') {
+      return value / dilutionFactor[action.row];
+    } else {
+      return undefined;
+    }
   });
   return { dilutionFactor: dilutionFactor, concentrations: concentrations };
 };
