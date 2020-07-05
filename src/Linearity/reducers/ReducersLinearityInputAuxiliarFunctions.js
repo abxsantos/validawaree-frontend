@@ -57,26 +57,21 @@ export const removeColumn = (
 };
 
 export const checkValidTableInput = (newValue) => {
-
+  if (typeof newValue === 'string') {
+    newValue = parseFloat(newValue.replace(',', '.'))
+    return isNaN(newValue) ? undefined : newValue
+  } else if (typeof newValue === 'number' && newValue > 0) {
+    return newValue
+  }
+  else {
+    return undefined
+  }
 }
 
 
 export const updateVolumeValue = (action, state) => {
   let volume = state.volume;
-  if (typeof action.updatedVolumeValue === 'string') {
-    isNaN(action.updatedVolumeValue)
-      ?
-      volume = undefined
-      :
-      volume = action.updatedVolumeValue.replace(',', '.')
-  } else if (
-    typeof action.updatedVolumeValue === 'number' &&
-    action.updatedVolumeValue > 0
-  ) {
-    volume = action.updatedVolumeValue;
-  } else {
-    throw new Error('Volume value not accepted!');
-  }
+  volume = checkValidTableInput(action.updatedVolumeValue)
   let initialConcentrations = [...state.mass].map(function (mass) {
     let updatedInitialConcentrationsValue = parseFloat(mass) / parseFloat(volume);
     if (!isNaN(updatedInitialConcentrationsValue) && typeof updatedInitialConcentrationsValue === 'number') {

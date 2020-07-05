@@ -1,10 +1,12 @@
 import 'core-js';
+import each from 'jest-each';
 
 import {
   addRow,
   addColumn,
   removeRow,
   removeColumn,
+  checkValidTableInput,
   updateVolumeValue,
   updateMassValue,
   updateValues,
@@ -12,6 +14,8 @@ import {
   calculateAnalyticalAverage,
   calculateStandardDeviation,
 } from './ReducersLinearityInputAuxiliarFunctions';
+
+
 
 test('addRow must return concentrations and analyticalData list of lists containing a new set filled with undefined that will be the same sumber of columns.', () => {
   const columns = 3;
@@ -112,6 +116,20 @@ test('removeColumn must remove the last data set of removed analytical data, con
     removedInitialConcentration: [1, 2],
     removedMass: [1, 2],
   });
+});
+
+describe('checkValidTableInput', () =>{
+  each([
+    ["5.2", 5.2],
+    ["STRING", undefined],
+    [null, undefined],
+    [-1, undefined],
+    [10, 10],    
+    ["3,2", 3.2],
+  ]).it('when the table input is "%s"', (value, expected) => {
+    expect(checkValidTableInput(value)).toEqual(expected);
+  });
+  
 });
 
 test('updateVolumeValue must alter the initial concentration, and the concentration values.', () => {

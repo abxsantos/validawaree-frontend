@@ -43,6 +43,7 @@
   "proxy": "http://localhost:5000",
   "devDependencies": {
     "core-js": "^3.6.5",
+    "jest-each": "^26.1.0",
     "redux-devtools-extension": "^2.13.8"
   }
 }
