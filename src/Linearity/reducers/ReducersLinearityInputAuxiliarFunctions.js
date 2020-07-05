@@ -122,7 +122,7 @@ export const updateMassValue = (action, state) => {
 };
 
 export const calculateAnalyticalAverage = (filteredAnalyticalData) => {
-  let average = (filteredAnalyticalData.reduce((cumulative, currentValue) => cumulative + currentValue, 0)) / filteredAnalyticalData.length;
+  let average = (filteredAnalyticalData.reduce((cumulative, currentValue) => cumulative + parseFloat(currentValue), 0)) / filteredAnalyticalData.length;
   return average;
 };
 
@@ -130,14 +130,15 @@ export const calculateStandardDeviation = (filteredAnalyticalData, average) => {
   let stdDeviation = Math.sqrt(
     filteredAnalyticalData
       .map((value) => Math.pow(value - average, 2))
-      .reduce((acumulatedValue, currentValue) => acumulatedValue + currentValue) /
+      .reduce((acumulatedValue, currentValue) => acumulatedValue + parseFloat(currentValue)) /
     (filteredAnalyticalData.length - 1)
   );
   return stdDeviation
 }
 
 export const updateStandardDeviationAndAverages = (analyticalData) => {
-  var filteredAnalyticalData = analyticalData.filter(function (el) { return el != null; });
+  // var filteredAnalyticalData = analyticalData.filter(function(el) { return el; });
+  let filteredAnalyticalData = analyticalData.filter(Number)
   if (filteredAnalyticalData.length > 2) {
     let average = calculateAnalyticalAverage(filteredAnalyticalData);
     let stdDeviation = calculateStandardDeviation(filteredAnalyticalData, average)
@@ -155,15 +156,17 @@ export const updateStandardDeviationAndAverages = (analyticalData) => {
 export const updateValues = (action, state) => {
   let analyticalData = [...state.analyticalData];
   if (typeof action.updatedValue == 'string') {
-    analyticalData[action.row][action.column] = parseFloat(
-      action.updatedValue.replace(',', '.')
-    );
+    isNaN(action.updatedValue) ? 
+    analyticalData[action.row][action.column] = undefined 
+    : 
+    analyticalData[action.row][action.column] = action.updatedValue.replace(',', '.');
   } else if (
     typeof action.updatedValue == 'number' &&
     action.updatedValue >= 0
   ) {
     analyticalData[action.row][action.column] = action.updatedValue;
-  } else {
+  }
+  else {
     throw new Error('Analytical value not valid!');
   }
 
