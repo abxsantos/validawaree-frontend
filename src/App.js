@@ -5,6 +5,7 @@ import LinearitySampleInputTable from './Linearity/components/tables/LinearitySa
 import LinearityRegressionAnovaTable from './Linearity/components/tables/LinearityRegressionAnovaTable';
 import LinearityRegressionChart from './Linearity/components/charts/LinearityRegressionGraph';
 import LinearityResiduesChart from './Linearity/components/charts/LinearityResiduesGraph';
+import LinearityDataStatisticsTable from './Linearity/components/tables/LinearityDataStatisticsTable';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <LinearityRegressionAnovaTable />
       <LinearityRegressionChart />
       <LinearityResiduesChart />
+      <LinearityDataStatisticsTable />
     </div>
   );
 }

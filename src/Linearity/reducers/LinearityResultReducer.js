@@ -12,6 +12,8 @@ const initialState = {
   isNormalDistribution: '',
   isHomokedastic: '',
   durbinWatsonValue: '',
+  shapiropValue:'',
+  breuschPaganpValue: '',
 
   regressionChartData: [],
   linearityChartData: [],
@@ -28,9 +30,13 @@ const linearity = (state = initialState, action) => {
         outliers: action.Outliers,
         cleanedAnalyticalData: action.cleanedAnalyticalData,
         cleanedConcentrationData: action.cleanedConcentrationData,
+        
         isNormalDistribution: action.isNormalDistribution,
         isHomokedastic: action.isHomokedastic,
         durbinWatsonValue: action.durbinWatsonValue,
+        shapiropValue: action.shapiropValue,
+        breuschPaganpValue: action.breuschPaganpValue,
+
 
         regressionChartData: action.regressionChartData,    
         linearityChartData: action.linearityChartData,
