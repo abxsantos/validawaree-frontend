@@ -9,6 +9,8 @@ import {
   updateMassValue,
   updateValues,
   updateDilutionFactorValue,
+  updateAnalyticalAverage,
+  updateStandardDeviation,
 } from './ReducersLinearityInputAuxiliarFunctions';
 
 test('addRow must return concentrations and analyticalData list of lists containing a new set filled with undefined that will be the same sumber of columns.', () => {
@@ -144,12 +146,25 @@ test('updateMassValue must return a dict containing new mass value and alter the
   });
 });
 
+test('updateAverage must calculate the average if there is 2 or more numbers in data set.', () => {
+  const analyticalData = [1, 2, 3];
+  expect(updateAnalyticalAverage(analyticalData)).toEqual(2);
+});
+
+test('updateStandardDeviation must calculate the standard deviation if there is 3 or more numbers in data set.', () => {
+  const analyticalData = [1, 2, 3];
+  expect(updateStandardDeviation(analyticalData)).toEqual({
+    updatedAverage: 2,
+    updatedStdDeviation: 1,
+  });
+});
+
 test('updateValues must return a dict containing new analytical data its updated averages and standard deviations, when the number of points allow such operations.', () => {
   const action = { updatedValue: 0.1, row: 0, column: 2 };
   const state = {
     analyticalData: [[0.1, 0.1, undefined]],
     averages: [0.1],
-    stdDeviations: [undefined],
+    stdDeviations: [0],
   };
   expect(updateValues(action, state)).toEqual({
     analyticalData: [[0.1, 0.1, 0.1]],

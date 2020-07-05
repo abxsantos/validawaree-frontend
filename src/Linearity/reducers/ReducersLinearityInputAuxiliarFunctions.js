@@ -121,6 +121,26 @@ export const updateMassValue = (action, state) => {
   };
 };
 
+export const updateAnalyticalAverage = (analyticalData) => {
+  let sum = analyticalData.reduce(
+    (cumulative, currentValue) => cumulative + currentValue,
+    0
+  );
+  let average = sum / analyticalData.length || 0;
+  return average;
+};
+
+export const updateStandardDeviation = (analyticalData) => {
+  let average = updateAnalyticalAverage(analyticalData);
+  let stdDeviation = Math.sqrt(
+    analyticalData
+      .map((x) => Math.pow(x - average, 2))
+      .reduce((a, b) => a + b) /
+      (analyticalData.length - 1)
+  );
+  return { updatedAverage: average, updatedStdDeviation: stdDeviation };
+};
+
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 export const updateValues = (action, state) => {
   let analyticalData = [...state.analyticalData];
@@ -139,58 +159,41 @@ export const updateValues = (action, state) => {
 
   let averages = [...state.averages];
   let stdDeviations = [...state.stdDeviations];
-  // Standard Deviation calculation
   if (
-    analyticalData[action.row].length -
-      analyticalData[action.row].filter((x) => x === undefined).length >=
+    analyticalData[action.row] -
+      analyticalData[action.row].filter((element) => element === undefined)
+        .length >=
     3
   ) {
-    stdDeviations[action.row] = parseFloat(Math.sqrt(
-      analyticalData[action.row]
-        .map((value) => Math.pow(parseFloat(value) - parseFloat(averages[action.row]), 2))
-        .reduce(
-          (acumulatedValue, currentValue) => acumulatedValue + currentValue
-        ) /
-        parseFloat(analyticalData[action.row].length - 1)
-    ));
+    let newValues = updateStandardDeviation(analyticalData[action.row]);
+    averages[action.row] = newValues.updatedAverage;
+    stdDeviations[action.row] = newValues.updatedStdDeviation;
 
-    averages[action.row] = analyticalData[action.row].reduce(
-      (acumulatedValue, currentValue) =>
-        parseFloat(acumulatedValue) + parseFloat(currentValue)
-    );
-    averages[action.row] /= parseFloat(analyticalData[action.row].length);
-  }
-  // Averages calculation
-  else if (
-    analyticalData[action.row].length -
-      analyticalData[action.row].filter((x) => x === undefined).length >=
+    return {
+      analyticalData: analyticalData,
+      averages: averages,
+      stdDeviations: stdDeviations,
+    };
+  } else if (
+    analyticalData[action.row] -
+      analyticalData[action.row].filter((element) => element === undefined)
+        .length >=
     2
   ) {
-    averages[action.row] = analyticalData[action.row].reduce(
-      (acumulatedValue, currentValue) =>
-        parseFloat(acumulatedValue) + parseFloat(currentValue)
-    );
-    averages[action.row] /= parseFloat(analyticalData[action.row].length);
-    stdDeviations = state.stdDeviations;
+    averages[action.row] = updateAnalyticalAverage(analyticalData[action.row]);
+    return {
+      averages: averages,
+      stdDeviations: stdDeviations,
+      analyticalData: analyticalData,
+    };
   } else {
-    stdDeviations = state.stdDeviations;
-    averages = state.averages;
+    return {
+      averages: averages,
+      stdDeviations: stdDeviations,
+      analyticalData: analyticalData,
+    };
   }
-
-  return {
-    analyticalData: analyticalData,
-    averages: averages,
-    stdDeviations: stdDeviations,
-  };
 };
-
-export const updateStandardDeviation = (row, analyticalData) => {
-  
-}
-
-export const updateAnalyticalAverage = (row, analyticalData) => {
-
-}
 
 export const updateDilutionFactorValue = (action, state) => {
   let dilutionFactor = [...state.dilutionFactor];
