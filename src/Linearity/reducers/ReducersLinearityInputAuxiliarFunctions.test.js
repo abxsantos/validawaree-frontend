@@ -163,8 +163,8 @@ test('updateValues must return a dict containing new analytical data its updated
   const action = { updatedValue: 0.1, row: 0, column: 2 };
   const state = {
     analyticalData: [[0.1, 0.1, undefined]],
-    averages: [0.1],
-    stdDeviations: [0],
+    averages: [undefined],
+    stdDeviations: [undefined],
   };
   expect(updateValues(action, state)).toEqual({
     analyticalData: [[0.1, 0.1, 0.1]],

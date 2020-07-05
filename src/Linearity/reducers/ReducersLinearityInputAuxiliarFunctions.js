@@ -159,12 +159,7 @@ export const updateValues = (action, state) => {
 
   let averages = [...state.averages];
   let stdDeviations = [...state.stdDeviations];
-  if (
-    analyticalData[action.row] -
-      analyticalData[action.row].filter((element) => element === undefined)
-        .length >=
-    3
-  ) {
+  if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 3) {
     let newValues = updateStandardDeviation(analyticalData[action.row]);
     averages[action.row] = newValues.updatedAverage;
     stdDeviations[action.row] = newValues.updatedStdDeviation;
@@ -174,12 +169,7 @@ export const updateValues = (action, state) => {
       averages: averages,
       stdDeviations: stdDeviations,
     };
-  } else if (
-    analyticalData[action.row] -
-      analyticalData[action.row].filter((element) => element === undefined)
-        .length >=
-    2
-  ) {
+  } else if (analyticalData[action.row] - analyticalData[action.row].filter((element) => element === undefined).length >= 2) {
     averages[action.row] = updateAnalyticalAverage(analyticalData[action.row]);
     return {
       averages: averages,
