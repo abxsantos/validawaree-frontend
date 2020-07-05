@@ -117,7 +117,7 @@ test('removeColumn must remove the last data set of removed analytical data, con
 test('updateVolumeValue must alter the initial concentration, and the concentration values.', () => {
   const action = { updatedVolumeValue: 1.0 };
   const state = {
-    volume: 0,
+    volume: undefined,
     initialConcentrations: [undefined, undefined, undefined],
     mass: [1, 2, 4],
     dilutionFactor: [2],
@@ -131,7 +131,7 @@ test('updateVolumeValue must alter the initial concentration, and the concentrat
 });
 
 test('updateVolumeValue must return undefined when not number values are inputed on the textfield and also return undefined for concentrations and initial concentrations values', () => {
-  const action = { updatedVolumeValue: ""};
+  const action = { updatedVolumeValue: "ABC"};
   const state = {
     volume: 1.0,
     initialConcentrations: [1, 2, 4],

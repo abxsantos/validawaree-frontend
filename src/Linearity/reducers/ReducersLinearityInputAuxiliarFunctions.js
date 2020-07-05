@@ -56,30 +56,44 @@ export const removeColumn = (
   };
 };
 
+export const checkValidTableInput = (newValue) => {
+
+}
+
+
 export const updateVolumeValue = (action, state) => {
   let volume = state.volume;
   if (typeof action.updatedVolumeValue === 'string') {
-    volume = parseFloat(action.updatedVolumeValue.replace(',', '.'));
+    isNaN(action.updatedVolumeValue)
+      ?
+      volume = undefined
+      :
+      volume = action.updatedVolumeValue.replace(',', '.')
   } else if (
     typeof action.updatedVolumeValue === 'number' &&
     action.updatedVolumeValue > 0
   ) {
-    volume = parseFloat(action.updatedVolumeValue);
+    volume = action.updatedVolumeValue;
   } else {
     throw new Error('Volume value not accepted!');
   }
-
-  let initialConcentrations = [...state.mass].map(function (value) {
-    return value / volume;
+  let initialConcentrations = [...state.mass].map(function (mass) {
+    let updatedInitialConcentrationsValue = parseFloat(mass) / parseFloat(volume);
+    if (!isNaN(updatedInitialConcentrationsValue) && typeof updatedInitialConcentrationsValue === 'number') {
+      return updatedInitialConcentrationsValue
+    } else {
+      return undefined
+    }
   });
-
   let concentrations = [...state.concentrations];
-
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
     for (let j = 0; j < initialConcentrations.length; ++j) {
-      concentrations[i][j] =
-        parseFloat(initialConcentrations[j]) /
-        parseFloat(state.dilutionFactor[i]);
+      let updatedConcentrations = parseFloat(initialConcentrations[j]) / parseFloat(state.dilutionFactor[i]);
+      !isNaN(updatedConcentrations) && typeof updatedConcentrations === 'number'
+        ?
+        concentrations[i][j] = updatedConcentrations
+        :
+        concentrations[i][j] = undefined
     }
   }
 
@@ -156,10 +170,10 @@ export const updateStandardDeviationAndAverages = (analyticalData) => {
 export const updateValues = (action, state) => {
   let analyticalData = [...state.analyticalData];
   if (typeof action.updatedValue == 'string') {
-    isNaN(action.updatedValue) ? 
-    analyticalData[action.row][action.column] = undefined 
-    : 
-    analyticalData[action.row][action.column] = action.updatedValue.replace(',', '.');
+    isNaN(action.updatedValue) ?
+      analyticalData[action.row][action.column] = undefined
+      :
+      analyticalData[action.row][action.column] = action.updatedValue.replace(',', '.');
   } else if (
     typeof action.updatedValue == 'number' &&
     action.updatedValue >= 0
