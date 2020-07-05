@@ -68,27 +68,18 @@ export const checkValidTableInput = (newValue) => {
   }
 }
 
-
 export const updateVolumeValue = (action, state) => {
   let volume = state.volume;
   volume = checkValidTableInput(action.updatedVolumeValue)
   let initialConcentrations = [...state.mass].map(function (mass) {
     let updatedInitialConcentrationsValue = parseFloat(mass) / parseFloat(volume);
-    if (!isNaN(updatedInitialConcentrationsValue) && typeof updatedInitialConcentrationsValue === 'number') {
-      return updatedInitialConcentrationsValue
-    } else {
-      return undefined
-    }
+    return checkValidTableInput(updatedInitialConcentrationsValue)
   });
   let concentrations = [...state.concentrations];
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
     for (let j = 0; j < initialConcentrations.length; ++j) {
       let updatedConcentrations = parseFloat(initialConcentrations[j]) / parseFloat(state.dilutionFactor[i]);
-      !isNaN(updatedConcentrations) && typeof updatedConcentrations === 'number'
-        ?
-        concentrations[i][j] = updatedConcentrations
-        :
-        concentrations[i][j] = undefined
+      concentrations[i][j] = checkValidTableInput(updatedConcentrations)
     }
   }
 
@@ -101,27 +92,14 @@ export const updateVolumeValue = (action, state) => {
 
 export const updateMassValue = (action, state) => {
   let mass = [...state.mass];
-  if (typeof action.updatedMassValue === 'string') {
-    mass[action.column] = parseFloat(action.updatedMassValue.replace(',', '.'));
-  } else if (
-    typeof action.updatedMassValue === 'number' &&
-    action.updatedMassValue > 0
-  ) {
-    mass[action.column] = parseFloat(action.updatedMassValue);
-  } else {
-    throw new Error('Mass value not accepted!');
-  }
+  mass[action.column] = checkValidTableInput(action.updatedMassValue)
 
   let initialConcentrations = [...state.initialConcentrations];
-  initialConcentrations[action.column] =
-    parseFloat(action.updatedMassValue) / parseFloat(state.volume);
+  initialConcentrations[action.column] = checkValidTableInput(parseFloat(action.updatedMassValue) / parseFloat(state.volume));
 
   let concentrations = [...state.concentrations];
-
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    concentrations[i][action.column] =
-      parseFloat(action.updatedMassValue / parseFloat(state.volume)) /
-      parseFloat(state.dilutionFactor[i]);
+    concentrations[i][action.column] = checkValidTableInput(parseFloat(action.updatedMassValue / parseFloat(state.volume)) / parseFloat(state.dilutionFactor[i]));
   }
   return {
     mass: mass,
@@ -146,7 +124,6 @@ export const calculateStandardDeviation = (filteredAnalyticalData, average) => {
 }
 
 export const updateStandardDeviationAndAverages = (analyticalData) => {
-  // var filteredAnalyticalData = analyticalData.filter(function(el) { return el; });
   let filteredAnalyticalData = analyticalData.filter(Number)
   if (filteredAnalyticalData.length > 2) {
     let average = calculateAnalyticalAverage(filteredAnalyticalData);
@@ -164,20 +141,7 @@ export const updateStandardDeviationAndAverages = (analyticalData) => {
 // https://dev.to/sagar/three-dots---in-javascript-26ci
 export const updateValues = (action, state) => {
   let analyticalData = [...state.analyticalData];
-  if (typeof action.updatedValue == 'string') {
-    isNaN(action.updatedValue) ?
-      analyticalData[action.row][action.column] = undefined
-      :
-      analyticalData[action.row][action.column] = action.updatedValue.replace(',', '.');
-  } else if (
-    typeof action.updatedValue == 'number' &&
-    action.updatedValue >= 0
-  ) {
-    analyticalData[action.row][action.column] = action.updatedValue;
-  }
-  else {
-    throw new Error('Analytical value not valid!');
-  }
+  analyticalData[action.row][action.column] = checkValidTableInput(action.updatedValue)
 
   let averages = [...state.averages];
   let stdDeviations = [...state.stdDeviations];
@@ -193,26 +157,13 @@ export const updateValues = (action, state) => {
 
 export const updateDilutionFactorValue = (action, state) => {
   let dilutionFactor = [...state.dilutionFactor];
-  if (typeof action.updatedValue === 'string') {
-    dilutionFactor[action.row] = action.updatedValue.replace(',', '.');
-  } else if (
-    typeof action.updatedValue == 'number' &&
-    action.updatedValue >= 0
-  ) {
-    dilutionFactor[action.row] = action.updatedValue;
-  } else {
-    throw new Error('Dilution factor value not valid!');
-  }
-
+  dilutionFactor[action.row] = checkValidTableInput(action.updatedValue);
+  
   let concentrations = [...state.concentrations];
   concentrations[action.row] = [...state.initialConcentrations].map(function (
     value
   ) {
-    if (typeof value === 'number') {
-      return value / dilutionFactor[action.row];
-    } else {
-      return undefined;
-    }
+    return checkValidTableInput(value / dilutionFactor[action.row])
   });
   return { dilutionFactor: dilutionFactor, concentrations: concentrations };
 };
