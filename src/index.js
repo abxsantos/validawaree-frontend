@@ -12,10 +12,10 @@ import App from './App';
 const middlewares = [thunk];
 
 ReactDOM.render(
-  <React.StrictMode>
-  <Provider store={createStore(reducers, {},  composeWithDevTools(applyMiddleware(...middlewares)))}>
-    <App />
-  </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <Provider store={createStore(reducers, {}, composeWithDevTools(applyMiddleware(...middlewares)))}>
+            <App />
+        </Provider>
+    </React.StrictMode>,
+    document.getElementById('root')
 );

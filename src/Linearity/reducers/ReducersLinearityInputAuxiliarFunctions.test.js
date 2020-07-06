@@ -140,11 +140,11 @@ describe('Check valid table user inputs', () => {
         ${"-"}      |  ${undefined}
         ${1}        |  ${1}
         ${"3,2"}    |  ${"3.2"}
-        `('When the user input is $input the expected result is $expectedResult', ({input, expectedResult}) => {
+        `('When the user input is $input the expected result is $expectedResult', ({ input, expectedResult }) => {
             expect(checkValidTableInput(input)).toEqual(expectedResult);
         })
-        });
     });
+});
 
 
 describe('Altering the store with table values', () => {
@@ -364,7 +364,7 @@ describe('Altering the store with table values', () => {
                 })
             })
             describe('When there is no mass in a column', () => {
-                it('The concentration value should be undefined for the sample without mass.', () =>{
+                it('The concentration value should be undefined for the sample without mass.', () => {
                     const action = {
                         updatedValue: 2.0,
                         row: 0
