@@ -108,7 +108,7 @@ export const updateMassValue = (action, state) => {
 
   let concentrations = [...state.concentrations];
   for (let i = 0; i < state.dilutionFactor.length; ++i) {
-    concentrations[i][action.column] = checkValidTableInput(mass[action.column] / parseFloat(state.volume)) / parseFloat(state.dilutionFactor[i]);
+    concentrations[i][action.column] = checkValidTableInput((mass[action.column] / parseFloat(state.volume)) / parseFloat(state.dilutionFactor[i]));
   }
   return {
     mass: mass,
