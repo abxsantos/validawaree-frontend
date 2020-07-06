@@ -10,49 +10,49 @@ export const REMOVE_COLUMN = 'REMOVE_COLUMN';
 
 // Linearity user input action creators
 export const incRow = () => ({
-  type: INC_ROW,
+    type: INC_ROW,
 });
 
 export const incColumn = () => ({
-  type: INC_COLUMN,
+    type: INC_COLUMN,
 });
 
 export const removeRow = () => ({
-  type: REMOVE_ROW
+    type: REMOVE_ROW
 });
 
 export const removeColumn = () => ({
-  type: REMOVE_COLUMN
+    type: REMOVE_COLUMN
 });
 
 export function updateVolumeValue(updatedValue) {
-  return {
-    type: UPD_VOLUME_VALUE,
-    updatedVolumeValue: updatedValue,
-  };
+    return {
+        type: UPD_VOLUME_VALUE,
+        updatedVolumeValue: updatedValue,
+    };
 }
 
 export function updateMassValue(updatedValue, column) {
-  return {
-    type: UPD_MASS_VALUE,
-    updatedMassValue: updatedValue,
-    column: column,
-  };
+    return {
+        type: UPD_MASS_VALUE,
+        updatedMassValue: updatedValue,
+        column: column,
+    };
 }
 
 export function updateSampleValue(updatedValue, row, column) {
-  return {
-    type: UPD_SAMPLE_VALUE,
-    updatedValue: updatedValue,
-    row: row,
-    column: column,
-  };
+    return {
+        type: UPD_SAMPLE_VALUE,
+        updatedValue: updatedValue,
+        row: row,
+        column: column,
+    };
 }
 
 export function updateDilutionFactorValue(updatedValue, row) {
-  return {
-    type: UPD_DILUTION_FACTOR_VALUE,
-    updatedValue: updatedValue,
-    row: row,
-  };
+    return {
+        type: UPD_DILUTION_FACTOR_VALUE,
+        updatedValue: updatedValue,
+        row: row,
+    };
 }

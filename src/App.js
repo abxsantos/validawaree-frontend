@@ -8,15 +8,15 @@ import LinearityResiduesChart from './Linearity/components/charts/LinearityResid
 import LinearityDataStatisticsTable from './Linearity/components/tables/LinearityDataStatisticsTable';
 
 function App() {
-  return (
-    <div className="App">
-      <LinearitySampleInputTable />
-      <LinearityRegressionAnovaTable />
-      <LinearityRegressionChart />
-      <LinearityResiduesChart />
-      <LinearityDataStatisticsTable />
-    </div>
-  );
+    return (
+        <div className="App">
+            <LinearitySampleInputTable />
+            <LinearityRegressionAnovaTable />
+            <LinearityRegressionChart />
+            <LinearityResiduesChart />
+            <LinearityDataStatisticsTable />
+        </div>
+    );
 }
 
 export default App;
