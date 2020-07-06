@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import { InputLabel, MenuItem, FormControl, Select } from '@material-ui/core/InputLabel';
 
-import { changeUnit } from '../../actions';
+import { changeVolumeUnit } from '../../actions';
 
 
 const LinearityUnitSelector = () => {
@@ -25,10 +25,16 @@ const LinearityUnitSelector = () => {
     );
 };
 
+const mapStateToProps = (state) =>{
+    return{
+        volumeUnit: state.samples.volumeUnit
+    }
+}
+
 const mapDispatchToProps = (dispatch) => {
     return{
         handleUnitChange: () =>{
-            dispatch(changeUnit());
+            dispatch(changeVolumeUnit());
         }
     }
 }

@@ -7,6 +7,7 @@ import {
     UPD_DILUTION_FACTOR_VALUE,
     REMOVE_ROW,
     REMOVE_COLUMN,
+    CHANGE_VOLUME_UNIT,
 } from '../actions';
 
 import {
@@ -24,6 +25,7 @@ const initialState = {
     numRows: 1,
     numColumns: 3,
     volume: undefined,
+    volumeUnit: undefined,
     mass: [undefined, undefined, undefined],
     analyticalData: [
         [undefined, undefined, undefined]
@@ -92,6 +94,12 @@ const samples = (state = initialState, action) => {
                 } else {
                     return state;
                 }
+                case CHANGE_VOLUME_UNIT:
+                    return {
+                        ...state,
+                        volumeUnit: statechangeUnit()
+                    }
+
 
                 case UPD_VOLUME_VALUE:
                     return {
