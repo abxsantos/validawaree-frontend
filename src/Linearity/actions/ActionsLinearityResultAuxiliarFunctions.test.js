@@ -90,7 +90,7 @@ describe('Chart data', () => {
                     ResiduesLine: 0,
                 },
                 {
-                    fittedValues: 1,
+                    fittedValues: 2,
                     ResiduesLine: 0,
                 },
                 ]);

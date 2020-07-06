@@ -85,7 +85,7 @@ export const organizeResiduesChartData = (
     makeChartLinePoint(0, 0, 'fittedValues', 'ResiduesLine')
   );
   residuesChartData.push(
-    makeChartLinePoint(1, 0, 'fittedValues', 'ResiduesLine')
+    makeChartLinePoint(Math.max(...flattenedConcentrationData), 0, 'fittedValues', 'ResiduesLine')
   );
 
   return residuesChartData;
