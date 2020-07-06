@@ -29,10 +29,19 @@ import RemoveRowButton from '../button/RemoveRowButton';
 import CalculateLinearityButton from '../button/CalculateLinearityButton';
 
 const useStyles = makeStyles({
+    root:{},
     table: {
-        minWidth: 250,
+      minWidth: 450,
+      maxWidth: 650,
     },
-});
+    tableAnalyticalCellBorder: {
+      borderWidth: 0,
+      borderRightWidth: 1,
+      borderLeftWidth: 1,
+      borderColor: 'rgba(224, 224, 224, 1)',
+      borderStyle: 'solid',
+  },
+  });
 
 function LinearitySampleInputTable(props) {
     const classes = useStyles();
