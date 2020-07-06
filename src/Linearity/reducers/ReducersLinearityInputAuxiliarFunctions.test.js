@@ -239,11 +239,11 @@ describe('Altering the store with table values', () => {
         })
         it('The initial concentration and sample concentration values for the corresponding mass should be undefined when there is no volume.', () => {
             const action = {
-                updatedMassValue: '1.0',
+                updatedMassValue: "2.0",
                 column: 2
             };
             const state = {
-                mass: [0, 0, 0],
+                mass: [undefined, undefined, 0],
                 volume: undefined,
                 initialConcentrations: [undefined, undefined, undefined],
                 concentrations: [
@@ -252,7 +252,7 @@ describe('Altering the store with table values', () => {
                 dilutionFactor: [2],
             };
             expect(updateMassValue(action, state)).toEqual({
-                mass: [0, 0, 1],
+                mass: [undefined, undefined, '2.0'],
                 initialConcentrations: [undefined, undefined, undefined],
                 concentrations: [
                     [undefined, undefined, undefined]
@@ -262,14 +262,14 @@ describe('Altering the store with table values', () => {
         it('The sample concentration values for the corresponding mass, should be undefined when there is no dilution factor.', () => {
             const action = {
                 updatedMassValue: '1.0',
-                column: 2
+                column: 1
             };
             const state = {
                 mass: [undefined, undefined, undefined],
                 volume: '1',
                 initialConcentrations: [undefined, undefined, undefined],
                 concentrations: [
-                    [undefined, undefined, undefined]
+                    [undefined, undefined, undefined],
                     [undefined, undefined, undefined]
                 ],
                 dilutionFactor: ['2', undefined],
@@ -278,7 +278,7 @@ describe('Altering the store with table values', () => {
                 mass: [undefined, '1.0', undefined],
                 initialConcentrations: [undefined, 1, undefined],
                 concentrations: [
-                    [undefined, '0.5', undefined],
+                    [undefined, 0.5, undefined],
                     [undefined, undefined, undefined],
                 ],
             });
