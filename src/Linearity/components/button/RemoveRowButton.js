@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { IconButton, Tooltip } from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { Button, Tooltip } from '@material-ui/core';
 
 import { removeRow } from '../../actions'
 
@@ -15,9 +14,7 @@ const RemoveRowButton = ({ removeRow }) => {
             disableFocusListener
             disableTouchListener
         >
-            <IconButton size='medium' onClick={removeRow}>
-                <DeleteIcon style={{ color: '#ff6b6b', fontSize: 50 }}></DeleteIcon>
-            </IconButton>
+            <Button style={{ color: '#EB5757', borderColor: '#EB5757' }} variant="outlined" onClick={removeRow} >Remove Row</Button>
         </Tooltip>
     );
 }
