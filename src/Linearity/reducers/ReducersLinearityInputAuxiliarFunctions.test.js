@@ -1,5 +1,4 @@
 import 'core-js';
-// import each from 'jest-each';
 
 import {
     addRow,
