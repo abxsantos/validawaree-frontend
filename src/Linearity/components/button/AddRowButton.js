@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { IconButton, Tooltip } from '@material-ui/core';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import { Button, Tooltip } from '@material-ui/core';
 
 import { incRow } from '../../actions'
 
@@ -15,9 +14,7 @@ const AddRowButton = ({ incRow }) => {
             disableFocusListener
             disableTouchListener
         >
-            <IconButton size='medium' onClick={incRow}>
-                <AddBoxIcon style={{ color: '#bce784', fontSize: 50 }}></AddBoxIcon>
-            </IconButton>
+             <Button style={{ color: '#219653', borderColor: '#219653'}} variant="outlined" onClick={incRow} >Add Row</Button>
         </Tooltip>
     );
 }

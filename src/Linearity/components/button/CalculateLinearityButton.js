@@ -15,7 +15,7 @@ const CalculateLinearityButton = (props) => {
             disableFocusListener
             disableTouchListener
         >
-            <Button startIcon={<ScatterPlotIcon />} variant="outlined" onClick={props.handleLinearityCalculation}>
+            <Button style={{ color: '#2F80ED', borderColor: '#2F80ED'}} startIcon={<ScatterPlotIcon />} variant="outlined" onClick={props.handleLinearityCalculation}>
                 Calculate Linearity
         </Button>
         </Tooltip>

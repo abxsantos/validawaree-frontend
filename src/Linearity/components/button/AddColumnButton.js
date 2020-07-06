@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { IconButton, Tooltip } from '@material-ui/core';
-import AddBoxIcon from '@material-ui/icons/AddBox';
+import { Button, Tooltip } from '@material-ui/core';
 
 import { incColumn } from '../../actions';
 
@@ -15,9 +14,7 @@ const AddColumnButton = ({ incColumn }) => {
             disableFocusListener
             disableTouchListener
         >
-            <IconButton size='medium' onClick={incColumn}>
-                <AddBoxIcon style={{ color: '#bce784', fontSize: 40 }}></AddBoxIcon>
-            </IconButton>
+            <Button style={{ color: '#219653', borderColor: '#219653'}} variant="outlined" onClick={incColumn} >Add Column</Button>
         </Tooltip>
     );
 };
