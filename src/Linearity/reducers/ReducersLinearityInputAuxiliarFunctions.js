@@ -58,11 +58,11 @@ export const removeColumn = (
 
 export const checkValidTableInput = (newValue) => {
   if (typeof newValue === 'string') {
-    newValue = newValue.replace(',', '.')
+    newValue = (newValue.replace(',', '.'))
     if (newValue.includes('.')) {
       return newValue
     }
-    else if (isNaN(newValue)) {
+    else if (isNaN(newValue) || newValue === "") {
       return undefined
     }
     else {
