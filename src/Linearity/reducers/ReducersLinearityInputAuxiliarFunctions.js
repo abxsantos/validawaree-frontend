@@ -79,20 +79,19 @@ export const checkValidTableInput = (newValue) => {
 
 export const changeVolumeUnit = (action,state) =>{
     let volumeUnit = state.volumeUnit;
-    volumeUnit = action.changedVolumeUnit
     let changedInitialConcentrations = [...state.initialConcentrations].map((initialConcentrationValue) => {
-        let changedInitialConcentrationValue = initialConcentrationValue / volumeUnit;
+        let changedInitialConcentrationValue = initialConcentrationValue / (volumeUnit/action.changedVolumeUnit);
         return changedInitialConcentrationValue
     });
     let changedConcentrations = [...state.concentrations];
     for (let row = 0; row < state.numRows; ++row){
         for (let column = 0; column < state.numColumns; ++column){
-            changedConcentrations[row][column] = state.concentrations[row][column] / volumeUnit
+            changedConcentrations[row][column] = state.concentrations[row][column] / (volumeUnit/action.changedVolumeUnit)
         };
     };
-
+    volumeUnit = action.changedVolumeUnit;
     return {
-        volumeUnit: action.changedVolumeUnit,
+        volumeUnit: volumeUnit,
         initialConcentrations: changedInitialConcentrations,
         concentrations: changedConcentrations,
     };
