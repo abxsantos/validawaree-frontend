@@ -46,7 +46,7 @@ function LinearitySampleInputTable(props) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell id='starter-column' align='center' padding='dense' size='normal'>
+              <TableCell id='starter-column' align='left' padding='dense' size='normal'>
                 Volume
               </TableCell>
               {buildColumns(props.columns, 'Mass')}
@@ -65,7 +65,7 @@ function LinearitySampleInputTable(props) {
           </TableBody>
           <TableHead>
             <TableRow>
-              <TableCell align='center' padding='dense' size='normal'>
+              <TableCell align='left' padding='dense' size='normal'>
                 Dilution Factor
               </TableCell>
               {buildColumns(props.columns, 'Sample')}

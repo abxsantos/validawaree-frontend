@@ -11,7 +11,7 @@ const RemoveRowButton = ({ removeRow }) => {
     return (
         <Button variant='neutral' onClick={removeRow}>
         <FontAwesomeIcon icon={faTrash} className='rainbow-m-right_small' />
-        Remove Column
+        Remove Row
       </Button>
     );
 }

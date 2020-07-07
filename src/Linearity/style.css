@@ -39,3 +39,8 @@ thead.MuiTableHead-root:nth-child(3) > tr:nth-child(1) > th:nth-child(1) {
   margin-left: 10px;
 }
 
+/* Element | http://localhost:3000/ */
+
+.MuiGrid-root {
+  overflow-x: auto;
+}
