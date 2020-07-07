@@ -6,10 +6,13 @@ import LinearityRegressionAnovaTable from './Linearity/components/tables/Lineari
 import LinearityRegressionChart from './Linearity/components/charts/LinearityRegressionGraph';
 import LinearityResiduesChart from './Linearity/components/charts/LinearityResiduesGraph';
 import LinearityDataStatisticsTable from './Linearity/components/tables/LinearityDataStatisticsTable';
+import LinearityUnitSelector from './Linearity/components/selector/LinearityUnitSelector';
+
 
 function App() {
     return (
         <div className="App">
+            <LinearityUnitSelector />
             <LinearitySampleInputTable />
             <LinearityRegressionAnovaTable />
             <LinearityRegressionChart />

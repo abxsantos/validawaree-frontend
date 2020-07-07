@@ -14,7 +14,7 @@ const RemoveColumnButton = ({ removeColumn }) => {
             disableFocusListener
             disableTouchListener
         >
-             <Button style={{ color: '#EB5757', borderColor: '#EB5757'}} variant="outlined" onClick={removeColumn} >Remove Column</Button>
+            <Button style={{ color: '#EB5757', borderColor: '#EB5757' }} variant="outlined" onClick={removeColumn} >Remove Column</Button>
         </Tooltip>
     );
 }
