@@ -163,7 +163,7 @@ describe('Altering the store', () => {
                     ],
                 };
                 const expectedState ={
-                    volumeUnit: 1e3,
+                    volumeUnit: 1e-3,
                     initialConcentrations: [1e3, 1e3, 1e3],
                     concentrations: [
                         [1e4, 1e4, 1e4]

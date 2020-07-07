@@ -80,8 +80,13 @@ export const checkValidTableInput = (newValue) => {
 export const changeVolumeUnit = (action,state) =>{
     let volumeUnit = state.volumeUnit;
     volumeUnit = action.changedVolumeUnit
+    let changedInitialConcentrations = [...state.initialConcentrations].map((initialConcentrationValue) => {
+        let changedInitialConcentrationValue = initialConcentrationValue / volumeUnit;
+        return changedInitialConcentrationValue
+    })
     return {
-        volumeUnit: action.changedVolumeUnit
+        volumeUnit: action.changedVolumeUnit,
+        initialConcentrations: changedInitialConcentrations
     }
 
 }
