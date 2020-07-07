@@ -13,6 +13,7 @@ import {
     calculateAnalyticalAverage,
     calculateStandardDeviation,
     changeVolumeUnit,
+    changeMassUnit,
 } from './ReducersLinearityInputAuxiliarFunctions';
 
 describe('Add and Remove Rows', () => {
@@ -175,7 +176,7 @@ describe('Altering the store', () => {
             });
         });
         describe('When the user selects in another mass unit in the selector',() => {
-            it('The volume unit is expected to change to the corresponding user selected value', () =>{
+            it('The mass unit is expected to change to the corresponding user selected value', () =>{
                 const action = {
                     changedMassUnit: 1
                 };
@@ -189,10 +190,10 @@ describe('Altering the store', () => {
                     ],
                 };
                 const expectedState ={
-                    massUnit: 1e-3,
-                    initialConcentrations: [1e-3, 1e-3, 1e-3],
+                    massUnit: 1,
+                    initialConcentrations: [1e3, 1e3, 1e3],
                     concentrations: [
-                        [1e-4, 1e-4, 1e-4]
+                        [1e2, 1e2, 1e2]
                     ],
                 };
                 expect(changeMassUnit(action, state)).toEqual(expectedState);
