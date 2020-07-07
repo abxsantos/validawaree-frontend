@@ -8,10 +8,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import './index.css';
 
-import { Grid, Container } from '@material-ui/core/';
-
 import LinearityApp from './Linearity/LinearityApp';
-import PermanentDrawerLeft from './Sidebar/Sidebar';
+import ResponsiveDrawer from './Sidebar/Sidebar';
 
 const middlewares = [thunk];
 
@@ -24,7 +22,7 @@ ReactDOM.render(
         composeWithDevTools(applyMiddleware(...middlewares))
       )}
     >
-      {/* <PermanentDrawerLeft /> */}
+      <ResponsiveDrawer />
       <LinearityApp />
     </Provider>
   </React.StrictMode>,

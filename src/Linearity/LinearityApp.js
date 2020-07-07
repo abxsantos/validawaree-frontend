@@ -18,6 +18,7 @@ import AddRowButton from './components/button/AddRowButton';
 import RemoveRowButton from './components/button/RemoveRowButton';
 import CalculateLinearityButton from './components/button/CalculateLinearityButton';
 
+
 const useStyles = makeStyles(() => ({
   root: {
     marginTop: '10rem',
