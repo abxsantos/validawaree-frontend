@@ -6,10 +6,8 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
-  Paper,
 } from '@material-ui/core';
 
 import {
@@ -24,55 +22,78 @@ import { buildRows } from './TableBuildRows';
 
 import { BaseInputTableCell } from './BaseInputTableCell';
 
-const useStyles = makeStyles({
-  root: {},
+import LinearityVolumeUnitSelector from '../../selector/LinearityVolumeUnitSelector';
+import LinearityMassUnitSelector from '../../selector/LinearityMassUnitSelector';
+
+import AddColumnButton from '../../button/AddColumnButton';
+import RemoveColumnButton from '../../button/RemoveColumnButton';
+import AddRowButton from '../../button/AddRowButton';
+import RemoveRowButton from '../../button/RemoveRowButton';
+import CalculateLinearityButton from '../../button/CalculateLinearityButton';
+
+const useStyles = makeStyles(() => ({
   table: {
     maxWidth: 950,
+    maxHeight: 600,
   },
-});
+}));
+
 
 function LinearitySampleInputTable(props) {
   const classes = useStyles();
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label='simple table'>
-        <TableHead>
-          <TableRow>
-            <TableCell align='center' padding='dense' size='normal'>
-              Volume
-            </TableCell>
-            {buildColumns(props.columns, 'Mass')}
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          <TableRow key={'volume'}>
-            <BaseInputTableCell
-              helperText=' '
-              label='Volume'
-              value={props.volume}
-              onChangeAction={(e) => handleVolumeChange(e, props)}
-            />
-            {buildColumns(props.columns, 'Mass', false, props)}
-          </TableRow>
-        </TableBody>
-        <TableHead>
-          <TableRow>
-            <TableCell align='center' padding='dense' size='normal'>
-              Dilution Factor
-            </TableCell>
-            {buildColumns(props.columns, 'Sample')}
-            <TableCell align='center' padding='dense' size='normal'>
-              Average
-            </TableCell>
-            <TableCell align='center' padding='dense' size='normal'>
-              Standard Deviation
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>{buildRows(props)}</TableBody>
-      </Table>
-    </TableContainer>
+    <Table stickyHeader aria-label='sticky table' className={classes.table}>
+      <TableHead>
+        <TableRow>
+          <LinearityMassUnitSelector />
+          <LinearityVolumeUnitSelector />
+          <AddRowButton />
+          <RemoveRowButton />
+          <AddColumnButton />
+          <RemoveColumnButton />
+          <CalculateLinearityButton />
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell align='center' padding='dense' size='normal'>
+                Volume
+              </TableCell>
+              {buildColumns(props.columns, 'Mass')}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            <TableRow key={'volume'}>
+              <BaseInputTableCell
+                helperText=' '
+                label='Volume'
+                value={props.volume}
+                onChangeAction={(e) => handleVolumeChange(e, props)}
+              />
+              {buildColumns(props.columns, 'Mass', false, props)}
+            </TableRow>
+          </TableBody>
+          <TableHead>
+            <TableRow>
+              <TableCell align='center' padding='dense' size='normal'>
+                Dilution Factor
+              </TableCell>
+              {buildColumns(props.columns, 'Sample')}
+              <TableCell align='center' padding='dense' size='normal'>
+                Average
+              </TableCell>
+              <TableCell align='center' padding='dense' size='normal'>
+                Standard Deviation
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>{buildRows(props)}</TableBody>
+        </Table>
+      </TableBody>
+    </Table>
   );
 }
 

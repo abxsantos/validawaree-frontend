@@ -9,6 +9,7 @@ import { incRow } from '../../actions'
 const AddRowButton = ({ incRow }) => {
     return (
         <BaseButton
+        id='button-add-row'
         tooltipText='Add row'
         color='#219653'
         onClickAction={incRow}

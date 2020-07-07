@@ -8,6 +8,7 @@ import { removeRow } from '../../actions'
 const RemoveRowButton = ({ removeRow }) => {
     return (
         <BaseButton
+        id='button-remove-row'
         tooltipText='Remove last row'
         color='#EB5757'
         onClickAction={removeRow}

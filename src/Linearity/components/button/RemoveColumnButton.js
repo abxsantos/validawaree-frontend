@@ -8,6 +8,7 @@ import { removeColumn } from '../../actions'
 const RemoveColumnButton = ({ removeColumn }) => {
     return (
         <BaseButton
+        id='button-remove-column'
         tooltipText='Remove last column'
         color='#EB5757'
         onClickAction={removeColumn}

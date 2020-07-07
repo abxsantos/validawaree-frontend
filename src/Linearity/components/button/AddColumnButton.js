@@ -8,6 +8,7 @@ import { incColumn } from '../../actions';
 const AddColumnButton = ({ incColumn }) => {
     return (
         <BaseButton
+        id='button-add-column'
         tooltipText='Add column'
         color='#219653'
         onClickAction={incColumn}
