@@ -1,11 +1,7 @@
 import React from 'react';
 import './style.css';
 
-import {
-  Grid,
-  Paper,
-
-} from '@material-ui/core/';
+import { Grid, Paper } from '@material-ui/core/';
 
 import LinearitySampleInputTable from './components/tables/LinearityInputTable/LinearitySampleInputTable';
 import LinearityRegressionAnovaTable from './components/tables/LinearityRegressionAnovaTable';
@@ -14,12 +10,10 @@ import LinearityRegressionChart from './components/charts/LinearityRegressionGra
 import LinearityResiduesChart from './components/charts/LinearityResiduesGraph';
 
 import LinearityDataStatisticsTable from './components/tables/LinearityDataStatisticsTable';
-import {GroupButton} from './components/button/GroupButton';
 
 function LinearityApp() {
   return (
-    <Grid container>  
-      <GroupButton />
+    <Grid container>
       <Grid component={Paper} container>
         <LinearitySampleInputTable />
       </Grid>

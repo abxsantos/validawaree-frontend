@@ -1,18 +1,21 @@
 import React from 'react';
 import {
   ButtonGroup,
-  Button,
-  ButtonIcon,
   ButtonMenu,
-  MenuItem,
 } from 'react-rainbow-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faPlus,
   faPencilAlt,
-  faTrash,
-  faFlask,
 } from '@fortawesome/free-solid-svg-icons';
+
+import AddRowButton from './AddRowButton'
+import AddColumnButton from './AddColumnButton'
+import RemoveRowButton from './RemoveRowButton'
+import RemoveColumnButton from './RemoveColumnButton'
+import CalculateLinearityButton from './CalculateLinearityButton'
+import LinearityMassUnitSelector from '../selector/LinearityMassUnitSelector'
+import LinearityVolumeUnitSelector from '../selector/LinearityVolumeUnitSelector'
+
 
 export const GroupButton = () => {
   return (
@@ -23,31 +26,15 @@ export const GroupButton = () => {
           menuSize='x-small'
           icon={<FontAwesomeIcon icon={faPencilAlt} />}
           label='Change unit'
-        >
-          <MenuItem label='Change volume unit' />
-          <MenuItem label='Change mass unit' />
+        >  
+          <LinearityMassUnitSelector />
+          <LinearityVolumeUnitSelector />
         </ButtonMenu>
-
-        <Button variant='neutral'>
-          <FontAwesomeIcon icon={faPlus} className='rainbow-m-right_small' />
-            Add Rows
-        </Button>
-        <Button variant='neutral'>
-          <FontAwesomeIcon icon={faPlus} className='rainbow-m-right_small' />
-            Add Columns
-        </Button>
-        <Button variant='neutral'>
-          <FontAwesomeIcon icon={faTrash} className='rainbow-m-right_small' />
-            Remove Rows
-        </Button>
-        <Button variant='neutral'>
-          <FontAwesomeIcon icon={faTrash} className='rainbow-m-right_small' />
-           Remove Columns
-        </Button>
-        <Button variant='neutral'>
-          <FontAwesomeIcon icon={faFlask} className='rainbow-m-right_small' />
-           Calculate Linearity
-        </Button>
+        <AddRowButton />
+        <AddColumnButton />
+        <RemoveRowButton />
+        <RemoveColumnButton />
+        <CalculateLinearityButton/>
       </ButtonGroup>
     </div>
   );

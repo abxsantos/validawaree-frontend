@@ -22,14 +22,8 @@ import { buildRows } from './TableBuildRows';
 
 import { BaseInputTableCell } from './BaseInputTableCell';
 
-import LinearityVolumeUnitSelector from '../../selector/LinearityVolumeUnitSelector';
-import LinearityMassUnitSelector from '../../selector/LinearityMassUnitSelector';
 
-import AddColumnButton from '../../button/AddColumnButton';
-import RemoveColumnButton from '../../button/RemoveColumnButton';
-import AddRowButton from '../../button/AddRowButton';
-import RemoveRowButton from '../../button/RemoveRowButton';
-import CalculateLinearityButton from '../../button/CalculateLinearityButton';
+import { GroupButton } from '../../button/GroupButton';
 
 const useStyles = makeStyles(() => ({
   table: {
@@ -45,15 +39,7 @@ function LinearitySampleInputTable(props) {
   return (
     <Table stickyHeader aria-label='sticky table' className={classes.table}>
       <TableHead>
-        <TableRow>
-          <LinearityMassUnitSelector />
-          <LinearityVolumeUnitSelector />
-          <AddRowButton />
-          <RemoveRowButton />
-          <AddColumnButton />
-          <RemoveColumnButton />
-          <CalculateLinearityButton />
-        </TableRow>
+        <GroupButton/>
       </TableHead>
       <TableBody>
         <Table>

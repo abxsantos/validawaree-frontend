@@ -1,19 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import {BaseButton} from './BaseButton'
+import { Button } from 'react-rainbow-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 import { removeColumn } from '../../actions'
 
 const RemoveColumnButton = ({ removeColumn }) => {
     return (
-        <BaseButton
-        id='button-remove-column'
-        tooltipText='Remove last column'
-        color='#EB5757'
-        onClickAction={removeColumn}
-        buttonText='Remove Column'
-        />
+        <Button style={{}} variant='neutral' onClick={removeColumn}>
+        <FontAwesomeIcon icon={faTrash} className='rainbow-m-right_small' />
+        Remove Column
+      </Button>
     );
 }
 
