@@ -157,9 +157,17 @@ describe('Altering the store', () => {
                 };
                 const state = {
                     volumeUnit: 1,
+                    initialConcentrations: [1, 1, 1],
+                    concentrations: [
+                        [0.1, 0.1, 0.1]
+                    ],
                 };
                 const expectedState ={
-                    volumeUnit: 1e-3
+                    volumeUnit: 1e3,
+                    initialConcentrations: [1e3, 1e3, 1e3],
+                    concentrations: [
+                        [1e4, 1e4, 1e4]
+                    ],
                 };
                 expect(changeVolumeUnit(action, state)).toEqual(expectedState);
             });
