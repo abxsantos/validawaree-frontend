@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
+import '../../../style.css';
+
 
 import {
   makeStyles,
@@ -27,7 +29,6 @@ import { GroupButton } from '../../button/GroupButton';
 
 const useStyles = makeStyles(() => ({
   table: {
-    maxWidth: 950,
     maxHeight: 600,
   },
 }));
