@@ -28,7 +28,7 @@ export const removeColumn = () => ({
 
 export const changeVolumeUnit = (changedVolumeUnit) => ({
     type: CHANGE_VOLUME_UNIT,
-    volumeUnit: changedVolumeUnit
+    changedVolumeUnit: changedVolumeUnit
 })
 
 export function updateVolumeValue(updatedValue) {

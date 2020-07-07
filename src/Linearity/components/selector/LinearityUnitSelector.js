@@ -6,15 +6,16 @@ import { InputLabel, MenuItem, FormControl, Select } from '@material-ui/core/';
 import { changeVolumeUnit } from '../../actions';
 
 
-const LinearityUnitSelector = () => {
+const LinearityUnitSelector = (props) => {
     return (
         <FormControl style={{ margin: "10px", width: "100px" }} variant="outlined">
             <InputLabel shrink={true} id="demo-simple-select-outlined-label">Volume</InputLabel>
             <Select
                 labelId="demo-simple-select-outlined-label"
                 id="demo-simple-select-outlined"
-                value="{Mass}"
-                label="Mass"
+                value={props.volumeUnit}
+                label="Volume"
+                onChange={(e) => handleUnitChange(e, props)}
             >
                 <MenuItem value={1}>L</MenuItem>
                 <MenuItem value={1e-3}>mL</MenuItem>
@@ -25,16 +26,19 @@ const LinearityUnitSelector = () => {
     );
 };
 
-const mapStateToProps = (state) =>{
-    return{
+const handleUnitChange = (event, props) => { props.updateUnitChange(event.target.value) }
+
+
+const mapStateToProps = (state) => {
+    return {
         volumeUnit: state.samples.volumeUnit
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return{
-        handleUnitChange: () =>{
-            dispatch(changeVolumeUnit());
+    return {
+        updateUnitChange: (changedVolumeUnit) => {
+            dispatch(changeVolumeUnit(changedVolumeUnit));
         }
     }
 }
