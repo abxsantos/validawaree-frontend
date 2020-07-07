@@ -19,6 +19,7 @@ import {
     updateMassValue,
     updateValues,
     updateDilutionFactorValue,
+    changeVolumeUnit,
 } from './ReducersLinearityInputAuxiliarFunctions';
 
 const initialState = {
@@ -97,7 +98,7 @@ const samples = (state = initialState, action) => {
                 case CHANGE_VOLUME_UNIT:
                     return {
                         ...state,
-                        volumeUnit: statechangeUnit()
+                        ...changeVolumeUnit(action, state)
                     }
 
 

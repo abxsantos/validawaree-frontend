@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { InputLabel, MenuItem, FormControl, Select } from '@material-ui/core/InputLabel';
+import { InputLabel, MenuItem, FormControl, Select } from '@material-ui/core/';
 
 import { changeVolumeUnit } from '../../actions';
 
@@ -16,10 +16,10 @@ const LinearityUnitSelector = () => {
                 value="{Mass}"
                 label="Mass"
             >
-                <MenuItem value={10}>L</MenuItem>
-                <MenuItem value={10}>mL</MenuItem>
-                <MenuItem value={20}>&mu;L</MenuItem>
-                <MenuItem value={30}>nL</MenuItem>
+                <MenuItem value={1}>L</MenuItem>
+                <MenuItem value={1e-3}>mL</MenuItem>
+                <MenuItem value={1e-6}>&mu;L</MenuItem>
+                <MenuItem value={1e-9}>nL</MenuItem>
             </Select>
         </FormControl>
     );
@@ -39,4 +39,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(LinearityUnitSelector)
+export default connect(mapStateToProps, mapDispatchToProps)(LinearityUnitSelector)
