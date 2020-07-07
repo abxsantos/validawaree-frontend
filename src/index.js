@@ -7,14 +7,14 @@ import { composeWithDevTools } from "redux-devtools-extension";
 
 import thunk from 'redux-thunk';
 import './index.css';
-import App from './App';
+import LinearityApp from './Linearity/LinearityApp';
 
 const middlewares = [thunk];
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={createStore(reducers, {}, composeWithDevTools(applyMiddleware(...middlewares)))}>
-            <App />
+            <LinearityApp />
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
