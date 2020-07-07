@@ -156,6 +156,8 @@ describe('Altering the store', () => {
                     changedVolumeUnit: 1e-3
                 };
                 const state = {
+                    numRows: 1,
+                    numColumns: 3,
                     volumeUnit: 1,
                     initialConcentrations: [1, 1, 1],
                     concentrations: [
@@ -166,7 +168,7 @@ describe('Altering the store', () => {
                     volumeUnit: 1e-3,
                     initialConcentrations: [1e3, 1e3, 1e3],
                     concentrations: [
-                        [1e4, 1e4, 1e4]
+                        [1e2, 1e2, 1e2]
                     ],
                 };
                 expect(changeVolumeUnit(action, state)).toEqual(expectedState);
