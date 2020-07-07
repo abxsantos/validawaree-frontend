@@ -77,9 +77,27 @@ export const checkValidTableInput = (newValue) => {
     }
 }
 
-export const changeVolumeUnit = (action, state) =>{
-    
-}
+export const changeVolumeUnit = (action,state) =>{
+    let volumeUnit = state.volumeUnit;
+    volumeUnit = action.changedVolumeUnit
+    let changedInitialConcentrations = [...state.initialConcentrations].map((initialConcentrationValue) => {
+        let changedInitialConcentrationValue = initialConcentrationValue / volumeUnit;
+        return changedInitialConcentrationValue
+    });
+    let changedConcentrations = [...state.concentrations];
+    for (let row = 0; row < state.numRows; ++row){
+        for (let column = 0; column < state.numColumns; ++column){
+            changedConcentrations[row][column] = state.concentrations[row][column] / volumeUnit
+        };
+    };
+
+    return {
+        volumeUnit: action.changedVolumeUnit,
+        initialConcentrations: changedInitialConcentrations,
+        concentrations: changedConcentrations,
+    };
+
+};
 
 export const updateVolumeValue = (action, state) => {
     let volume = state.volume;
@@ -93,8 +111,8 @@ export const updateVolumeValue = (action, state) => {
         for (let j = 0; j < initialConcentrations.length; ++j) {
             let updatedConcentrations = parseFloat(initialConcentrations[j]) / parseFloat(state.dilutionFactor[i]);
             concentrations[i][j] = checkValidTableInput(updatedConcentrations)
-        }
-    }
+        };
+    };
 
     return {
         volume: volume,
