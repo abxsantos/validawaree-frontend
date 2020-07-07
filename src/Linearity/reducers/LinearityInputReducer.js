@@ -26,7 +26,7 @@ const initialState = {
     numRows: 1,
     numColumns: 3,
     volume: undefined,
-    volumeUnit: undefined,
+    volumeUnit: 1e-3,
     mass: [undefined, undefined, undefined],
     analyticalData: [
         [undefined, undefined, undefined]
@@ -35,7 +35,7 @@ const initialState = {
     concentrations: [
         [undefined, undefined, undefined]
     ],
-    initialConcentrations: [undefined, undefined, undefined], // ci = mass/volume
+    initialConcentrations: [undefined, undefined, undefined],
     averages: [undefined],
     stdDeviations: [undefined],
 };
