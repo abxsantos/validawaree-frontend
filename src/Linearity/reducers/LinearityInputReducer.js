@@ -8,6 +8,7 @@ import {
     REMOVE_ROW,
     REMOVE_COLUMN,
     CHANGE_VOLUME_UNIT,
+    CHANGE_MASS_UNIT,
 } from '../actions';
 
 import {
@@ -20,6 +21,7 @@ import {
     updateValues,
     updateDilutionFactorValue,
     changeVolumeUnit,
+    changeMassUnit,
 } from './ReducersLinearityInputAuxiliarFunctions';
 
 const initialState = {
@@ -100,7 +102,11 @@ const samples = (state = initialState, action) => {
                         ...state,
                         ...changeVolumeUnit(action, state)
                     }
-
+                case CHANGE_MASS_UNIT:
+                    return {
+                        ...state,
+                        ...changeMassUnit(action, state)
+                    } 
 
                 case UPD_VOLUME_VALUE:
                     return {
