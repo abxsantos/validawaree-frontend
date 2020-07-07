@@ -1,21 +1,19 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { Button, Tooltip } from '@material-ui/core';
+import {BaseButton} from './BaseButton'
+
 
 import { incRow } from '../../actions'
 
 const AddRowButton = ({ incRow }) => {
     return (
-        <Tooltip
-            title='Add row'
-            placement='bottom'
-            arrow
-            disableFocusListener
-            disableTouchListener
-        >
-             <Button style={{ color: '#219653', borderColor: '#219653'}} variant="outlined" onClick={incRow} >Add Row</Button>
-        </Tooltip>
+        <BaseButton
+        tooltipText='Add row'
+        color='#219653'
+        onClickAction={incRow}
+        buttonText='Add Row'
+        />
     );
 }
 

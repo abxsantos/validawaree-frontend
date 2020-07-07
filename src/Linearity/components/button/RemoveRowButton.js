@@ -1,21 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { Button, Tooltip } from '@material-ui/core';
+import {BaseButton} from './BaseButton'
 
 import { removeRow } from '../../actions'
 
 const RemoveRowButton = ({ removeRow }) => {
     return (
-        <Tooltip
-            title='Remove last row'
-            placement='bottom'
-            arrow
-            disableFocusListener
-            disableTouchListener
-        >
-            <Button style={{ color: '#EB5757', borderColor: '#EB5757' }} variant="outlined" onClick={removeRow} >Remove Row</Button>
-        </Tooltip>
+        <BaseButton
+        tooltipText='Remove last row'
+        color='#EB5757'
+        onClickAction={removeRow}
+        buttonText='Remove Row'
+        />
     );
 }
 

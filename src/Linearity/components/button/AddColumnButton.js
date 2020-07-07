@@ -1,21 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button, Tooltip } from '@material-ui/core';
+import {BaseButton} from './BaseButton'
 
 import { incColumn } from '../../actions';
 
 const AddColumnButton = ({ incColumn }) => {
     return (
-        <Tooltip
-            title='Add column'
-            placement='right'
-            arrow
-            disableFocusListener
-            disableTouchListener
-        >
-            <Button style={{ color: '#219653', borderColor: '#219653'}} variant="outlined" onClick={incColumn} >Add Column</Button>
-        </Tooltip>
+        <BaseButton
+        tooltipText='Add column'
+        color='#219653'
+        onClickAction={incColumn}
+        buttonText='Add Column'
+        />
     );
 };
 
