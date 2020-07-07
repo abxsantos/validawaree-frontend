@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import React from 'react';
 import '../../../style.css';
 
-
 import {
   makeStyles,
   Table,
@@ -25,61 +24,60 @@ import { buildRows } from './TableBuildRows';
 import { BaseInputTableCell } from './BaseInputTableCell';
 
 
-import { GroupButton } from '../../button/GroupButton';
-
 const useStyles = makeStyles(() => ({
+  root: {
+    fontWeight: 600,
+  },
   table: {
     maxHeight: 600,
   },
-}));
 
+}));
 
 function LinearitySampleInputTable(props) {
   const classes = useStyles();
 
   return (
-    <Table stickyHeader aria-label='sticky table' className={classes.table}>
-      <TableHead>
-        <GroupButton/>
+    <Table aria-label='sticky table' className={classes.table}>
+      <TableHead className={classes.root}>
+        <TableRow>
+          <TableCell
+            id='starter-column'
+            align='left'
+            padding='dense'
+            size='normal'
+          >
+            Volume
+          </TableCell>
+          {buildColumns(props.columns, 'Mass')}
+        </TableRow>
       </TableHead>
       <TableBody>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell id='starter-column' align='left' padding='dense' size='normal'>
-                Volume
-              </TableCell>
-              {buildColumns(props.columns, 'Mass')}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            <TableRow key={'volume'}>
-              <BaseInputTableCell
-                id='starter-column'
-                label='Volume'
-                value={props.volume}
-                onChangeAction={(e) => handleVolumeChange(e, props)}
-              />
-              {buildColumns(props.columns, 'Mass', false, props)}
-            </TableRow>
-          </TableBody>
-          <TableHead>
-            <TableRow>
-              <TableCell align='left' padding='dense' size='normal'>
-                Dilution Factor
-              </TableCell>
-              {buildColumns(props.columns, 'Sample')}
-              <TableCell align='center' padding='dense' size='normal'>
-                Average
-              </TableCell>
-              <TableCell align='center' padding='dense' size='normal'>
-                Standard Deviation
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{buildRows(props)}</TableBody>
-        </Table>
+        <TableRow key={'volume'}>
+          <BaseInputTableCell
+            id='starter-column'
+            label='Volume'
+            value={props.volume}
+            onChangeAction={(e) => handleVolumeChange(e, props)}
+          />
+          {buildColumns(props.columns, 'Mass', false, props)}
+        </TableRow>
       </TableBody>
+      <TableHead>
+        <TableRow>
+          <TableCell align='left' padding='dense' size='normal'>
+            Dilution Factor
+          </TableCell>
+          {buildColumns(props.columns, 'Sample')}
+          <TableCell align='center' padding='dense' size='normal'>
+            Average
+          </TableCell>
+          <TableCell align='center' padding='dense' size='normal'>
+            Standard Deviation
+          </TableCell>
+        </TableRow>
+      </TableHead>
+      <TableBody>{buildRows(props)}</TableBody>
     </Table>
   );
 }
