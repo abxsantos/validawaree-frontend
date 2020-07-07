@@ -18,7 +18,6 @@ import AddRowButton from './components/button/AddRowButton';
 import RemoveRowButton from './components/button/RemoveRowButton';
 import CalculateLinearityButton from './components/button/CalculateLinearityButton';
 
-
 const useStyles = makeStyles(() => ({
   root: {
     marginTop: '10rem',
@@ -30,7 +29,6 @@ const useStyles = makeStyles(() => ({
 
 function LinearityApp() {
   const classes = useStyles();
-
   return (
     <div className={classes.root}>
       <Grid container alignItems='center' direction='row' spacing={2}>
@@ -60,7 +58,6 @@ function LinearityApp() {
             </Grid>
           </Paper>
         </Grid>
-
         <Grid item>
           <Paper
             style={{ background: 'linear-gradient(60deg, #ffa726, #fb8c00)' }}
