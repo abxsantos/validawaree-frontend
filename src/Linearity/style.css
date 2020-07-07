@@ -1,15 +1,89 @@
+
+/* Inline #42 | http://localhost:3000/ */
+
+
+/* Element | http://localhost:3000/ */
+
+#starter-column {
+  text-align: left;
+}
+
+/* Element | http://localhost:3000/ */
+
+thead.MuiTableHead-root:nth-child(3) > tr:nth-child(1) > th:nth-child(1) {
+  text-align: left;
+}
+
+/* Element | http://localhost:3000/ */
+
+.makeStyles-table-23 > tbody:nth-child(2) > table:nth-child(1) > tbody:nth-child(2) > tr:nth-child(1) > td:nth-child(1) {
+  text-align: left;
+}
+
+/* Element | http://localhost:3000/ */
+
+tbody.MuiTableBody-root:nth-child(4) > tr:nth-child(1) > td:nth-child(1) {
+  text-align: left;
+}
+
+/* Inline #34 | http://localhost:3000/ */
+
+.MuiInputLabel-formControl {
+  /* position: absolute; */
+  position: inherit;
+}
+
+
+/* Inline #34 | http://localhost:3000/ */
+
+.MuiInputLabel-formControl {
+  /* position: absolute; */
+  position: inherit;
+}
+
 /* Element | http://localhost:3000/ */
 
 #simple-select-text-mass {
-  padding-right: 32px;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  padding-left: 5px;
+  padding-right: 16px;
+  margin-right: 0px;
 }
 
 /* Element | http://localhost:3000/ */
 
 #simple-select-text-volume {
-  padding-right: 32px;
-  padding-bottom: 5px;
-  padding-top: 5px;
+  padding-bottom: 3px;
+  padding-top: 3px;
+  padding-right: 16px;
+  padding-left: 5px;
+  margin-left: 0px;
 }
+
+/* Element | http://localhost:3000/ */
+
+.sc-kpOJdX > div:nth-child(1) {
+  /* margin-right: 1px; */
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+
+
+/* Inline #31 | http://localhost:3000/ */
+
+.MuiGrid-container {
+  /* width: 100%; */
+  width: -moz-fit-content;
+}
+
+/* Inline #25 | http://localhost:3000/ */
+
+*, ::before, ::after {
+  /* box-sizing: inherit; */
+  box-sizing: content-box;
+}
+
+
+

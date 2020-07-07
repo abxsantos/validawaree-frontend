@@ -13,8 +13,8 @@ export const buildRows = (props) => {
         let items = [];
         items.push(
             <BaseInputTableCell
+            id='starter-column'
             tooltipText='Initial volume divided by Final Volume'
-            helperText=' '
             label='Dilution factor'
             value={props.dilutionFactor[i]}
             onChangeAction={(e) => handleChangeDilutionFactor(e, i, props)}

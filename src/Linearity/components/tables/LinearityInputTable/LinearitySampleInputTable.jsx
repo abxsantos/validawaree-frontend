@@ -45,7 +45,7 @@ function LinearitySampleInputTable(props) {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell align='center' padding='dense' size='normal'>
+              <TableCell id='starter-column' align='center' padding='dense' size='normal'>
                 Volume
               </TableCell>
               {buildColumns(props.columns, 'Mass')}
@@ -54,7 +54,7 @@ function LinearitySampleInputTable(props) {
           <TableBody>
             <TableRow key={'volume'}>
               <BaseInputTableCell
-                helperText=' '
+                id='starter-column'
                 label='Volume'
                 value={props.volume}
                 onChangeAction={(e) => handleVolumeChange(e, props)}
