@@ -10,7 +10,6 @@ import {
     TableHead,
     TableRow,
     Paper,
-    TextField,
 } from '@material-ui/core';
 
 import {
@@ -20,23 +19,16 @@ import {
     updateMassValue,
 } from '../../../actions';
 
-import {buildColumns} from './TableBuildColumns'
-import {buildRows} from './TableBuidRows'
+import { buildColumns } from './TableBuildColumns'
+import { buildRows } from './TableBuildRows'
+
+import { BaseInputTableCell } from './BaseInputTableCell'
 
 
 const useStyles = makeStyles({
     root: {},
     table: {
-        minWidth: 450,
-        maxWidth: 850,
-    },
-    underline: {
-        "&&&:before": {
-            borderBottom: "none"
-        },
-        "&&:after": {
-            borderBottom: "none"
-        }
+        maxWidth: 950,
     },
 });
 
@@ -48,34 +40,40 @@ function LinearitySampleInputTable(props) {
             <Table className={classes.table} aria-label='simple table'>
                 <TableHead>
                     <TableRow>
-                        <TableCell align='center' padding='dense' size="small">Volume</TableCell>
+                        <TableCell align='center' padding='dense' size="normal">
+                            Volume
+                    </TableCell>
                         {buildColumns(props.columns, 'Mass')}
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     <TableRow key={'volume'}>
-                        <TableCell align='center' padding='dense' size="small">
-                            <TextField
-                                InputProps={{ classes }}
-                                size='small'
-                                helperText=' '
-                                label='Volume'
-                                value={props.volume}
-                                onChange={(e) => handleVolumeChange(e, props)}
-                            />
-                        </TableCell>
+                        <BaseInputTableCell
+                            helperText=' '
+                            label='Volume'
+                            value={props.volume}
+                            onChangeAction={(e) => handleVolumeChange(e, props)}
+                        />
                         {buildColumns(props.columns, 'Mass', false, props)}
                     </TableRow>
                 </TableBody>
                 <TableHead>
                     <TableRow>
-                        <TableCell align='center' padding='dense' size="small">Dilution Factor</TableCell>
+                        <TableCell align='center' padding='dense' size="normal">
+                            Dilution Factor
+                        </TableCell>
                         {buildColumns(props.columns, 'Sample')}
-                        <TableCell align='center' padding='dense' size="small">Average</TableCell>
-                        <TableCell align='center' padding='dense' size="small">Standard Deviation</TableCell>
+                        <TableCell align='center' padding='dense' size="normal">
+                            Average
+                        </TableCell>
+                        <TableCell align='center' padding='dense' size="normal">
+                            Standard Deviation
+                        </TableCell>
                     </TableRow>
                 </TableHead>
-                <TableBody>{buildRows(props)}</TableBody>
+                <TableBody>
+                    {buildRows(props)}
+                </TableBody>
             </Table>
         </TableContainer>
     );

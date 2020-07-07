@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core';
-
-import LinearitySampleInputTable from './components/tables/LinearitySampleInputTable';
+import LinearitySampleInputTable from './components/tables/LinearityInputTable/LinearitySampleInputTable';
 import LinearityRegressionAnovaTable from './components/tables/LinearityRegressionAnovaTable';
 
 import LinearityRegressionChart from './components/charts/LinearityRegressionGraph';
@@ -18,26 +16,7 @@ import AddRowButton from './components/button/AddRowButton';
 import RemoveRowButton from './components/button/RemoveRowButton';
 import CalculateLinearityButton from './components/button/CalculateLinearityButton';
 
-const useStyles = makeStyles({
-    root:{},
-    table: {
-      minWidth: 450,
-      maxWidth: 650,
-    },
-    tableAnalyticalCellBorder: {
-      borderWidth: 0,
-      borderRightWidth: 1,
-      borderLeftWidth: 1,
-      borderColor: 'rgba(224, 224, 224, 1)',
-      borderStyle: 'solid',
-  },
-  });
-
-
-
 function LinearityApp() {
-    const classes = useStyles();
-
     return (
         <div className="LinearityApp">
             <LinearityMassUnitSelector />
