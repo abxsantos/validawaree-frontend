@@ -1,4 +1,5 @@
 import React from 'react';
+import '../../../style.css';
 
 import {
     TableCell,
@@ -11,7 +12,7 @@ export const buildColumns = (columns, dataType, isHeader = true, props) => {
     for (let i = 1; i <= columns; ++i) {
         isHeader
             ? items.push(
-                <TableCell align='center' padding='dense' size="normal">
+                <TableCell align='left' padding='dense' size="normal">
                     {dataType} {i}
                 </TableCell>
             )

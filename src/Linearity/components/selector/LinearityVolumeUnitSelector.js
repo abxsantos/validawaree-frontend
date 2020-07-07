@@ -8,11 +8,12 @@ import { changeVolumeUnit } from '../../actions';
 
 const LinearityUnitSelector = (props) => {
     return (
-        <FormControl style={{ margin: "10px", width: "100px" }} variant="outlined">
-            <InputLabel shrink={true} id="demo-simple-select-outlined-label">Volume</InputLabel>
+        <FormControl  variant="outlined">
+            <InputLabel id="form-input-text-volume">Volume</InputLabel>
             <Select
-                labelId="demo-simple-select-outlined-label"
-                id="demo-simple-select-outlined"
+                style={{width: 75}}
+                labelId="select-outlined-label-text-volume"
+                id="simple-select-text-volume"
                 value={props.volumeUnit}
                 label="Volume"
                 onChange={(e) => handleUnitChange(e, props)}

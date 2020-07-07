@@ -1,38 +1,23 @@
 import React from 'react';
+import './style.css';
+
+import { Grid, Paper } from '@material-ui/core/';
 
 import LinearitySampleInputTable from './components/tables/LinearityInputTable/LinearitySampleInputTable';
-import LinearityRegressionAnovaTable from './components/tables/LinearityRegressionAnovaTable';
-
-import LinearityRegressionChart from './components/charts/LinearityRegressionGraph';
-import LinearityResiduesChart from './components/charts/LinearityResiduesGraph';
-
-import LinearityDataStatisticsTable from './components/tables/LinearityDataStatisticsTable';
-import LinearityVolumeUnitSelector from './components/selector/LinearityVolumeUnitSelector';
-import LinearityMassUnitSelector from './components/selector/LinearityMassUnitSelector';
-
-import AddColumnButton from './components/button/AddColumnButton';
-import RemoveColumnButton from './components/button/RemoveColumnButton';
-import AddRowButton from './components/button/AddRowButton';
-import RemoveRowButton from './components/button/RemoveRowButton';
-import CalculateLinearityButton from './components/button/CalculateLinearityButton';
+import { GroupButton } from './components/button/GroupButton';
 
 function LinearityApp() {
-    return (
-        <div className="LinearityApp">
-            <LinearityMassUnitSelector />
-            <LinearityVolumeUnitSelector />
-            <AddRowButton />
-            <RemoveRowButton />
-            <AddColumnButton />
-            <RemoveColumnButton />
-            <CalculateLinearityButton />
-            <LinearitySampleInputTable />
-            <LinearityRegressionAnovaTable />
-            <LinearityRegressionChart />
-            <LinearityResiduesChart />
-            <LinearityDataStatisticsTable />
-        </div>
-    );
+  return (
+    <div>
+      <Grid item lg={8}>
+        <GroupButton />
+      </Grid>
+
+      <Grid component={Paper} item lg={8}>
+        <LinearitySampleInputTable />
+      </Grid>
+    </div>
+  );
 }
 
 export default LinearityApp;

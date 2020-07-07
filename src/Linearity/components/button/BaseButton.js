@@ -13,7 +13,8 @@ export const BaseButton = ({tooltipText, color, onClickAction, buttonText}) => {
             disableTouchListener
         >
             <Button
-                style={{ color: color, borderColor: color }}
+                id='base-button-edit-table'
+                style={{ color: color, borderColor: color , width: '102px'}}
                 variant="outlined" 
                 onClick={onClickAction} >
                 {buttonText}
