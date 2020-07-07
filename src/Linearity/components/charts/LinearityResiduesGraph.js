@@ -16,14 +16,11 @@ const LinearityResiduesChart = (props) => {
     return (
         <div>
             <ComposedChart
-                width={500}
-                height={400}
+                width={300}
+                height={300}
                 data={props.regressionChartData}
                 margin={{
-                    top: 20,
-                    right: 80,
-                    bottom: 20,
-                    left: 20,
+
                 }}
             >
                 <CartesianGrid stroke='#f5f5f5' />
