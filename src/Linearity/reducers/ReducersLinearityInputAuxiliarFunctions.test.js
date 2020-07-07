@@ -12,6 +12,7 @@ import {
     updateDilutionFactorValue,
     calculateAnalyticalAverage,
     calculateStandardDeviation,
+    changeVolumeUnit,
 } from './ReducersLinearityInputAuxiliarFunctions';
 
 describe('Add and Remove Rows', () => {
@@ -152,14 +153,15 @@ describe('Altering the store', () => {
         describe('When the user selects in another unit in the selector',() => {
             it('The volume unit is expected to change to the corresponding user selected value', () =>{
                 const action = {
-                    changedVolumeUnit: 10e-3
+                    changedVolumeUnit: 1e-3
                 };
                 const state = {
                     volumeUnit: 1,
                 };
-                expect(changeVolumeUnit(action, state).toEqual({
-                    volumeUnit: 10e-3
-                }))
+                const expectedState ={
+                    volumeUnit: 1e-3
+                };
+                expect(changeVolumeUnit(action, state)).toEqual(expectedState);
             });
         });
     });

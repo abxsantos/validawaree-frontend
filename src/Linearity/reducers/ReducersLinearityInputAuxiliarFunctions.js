@@ -77,8 +77,13 @@ export const checkValidTableInput = (newValue) => {
     }
 }
 
-export const changeVolumeUnit = (action, state) =>{
-    
+export const changeVolumeUnit = (action,state) =>{
+    let volumeUnit = state.volumeUnit;
+    volumeUnit = action.changedVolumeUnit
+    return {
+        volumeUnit: action.changedVolumeUnit
+    }
+
 }
 
 export const updateVolumeValue = (action, state) => {
