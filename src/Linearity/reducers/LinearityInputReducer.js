@@ -29,6 +29,7 @@ const initialState = {
     numColumns: 3,
     volume: undefined,
     volumeUnit: 1e-3,
+    massUnit: 1e-3,
     mass: [undefined, undefined, undefined],
     analyticalData: [
         [undefined, undefined, undefined]
