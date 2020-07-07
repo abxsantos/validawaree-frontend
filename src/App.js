@@ -6,13 +6,15 @@ import LinearityRegressionAnovaTable from './Linearity/components/tables/Lineari
 import LinearityRegressionChart from './Linearity/components/charts/LinearityRegressionGraph';
 import LinearityResiduesChart from './Linearity/components/charts/LinearityResiduesGraph';
 import LinearityDataStatisticsTable from './Linearity/components/tables/LinearityDataStatisticsTable';
-import LinearityUnitSelector from './Linearity/components/selector/LinearityUnitSelector';
+import LinearityVolumeUnitSelector from './Linearity/components/selector/LinearityVolumeUnitSelector';
+import LinearityMassUnitSelector from './Linearity/components/selector/LinearityMassUnitSelector';
 
 
 function App() {
     return (
         <div className="App">
-            <LinearityUnitSelector />
+            <LinearityMassUnitSelector />
+            <LinearityVolumeUnitSelector />
             <LinearitySampleInputTable />
             <LinearityRegressionAnovaTable />
             <LinearityRegressionChart />

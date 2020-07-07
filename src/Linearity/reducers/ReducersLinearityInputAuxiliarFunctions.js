@@ -80,18 +80,39 @@ export const checkValidTableInput = (newValue) => {
 export const changeVolumeUnit = (action,state) =>{
     let volumeUnit = state.volumeUnit;
     let changedInitialConcentrations = [...state.initialConcentrations].map((initialConcentrationValue) => {
-        let changedInitialConcentrationValue = initialConcentrationValue / (volumeUnit/action.changedVolumeUnit);
+        let changedInitialConcentrationValue = initialConcentrationValue * (volumeUnit/action.changedVolumeUnit);
         return changedInitialConcentrationValue
     });
     let changedConcentrations = [...state.concentrations];
     for (let row = 0; row < state.numRows; ++row){
         for (let column = 0; column < state.numColumns; ++column){
-            changedConcentrations[row][column] = state.concentrations[row][column] / (volumeUnit/action.changedVolumeUnit)
+            changedConcentrations[row][column] = state.concentrations[row][column] * (volumeUnit/action.changedVolumeUnit)
         };
     };
     volumeUnit = action.changedVolumeUnit;
     return {
         volumeUnit: volumeUnit,
+        initialConcentrations: changedInitialConcentrations,
+        concentrations: changedConcentrations,
+    };
+
+};
+
+export const changeMassUnit = (action,state) =>{
+    let massUnit = state.massUnit;
+    let changedInitialConcentrations = [...state.initialConcentrations].map((initialConcentrationValue) => {
+        let changedInitialConcentrationValue = initialConcentrationValue / (massUnit/action.changedMassUnit);
+        return changedInitialConcentrationValue
+    });
+    let changedConcentrations = [...state.concentrations];
+    for (let row = 0; row < state.numRows; ++row){
+        for (let column = 0; column < state.numColumns; ++column){
+            changedConcentrations[row][column] = state.concentrations[row][column] / (massUnit/action.changedMassUnit)
+        };
+    };
+    massUnit = action.changedMassUnit;
+    return {
+        massUnit: massUnit,
         initialConcentrations: changedInitialConcentrations,
         concentrations: changedConcentrations,
     };
