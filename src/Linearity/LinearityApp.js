@@ -6,6 +6,7 @@ import { GroupButton } from './components/button/GroupButton';
 import LinearitySampleInputTable from './components/tables/LinearityInputTable/LinearitySampleInputTable';
 import LinearityRegressionAnovaTable from './components/tables/LinearityRegressionAnovaTable';
 import LinearityDataStatisticsTable from './components/tables/LinearityDataStatisticsTable';
+import LinearityCoefficientsTable from './components/tables/LinearityCoefficientsTable';
 import LinearityRegressionGraph from './components/charts/LinearityRegressionGraph';
 import LinearityResiduesChart from './components/charts/LinearityResiduesGraph';
 
@@ -75,7 +76,7 @@ function LinearityApp() {
                   <LinearityRegressionGraph />
                 </Paper>
               </Grid>
-              <Grid item className='LinearityRegressionCoefficients'>
+              <Grid item className='LinearityResiduesAnovaTable'>
                 <Paper>
                   <LinearityRegressionAnovaTable />
                 </Paper>
@@ -89,14 +90,14 @@ function LinearityApp() {
               md={12}
               spacing={3}
             >
-              <Grid item className='LinearityRegressionAnovaTable'>
-                <Grid item>
-                  <Paper>
-                    <LinearityResiduesChart />
-                  </Paper>
-                </Grid>
+              <Grid item className='LinearityResiduesGraph'>
                 <Paper>
-                  {/* TABLE COEFFICIENTS */}
+                  <LinearityResiduesChart />
+                </Paper>
+              </Grid>
+              <Grid item className='LinearityRegressionCoefficients'>
+                <Paper>
+                  <LinearityCoefficientsTable />
                 </Paper>
               </Grid>
               <Grid item className='LinearityDataStatisticsTable'>
