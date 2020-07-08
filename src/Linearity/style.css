@@ -61,12 +61,6 @@ th.MuiTableCell-root:nth-child(6) {
   border-color: rgb(224, 224, 224);
 }
 
-.MuiGrid-grid-lg-4 {
-  overflow: unset;
-  margin-top: -30px;
-  margin-left: 20px;
-}
-
 .makeStyles-content-7 > div:nth-child(2) > div:nth-child(2) {
   overflow: unset;
   overflow-x: unset;
@@ -77,4 +71,21 @@ th.MuiTableCell-root:nth-child(6) {
   margin-top: 100px;
   margin-bottom: 100px;
   overflow: unset;
+}
+
+.makeStyles-content-7 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+  background: linear-gradient(186deg, rgba(0,143,193,1) 0%, rgba(25,216,255,1) 100%);
+}
+
+.makeStyles-content-7 > div:nth-child(2) > div:nth-child(2) {
+
+  margin-right: 400px;
+}
+
+#linearity-chart-result {
+  margin-left: 100px;
+}
+
+div.MuiGrid-root:nth-child(3) {
+  margin-left: 100px;
 }

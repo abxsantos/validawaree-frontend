@@ -15,7 +15,7 @@ import {
 
 import LinearityApp from '../Linearity/LinearityApp';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -123,7 +123,10 @@ function ResponsiveDrawer(props) {
           </Drawer>
         </Hidden>
       </nav>
-      <main className={classes.content}>
+      <main className={classes.content} styles={{
+        backgroundColor:
+        '#E0E0E0'
+      }}>
         <div className={classes.toolbar} />
         <LinearityApp></LinearityApp>
       </main>

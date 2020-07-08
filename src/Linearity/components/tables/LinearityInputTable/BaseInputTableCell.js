@@ -38,8 +38,12 @@ export const BaseInputTableCell = ({
         disableTouchListener
       >
         <TextField
-          InputProps={{ classes: { root: classes.inputRoot }, classes }}
-          InputLabelProps={{ classes: { root: classes.labelRoot }, classes }}
+          InputProps={{
+            classes: { root: classes.inputRoot, root: classes.underline },
+          }}
+          InputLabelProps={{
+            classes: { root: classes.labelRoot, root: classes.underline },
+          }}
           size='small'
           helperText={helperText}
           label={label}

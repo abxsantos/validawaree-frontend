@@ -21,7 +21,6 @@ const LinearityResiduesChart = (props) => {
           style={{ padding: 10 }}
           margin={{
             left: 10,
-            right: 0,
           }}
         >
           <CartesianGrid stroke='#f5f5f5' />

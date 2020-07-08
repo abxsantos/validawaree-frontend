@@ -17,11 +17,10 @@ const LinearityRegressionChart = (props) => {
     <div>
       <ResponsiveContainer width={550} height={300}>
         <ComposedChart
-          width={750}
           data={props.linearityChartData}
           margin={{
             left: 10,
-            right: 60,
+            right: 30,
           }}
           style={{ padding: 10 }}
         >
