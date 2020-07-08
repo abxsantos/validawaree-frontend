@@ -70,8 +70,7 @@ export function getLinearityResults() {
         });
     } catch (error) {
       console.error(error);
-    }finally{
-        window.alert("There is something wrong, check your data again!")
+      window.alert("There is something wrong, check your data again!");
     }
   };
 }

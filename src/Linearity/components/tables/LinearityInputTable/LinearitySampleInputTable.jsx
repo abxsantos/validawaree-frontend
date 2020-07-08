@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import '../../../style.css';
 
 import {
   makeStyles,
@@ -23,22 +22,10 @@ import { buildRows } from './TableBuildRows';
 
 import { BaseInputTableCell } from './BaseInputTableCell';
 
-
-const useStyles = makeStyles(() => ({
-  root: {
-    fontWeight: 600,
-  },
-  table: {
-    maxHeight: 600,
-  },
-
-}));
-
 function LinearitySampleInputTable(props) {
-  const classes = useStyles();
   return (
-    <Table aria-label='sticky table' className={classes.table}>]
-      <TableHead className={classes.root}>
+    <Table aria-label='sticky table' >
+      <TableHead >
         <TableRow>
           <TableCell
             id='starter-column'

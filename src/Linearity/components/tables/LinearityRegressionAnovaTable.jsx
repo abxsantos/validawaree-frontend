@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -8,25 +7,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { connect } from 'react-redux';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 200,
-    maxWidth: 450,
-  },
-});
-
 function LinearityRegressionAnovaTable(props) {
-  const classes = useStyles();
   return (
-    <Table className={classes.table} size='small' aria-label='a dense table'>
+    <Table size='small' aria-label='a dense table'>
       <TableHead>
         <TableRow>
           <TableCell component='th' scope='row'>
             {'Regression ANOVA'}
           </TableCell>
-          <TableCell align='center'>Degrees of freedom</TableCell>
-          <TableCell align='center'>Sum of squares</TableCell>
-          <TableCell align='center'>Mean Squares</TableCell>
+          <TableCell align='center'>{'Degrees \n of \n freedom'}</TableCell>
+          <TableCell align='center'>{'Sum \n of \n squares'}</TableCell>
+          <TableCell align='center'>{'Mean \n Squares'}</TableCell>
           <TableCell align='center'>F-Test</TableCell>
           <TableCell align='center'>
             F<sub>alpha</sub>

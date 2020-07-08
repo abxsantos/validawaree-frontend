@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../style.css';
 
 import { TableCell, TextField, makeStyles, Tooltip } from '@material-ui/core';
 

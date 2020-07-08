@@ -12,18 +12,11 @@ import {
   Tooltip,
 } from 'recharts';
 
-const LinearityRegressionChart = (props) => {
+const LinearityResiduesChart = (props) => {
   return (
     <div>
-      <ResponsiveContainer width={550} height={300}>
-        <ComposedChart
-          data={props.linearityChartData}
-          margin={{
-            left: 10,
-            right: 30,
-          }}
-          style={{ padding: 10 }}
-        >
+      <ResponsiveContainer height={300} >
+        <ComposedChart data={props.regressionChartData}>
           <CartesianGrid stroke='#f5f5f5' />
           <Tooltip
             labelStyle={{ fontWeight: 600 }}
@@ -37,28 +30,25 @@ const LinearityRegressionChart = (props) => {
           />
 
           <XAxis
-            height={50}
-            dataKey='concentration'
+            dataKey='fittedValues'
             type='number'
             axisLine={false}
+            allowDecimals={true}
+            label={{
+              position: 'insideBottomRight',
+              offset: 0,
+            }}
             style={{
               fontFamily: 'Roboto',
               color: 'gray',
             }}
-            label={{
-              value: 'Concentration',
-              position: 'insideBottomRight',
-              offset: 0,
-            }}
           />
           <YAxis
-            height={50}
-            allowDecimals={true}
             unit=''
+            allowDecimals={true}
             type='number'
             axisLine={false}
             label={{
-              value: 'Analytical Signal',
               angle: -90,
               position: 'insideLeft',
             }}
@@ -67,16 +57,14 @@ const LinearityRegressionChart = (props) => {
               color: 'gray',
             }}
           />
-          <CartesianGrid stroke='#eee' strokeDasharray='5 5' />
           <Scatter
-            name='Analytical Signal'
-            dataKey='analyticalSignal'
+            name='Regression Residue'
+            dataKey='regressionResidue'
             fill='#01b6f5'
-            legendType='line'
           />
           <Line
             type='monotone'
-            dataKey='RegressionLine'
+            dataKey='ResiduesLine'
             stroke='#01b6f5'
             dot={false}
             activeDot={false}
@@ -90,8 +78,8 @@ const LinearityRegressionChart = (props) => {
 
 const mapStateToProps = function (state) {
   return {
-    linearityChartData: state.linearity.linearityChartData,
+    regressionChartData: state.linearity.regressionChartData,
   };
 };
 
-export default connect(mapStateToProps)(LinearityRegressionChart);
+export default connect(mapStateToProps)(LinearityResiduesChart);
