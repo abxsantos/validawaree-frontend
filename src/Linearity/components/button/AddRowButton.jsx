@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from 'react-rainbow-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import {BaseButton} from './BaseButton';
 import { incRow } from '../../actions';
 
 const AddRowButton = ({ incRow }) => {
   return (
-    <Button style={{background: '#01b6f5', color: 'white'}} variant='neutral' onClick={incRow}>
-      <FontAwesomeIcon icon={faPlus} className='rainbow-m-right_small' />
-      Add Rows
-    </Button>
+    <BaseButton 
+    tooltipText='Add Row'
+    baseColor= '#01b6f5'
+    textColor='white'
+    icon={faPlus}
+    onClickAction={incRow}
+    buttonText='Add Row'
+    />
   );
 };
 

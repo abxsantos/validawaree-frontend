@@ -1,25 +1,30 @@
 import React from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 
-import { Button } from 'react-rainbow-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-import { removeColumn } from '../../actions'
+import { BaseButton } from './BaseButton';
+import { removeColumn } from '../../actions';
 
 const RemoveColumnButton = ({ removeColumn }) => {
-    return (
-        <Button style={{}} variant='neutral' onClick={removeColumn}>
-        <FontAwesomeIcon icon={faTrash} className='rainbow-m-right_small' />
-        Remove Column
-      </Button>
-    );
-}
+  return (
+    <BaseButton
+      tooltipText='Remove the last column'
+      baseColor='#01b6f5'
+      textColor='white'
+      icon={faTrash}
+      onClickAction={removeColumn}
+      buttonText='Remove Column'
+    />
+  );
+};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        removeColumn: () => { dispatch(removeColumn()) }
-    }
-}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    removeColumn: () => {
+      dispatch(removeColumn());
+    },
+  };
+};
 
 export default connect(null, mapDispatchToProps)(RemoveColumnButton);
