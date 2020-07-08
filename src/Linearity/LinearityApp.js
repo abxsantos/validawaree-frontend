@@ -1,5 +1,4 @@
-import React from 'react';
-import './style.css';
+import React, { Fragment } from 'react';
 
 import { Grid, Paper } from '@material-ui/core/';
 
@@ -12,95 +11,104 @@ import LinearityResiduesChart from './components/charts/LinearityResiduesGraph';
 
 function LinearityApp() {
   return (
-    <div>
-      <GroupButton />
-      <div styles={{ marginBottom: 100 }}>
-        <Grid
-          id='linearity-input-table'
-          component={Paper}
-          elevation={4}
-          item
-          lg={8}
-        >
-          <LinearitySampleInputTable />
-        </Grid>
-      </div>
-
+    <>
       <div>
+        <h1 id='title'>Validware</h1>
+        <h6 id='subtitle'>Analytical method validator</h6>
+        <p id='intro'>
+          An open source tool to validate your method using various statistical
+          analytsis without any complications. Just input your data and
+          interpret the results! There is no magic or blackbox, all the
+          statistical methods and calculations are availiable at your disposal.
+        </p>
+      </div>
+      <Grid container className='Linearity'>
+        <h2>Linearity</h2>
         <Grid
           container
-          component={Paper}
-          elevation={4}
-          styles={{
-            marginTop: 100,
-            marginRight: 300,
-            backgroundColor:
-              'linear-gradient(186deg, rgba(0,143,193,1) 0%, rgba(25,216,255,1) 100%)',
-          }}
+          className='LinearityInput'
+          spacing={3}
+          direction='row'
+          justify='center'
         >
-          <Grid
-            style={{
-              marginTop: '-30px',
-              marginLeft: '20px',
-              marginBottom: '50px',
-              paddingRight: '30px',
-              paddingBottom: '20px',
-            }}
-            elevation={4}
-            component={Paper}
-            item
-            id='linearity-chart-result'
-          >
-            <div>
-              <LinearityRegressionGraph />
-            </div>
+          <Grid item className='LinearityInputData' md={8}>
+            <Grid container className='LinearityTable' direction='column'>
+              <Grid item className='LinearityHeaderButtons'>
+                <GroupButton />
+              </Grid>
+              <Grid item className='LinearitySampleTable'>
+                <Paper style={{ overflowX: 'auto' }}>
+                  <LinearitySampleInputTable />
+                </Paper>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid
-            style={{
-              marginTop: '-30px',
-              marginLeft: '20px',
-              marginBottom: '50px',
-              paddingRight: '55px',
-              paddingBottom: '20px',
-            }}
-            elevation={4}
-            component={Paper}
-            item
-            id='linearity-residues-chart-result'
-          >
-            <div>
-              <LinearityResiduesChart />
-            </div>
-          </Grid>
-          <Grid
-            style={{
-              marginTop: '10px',
-              marginLeft: '20px',
-              marginBottom: '20px',
-              marginRight: '20px',
-              paddingBottom: '20px',
-            }}
-            elevation={4}
-            container
-            id='linearity-residues-chart-result'
-          >
-            <Paper elevation={4}>
-              <LinearityRegressionAnovaTable />
-            </Paper>
-            <Paper
-              elevation={4}
-              style={{
-                marginTop: '30px',
-                marginBottom: '40px',
-                marginLeft: '20px',
-              }}
-            >
-              <LinearityDataStatisticsTable />
+          <Grid item md={4} className='LinearityInputText'>
+            <Paper>
+              To start validating your method you need to input your
+              measurements in this table. The units of mass and volume can be
+              changed clicking the edit button, and you can increase the number
+              of rows and columns as you may like. Blank fields will not be
+              acounted in the regression analysis.
             </Paper>
           </Grid>
         </Grid>
-      </div>
-    </div>
+        <h2>Linearity Results</h2>
+        <Grid container className='LinearityResults'>
+          <Grid
+            container
+            className='LinearityResultsData'
+            direction='row'
+            spacing={3}
+            justify='space-around'
+          >
+            <Grid
+              container
+              className='Tables'
+              direction='column'
+              md={12}
+              lg={7}
+              spacing={3}
+            >
+              <Grid item className='LinearityRegressionGraph'>
+                <Paper>
+                  <LinearityRegressionGraph />
+                </Paper>
+              </Grid>
+              <Grid item className='LinearityRegressionCoefficients'>
+                <Paper>
+                  <LinearityRegressionAnovaTable />
+                </Paper>
+              </Grid>
+            </Grid>
+            <Grid
+              container
+              className='Tables'
+              direction='column'
+              lg={5}
+              md={12}
+              spacing={3}
+            >
+              <Grid item className='LinearityRegressionAnovaTable'>
+                <Grid item>
+                  <Paper>
+                    <LinearityResiduesChart />
+                  </Paper>
+                </Grid>
+                <Paper>
+                  {/* TABLE COEFFICIENTS */}
+                </Paper>
+              </Grid>
+              <Grid item className='LinearityDataStatisticsTable'>
+                <Paper>
+                  <LinearityDataStatisticsTable />
+                </Paper>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
   );
 }
 
