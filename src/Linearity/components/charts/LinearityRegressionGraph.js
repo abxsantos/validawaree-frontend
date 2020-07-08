@@ -2,60 +2,97 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-    ComposedChart,
-    XAxis,
-    YAxis,
-    Scatter,
-    Line,
-    CartesianGrid,
-    Tooltip,
-    Legend,
+  ResponsiveContainer,
+  ComposedChart,
+  XAxis,
+  YAxis,
+  Scatter,
+  Line,
+  CartesianGrid,
+  Tooltip,
 } from 'recharts';
 
 const LinearityRegressionChart = (props) => {
-    return (
-        <div>
-            <ComposedChart
-                width={550}
-                height={300}
-                data={props.linearityChartData}
-                margin={{
-                    top:-20,
-                    left:15,
-                    right:15
-                }}
-            >
-                <CartesianGrid stroke='#f5f5f5' />
-                <Tooltip />
-                <Legend />
+  return (
+    <div>
+      <ResponsiveContainer width={550} height={300}>
+        <ComposedChart
+          width={750}
+          data={props.linearityChartData}
+          margin={{
+            left: 10,
+            right: 60,
+          }}
+          style={{ padding: 10 }}
+        >
+          <CartesianGrid stroke='#f5f5f5' />
+          <Tooltip
+            labelStyle={{ fontWeight: 600 }}
+            itemStyle={{ fontWeight: 600 }}
+            formatter={function (value) {
+              return `${value}`;
+            }}
+            labelFormatter={function (value) {
+              return `Concentration: ${value}`;
+            }}
+          />
 
-                <XAxis
-                    dataKey='concentration'
-                    type='number'
-                    label={{ value: 'Concentration', position: 'insideBottomRight', offset: 0 }}
-                />
-                <YAxis
-                    unit=''
-                    type='number'
-                    label={{ value: 'Analytical Signal', angle: -90, position: 'insideLeft' }}
-                />
-                <Scatter name='Analytical Signal' dataKey='analyticalSignal' fill='red' />
-                <Line
-                    dataKey='RegressionLine'
-                    stroke='red'
-                    dot={false}
-                    activeDot={false}
-                    legendType='none'
-                />
-            </ComposedChart>
-        </div>
-    );
+          <XAxis
+            height={50}
+            dataKey='concentration'
+            type='number'
+            axisLine={false}
+            style={{
+              fontFamily: 'Roboto',
+              color: 'gray',
+            }}
+            label={{
+              value: 'Concentration',
+              position: 'insideBottomRight',
+              offset: 0,
+            }}
+          />
+          <YAxis
+            height={50}
+            allowDecimals={true}
+            unit=''
+            type='number'
+            axisLine={false}
+            label={{
+              value: 'Analytical Signal',
+              angle: -90,
+              position: 'insideLeft',
+            }}
+            style={{
+              fontFamily: 'Roboto',
+              color: 'gray',
+            }}
+          />
+          <CartesianGrid stroke='#eee' strokeDasharray='5 5' />
+          <Scatter
+            name='Analytical Signal'
+            dataKey='analyticalSignal'
+            fill='#01b6f5'
+            legendType='line'
+          />
+          <Line
+            type='monotone'
+            dataKey='RegressionLine'
+            stroke='#01b6f5'
+            dot={false}
+            activeDot={false}
+            legendType='none'
+          />
+        </ComposedChart>
+      </ResponsiveContainer>
+    </div>
+  );
 };
 
 const mapStateToProps = function (state) {
-    return {
-        linearityChartData: state.linearity.linearityChartData,
-    };
+  return {
+    linearityChartData: state.linearity.linearityChartData,
+  };
 };
 
 export default connect(mapStateToProps)(LinearityRegressionChart);

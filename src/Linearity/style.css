@@ -49,16 +49,32 @@ thead.MuiTableHead-root:nth-child(3) > tr:nth-child(1) > th:nth-child(4) {
   border-right-style: solid;
 }
 
-
 th.MuiTableCell-root:nth-child(5) {
   border-top-width: 1px;
   border-top-style: solid;
   border-color: rgb(224, 224, 224);
 }
 
-
 th.MuiTableCell-root:nth-child(6) {
   border-top-width: 1px;
   border-top-style: solid;
   border-color: rgb(224, 224, 224);
+}
+
+.MuiGrid-grid-lg-4 {
+  overflow: unset;
+  margin-top: -30px;
+  margin-left: 20px;
+}
+
+.makeStyles-content-7 > div:nth-child(2) > div:nth-child(2) {
+  overflow: unset;
+  overflow-x: unset;
+  overflow-y: unset;
+}
+
+.makeStyles-content-7 > div:nth-child(2) > div:nth-child(2) > div:nth-child(1) {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  overflow: unset;
 }
