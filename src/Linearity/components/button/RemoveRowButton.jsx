@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import { Button } from 'react-rainbow-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
+import {BaseButton} from './BaseButton';
 import { removeRow } from '../../actions'
 
 const RemoveRowButton = ({ removeRow }) => {
     return (
-        <Button variant='neutral' onClick={removeRow}>
-        <FontAwesomeIcon icon={faTrash} className='rainbow-m-right_small' />
-        Remove Row
-      </Button>
+        <BaseButton 
+        tooltipText='Remove the last row'
+        baseColor= '#01b6f5'
+        textColor='white'
+        icon={faTrash}
+        onClickAction={removeRow}
+        buttonText='Remove Row'
+        />
     );
 }
 

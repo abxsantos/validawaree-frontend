@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { Button } from 'react-rainbow-components';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import {BaseButton} from './BaseButton';
 import { incColumn } from '../../actions';
 
 const AddColumnButton = ({ incColumn }) => {
     return (
-        <Button variant='neutral' style={{background: '#01b6f5', color: 'white'}} onClick={incColumn}>
-        <FontAwesomeIcon icon={faPlus} className='rainbow-m-right_small' />
-        Add Column
-      </Button>
+        <BaseButton 
+        tooltipText='Add column'
+        baseColor= '#01b6f5'
+        textColor='white'
+        icon={faPlus}
+        onClickAction={incColumn}
+        buttonText='Add Column'
+        />
     );
 };
 
