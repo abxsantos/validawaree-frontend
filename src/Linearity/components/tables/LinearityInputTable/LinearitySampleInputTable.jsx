@@ -36,9 +36,8 @@ const useStyles = makeStyles(() => ({
 
 function LinearitySampleInputTable(props) {
   const classes = useStyles();
-
   return (
-    <Table aria-label='sticky table' className={classes.table}>
+    <Table aria-label='sticky table' className={classes.table}>]
       <TableHead className={classes.root}>
         <TableRow>
           <TableCell

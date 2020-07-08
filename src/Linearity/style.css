@@ -89,3 +89,37 @@ th.MuiTableCell-root:nth-child(6) {
 div.MuiGrid-root:nth-child(3) {
   margin-left: 100px;
 }
+
+
+#linearity-input-table {
+  margin-top: 0px;
+  margin-left: 20px;
+}
+
+.makeStyles-table-29 {
+  background-color: white;
+}
+
+.makeStyles-content-7 > div:nth-child(2) > div:nth-child(3) {
+  overflow: unset;
+}
+
+
+div.MuiGrid-container:nth-child(1) {
+  overflow-x: unset;
+}
+
+
+.makeStyles-content-7 > div:nth-child(2) > div:nth-child(2) {
+  overflow-x: initial;
+}
+
+
+.makeStyles-table-29 {
+  overflow-x: auto;
+}
+
+
+#linearity-input-table {
+  overflow-x: auto;
+}

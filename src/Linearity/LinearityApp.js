@@ -13,14 +13,16 @@ import LinearityResiduesChart from './components/charts/LinearityResiduesGraph';
 function LinearityApp() {
   return (
     <div>
+      <GroupButton />
       <div styles={{ marginBottom: 100 }}>
-        <Grid container >
-          <Grid item lg={8}>
-            <GroupButton />
-          </Grid>
-          <Grid id='linearity-input-table' component={Paper} elevation={4} item lg={8}>
-            <LinearitySampleInputTable />
-          </Grid>
+        <Grid
+          id='linearity-input-table'
+          component={Paper}
+          elevation={4}
+          item
+          lg={8}
+        >
+          <LinearitySampleInputTable />
         </Grid>
       </div>
 
@@ -86,7 +88,7 @@ function LinearityApp() {
               <LinearityRegressionAnovaTable />
             </Paper>
             <Paper
-            elevation={4}
+              elevation={4}
               style={{
                 marginTop: '30px',
                 marginBottom: '40px',
