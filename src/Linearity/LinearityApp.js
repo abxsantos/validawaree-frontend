@@ -24,6 +24,28 @@ function LinearityApp() {
           interpret the results!   There is no magic or blackbox, all the code,
           statistical methods and calculations are availiable at your disposal.
         </p>
+        <p>Source code repository</p>
+        <h2>Proposal</h2>
+        <p id='proposal'>
+          When validating a analytical method, planning the experiments, doing
+          quantifications and managing the results can be a very difficult
+          process.
+        </p>
+        <p id='proposal'>
+          The results analisys itself consists of passing your experiment data
+          through many statistical tests, wich can be a very time consuming
+          processes.
+        </p>
+        <p id='proposal'>
+          The main idea of this project is to build a free easy to use and
+          integrate with existing tools web app, that will be following the
+          latest ANVISA legislation for validating an analytical method.
+        </p>
+        <p id='proposal'>
+          There are paid softwares and the option to build your own table in
+          existing softwares, but this leads to a very time consuming task, and
+          also can lead to the usage of incorrect treatment of the data.
+        </p>
         <h2>Linearity</h2>
       </div>
 
