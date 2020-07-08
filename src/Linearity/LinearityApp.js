@@ -22,9 +22,10 @@ function LinearityApp() {
           interpret the results! There is no magic or blackbox, all the
           statistical methods and calculations are availiable at your disposal.
         </p>
-      </div>
-      <Grid container className='Linearity'>
         <h2>Linearity</h2>
+      </div>
+
+      <Grid container className='Linearity'>
         <Grid
           container
           className='LinearityInput'
@@ -32,19 +33,24 @@ function LinearityApp() {
           direction='row'
           justify='center'
         >
-          <Grid item className='LinearityInputData' md={8}>
+          <Grid
+            item
+            className='LinearityInputData'
+            lg={8}
+            style={{ overflowX: 'auto' }}
+          >
             <Grid container className='LinearityTable' direction='column'>
               <Grid item className='LinearityHeaderButtons'>
                 <GroupButton />
               </Grid>
               <Grid item className='LinearitySampleTable'>
-                <Paper style={{ overflowX: 'auto' }}>
+                <Paper>
                   <LinearitySampleInputTable />
                 </Paper>
               </Grid>
             </Grid>
           </Grid>
-          <Grid item md={4} className='LinearityInputText'>
+          <Grid item lg={4} className='LinearityInputText'>
             <Paper>
               To start validating your method you need to input your
               measurements in this table. The units of mass and volume can be

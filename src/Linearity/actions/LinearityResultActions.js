@@ -3,7 +3,6 @@ import {
   organizeLinearityGraphData,
 } from './ActionsLinearityResultAuxiliarFunctions';
 
-// Action types
 export const UPD_LINEARITY_RESULT = 'UPD_LINEARITY_RESULT';
 
 export function updateLinearityResults(jsonLinearityResultData) {
@@ -45,10 +44,10 @@ export function updateLinearityResults(jsonLinearityResultData) {
   };
 }
 
-// This is possible beacuse we are using Redux-Thunk
 export function getLinearityResults() {
   return (dispatch, getState) => {
     const { samples } = getState();
+
     try {
       const jsonLinearityInputData = {
         analytical_data: JSON.stringify(samples.analyticalData),
@@ -69,8 +68,8 @@ export function getLinearityResults() {
           dispatch(updateLinearityResults(jsonLinearityResultData));
         });
     } catch (error) {
+      window.alert('There is something wrong, check your data again!');
       console.error(error);
-      window.alert("There is something wrong, check your data again!");
     }
   };
 }
