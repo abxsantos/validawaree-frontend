@@ -15,7 +15,7 @@ import {
 const LinearityResiduesChart = (props) => {
   return (
     <div>
-      <ResponsiveContainer height={300} >
+      <ResponsiveContainer width={400} height={400}>
         <ComposedChart data={props.regressionChartData}>
           <CartesianGrid stroke='#f5f5f5' />
           <Tooltip

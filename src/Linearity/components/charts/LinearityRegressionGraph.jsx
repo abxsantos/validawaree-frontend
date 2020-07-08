@@ -15,10 +15,11 @@ import {
 const LinearityRegressionChart = (props) => {
   return (
     <div>
-      <ResponsiveContainer
-        height={300}
-      >
-        <ComposedChart data={props.linearityChartData}>
+      <ResponsiveContainer height={400}>
+        <ComposedChart
+          data={props.linearityChartData}
+
+        >
           <CartesianGrid stroke='#f5f5f5' />
           <Tooltip
             labelStyle={{ fontWeight: 600 }}
