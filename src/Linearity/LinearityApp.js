@@ -14,12 +14,14 @@ function LinearityApp() {
   return (
     <>
       <div>
-        <h1 id='title'>Validware</h1>
+        <h1 id='title'>VALIDWARE</h1>
         <h6 id='subtitle'>Analytical method validator</h6>
+        <h3>Go to the validation section</h3>
+        <h2>The App</h2>
         <p id='intro'>
           An open source tool to validate your method using various statistical
-          analytsis without any complications. Just input your data and
-          interpret the results! There is no magic or blackbox, all the
+          analytsis without any complications.   Just input your data and
+          interpret the results!   There is no magic or blackbox, all the code,
           statistical methods and calculations are availiable at your disposal.
         </p>
         <h2>Linearity</h2>
