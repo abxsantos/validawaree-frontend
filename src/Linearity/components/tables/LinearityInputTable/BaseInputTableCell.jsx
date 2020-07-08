@@ -11,12 +11,6 @@ const useStyles = makeStyles({
       borderBottom: 'none',
     },
   },
-  inputRoot: {
-    fontSize: '14px',
-  },
-  labelRoot: {
-    fontSize: '14px',
-  },
 });
 
 export const BaseInputTableCell = ({
@@ -28,7 +22,7 @@ export const BaseInputTableCell = ({
 }) => {
   const classes = useStyles();
   return (
-    <TableCell align='center' padding='dense' size='small'>
+    <TableCell align='center' padding='normal' size='medium'>
       <Tooltip
         title={tooltipText}
         placement='bottom'
@@ -37,13 +31,16 @@ export const BaseInputTableCell = ({
         disableTouchListener
       >
         <TextField
+          style={{ paddingBottom: 15 }}
           InputProps={{
+            style: { fontSize: '14px' },
             classes: { root: classes.inputRoot, root: classes.underline },
           }}
           InputLabelProps={{
+            style: { fontSize: '12px' },
             classes: { root: classes.labelRoot, root: classes.underline },
           }}
-          size='small'
+          size='normal'
           helperText={helperText}
           label={label}
           value={value}

@@ -10,8 +10,6 @@ const RemoveRowButton = ({ removeRow }) => {
     return (
         <BaseButton 
         tooltipText='Remove the last row'
-        baseColor= '#01b6f5'
-        textColor='white'
         icon={faTrash}
         onClickAction={removeRow}
         buttonText='Remove Row'

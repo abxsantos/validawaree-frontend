@@ -14,37 +14,3 @@ code {
     monospace;
 }
 
-h1 {
-  font-family: 'Josefin Sans', cursive, sans-serif;
-  font-size: 10rem;
-  text-align: center;
-}
-
-h6 {
-  font-family: 'Josefin Sans', cursive, sans-serif;
-  font-size: 1.75rem;
-  text-align: center;
-}
-
-h3 {
-  font-family: 'Josefin Sans', cursive, sans-serif;
-  font-size: 2rem;
-  text-align: center;
-  color: #0B132B;
-}
-
-h2 {
-  font-family: 'Josefin Sans', cursive, sans-serif;
-  font-size: 6rem;
-  text-align: center;
-  color: #5BC0BE;
-}
-
-p {
-
-  font-family: 'Josefin Sans', cursive, sans-serif;
-  font-size: 1.5rem;
-  text-align: center;
-  color: #0B132B;
-}
-

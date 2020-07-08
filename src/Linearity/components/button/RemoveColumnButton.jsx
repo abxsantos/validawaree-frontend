@@ -10,8 +10,6 @@ const RemoveColumnButton = ({ removeColumn }) => {
   return (
     <BaseButton
       tooltipText='Remove the last column'
-      baseColor='#01b6f5'
-      textColor='white'
       icon={faTrash}
       onClickAction={removeColumn}
       buttonText='Remove Column'

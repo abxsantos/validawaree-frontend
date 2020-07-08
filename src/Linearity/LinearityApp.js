@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
+import './LinearityApp.css';
 
-import { Grid, Paper } from '@material-ui/core/';
+import { Grid, Paper, Typography, makeStyles } from '@material-ui/core/';
 
 import { GroupButton } from './components/button/GroupButton';
 import LinearitySampleInputTable from './components/tables/LinearityInputTable/LinearitySampleInputTable';
@@ -13,15 +14,15 @@ import LinearityResiduesChart from './components/charts/LinearityResiduesGraph';
 function LinearityApp() {
   return (
     <>
-      <div>
-        <h1 id='title'>VALIDWARE</h1>
+      <div id='mainTitle'>
+        <h1>VALIDWARE</h1>
         <h6 id='subtitle'>Analytical method validator</h6>
         <h3>Go to the validation section</h3>
         <h2>The App</h2>
         <p id='intro'>
           An open source tool to validate your method using various statistical
-          analytsis without any complications.   Just input your data and
-          interpret the results!   There is no magic or blackbox, all the code,
+          analytsis without any complications. Just input your data and
+          interpret the results! There is no magic or blackbox, all the code,
           statistical methods and calculations are availiable at your disposal.
         </p>
         <p>Source code repository</p>
