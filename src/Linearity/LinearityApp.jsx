@@ -18,6 +18,7 @@ function LinearityApp() {
         className='Linearity'
         justify='justify'
         direction='column'
+        alignItems='center'
       >
         <section id='linearity-section'>
           <h2>Linearity</h2>
