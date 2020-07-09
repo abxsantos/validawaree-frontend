@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import './LinearityApp.css';
 
-import { Grid, Paper, Typography, makeStyles } from '@material-ui/core/';
+import { Grid, Paper } from '@material-ui/core/';
 
 import { GroupButton } from './components/button/GroupButton';
 import LinearitySampleInputTable from './components/tables/LinearityInputTable/LinearitySampleInputTable';
@@ -49,14 +49,16 @@ function LinearityApp() {
         </p>
         <h2>Linearity</h2>
       </div>
-
+      <>
+        <GroupButton />
+      </>
       <Grid container className='Linearity'>
         <Grid
           container
           className='LinearityInput'
           spacing={3}
           direction='row'
-          justify='center'
+          justify='justify'
         >
           <Grid
             item
@@ -64,16 +66,9 @@ function LinearityApp() {
             lg={8}
             style={{ overflowX: 'auto' }}
           >
-            <Grid container className='LinearityTable' direction='column'>
-              <Grid item className='LinearityHeaderButtons'>
-                <GroupButton />
-              </Grid>
-              <Grid item className='LinearitySampleTable'>
-                <Paper>
-                  <LinearitySampleInputTable />
-                </Paper>
-              </Grid>
-            </Grid>
+            <Paper>
+              <LinearitySampleInputTable />
+            </Paper>
           </Grid>
           <Grid item lg={4} className='LinearityInputText'>
             <Paper>
