@@ -8,7 +8,6 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import './index.css';
 
-// import LinearityApp from './Linearity/LinearityApp';
 import ResponsiveDrawer from './Sidebar/Sidebar';
 
 const middlewares = [thunk];

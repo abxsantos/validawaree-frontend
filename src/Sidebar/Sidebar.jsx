@@ -13,6 +13,7 @@ import {
 } from '@material-ui/core/';
 
 import LinearityApp from '../Linearity/LinearityApp';
+import HomePage from '../HomePage/HomePage';
 
 const drawerWidth = 200;
 
@@ -127,6 +128,7 @@ function ResponsiveDrawer(props) {
         }}
       >
         <div className={classes.toolbar} />
+        <HomePage />
         <LinearityApp></LinearityApp>
       </main>
     </div>

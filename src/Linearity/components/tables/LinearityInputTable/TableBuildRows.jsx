@@ -19,7 +19,11 @@ export const buildRows = (props) => {
     for (let j = 0; j < props.columns; ++j) {
       items.push(
         <BaseInputTableCell
-          tooltipText={`Concentration: ${props.concentrations[i][j]}`}
+          tooltipText={
+            props.concentrations[i][j] !== undefined
+              ? `Concentration: ${props.concentrations[i][j]}`
+              : ''
+          }
           label='Analytical signal'
           value={props.analyticalData[i][j]}
           onChangeAction={(e) => handleChange(e, i, j, props)}
