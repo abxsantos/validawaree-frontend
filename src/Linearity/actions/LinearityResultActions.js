@@ -48,13 +48,13 @@ export function updateLinearityResults(jsonLinearityResultData) {
 
 export function getLinearityResults() {
   return (dispatch, getState) => {
-    const { state } = getState();
+    const { samples } = getState();
 
-    console.log(state);
+    console.log(samples);
 
     const jsonLinearityInputData = {
-      analytical_data: JSON.stringify(state.analyticalData),
-      concentration_data: JSON.stringify(state.concentrations),
+      analytical_data: JSON.stringify(samples.analyticalData),
+      concentration_data: JSON.stringify(samples.concentrations),
     };
     fetch(REACT_APP_BACKEND_URL + '/linearity_result', {
       method: 'POST',
