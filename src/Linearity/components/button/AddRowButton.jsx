@@ -10,8 +10,7 @@ const AddRowButton = ({ incRow }) => {
   return (
     <BaseButton 
     tooltipText='Add Row'
-    baseColor= '#01b6f5'
-    textColor='white'
+    value='border-filled'
     icon={faPlus}
     onClickAction={incRow}
     buttonText='Add Row'

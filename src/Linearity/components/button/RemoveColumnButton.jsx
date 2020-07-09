@@ -13,6 +13,7 @@ const RemoveColumnButton = ({ removeColumn }) => {
       icon={faTrash}
       onClickAction={removeColumn}
       buttonText='Remove Column'
+      value='border-filled'
     />
   );
 };

@@ -8,10 +8,9 @@ import { incColumn } from '../../actions';
 
 const AddColumnButton = ({ incColumn }) => {
     return (
-        <BaseButton 
+        <BaseButton
         tooltipText='Add column'
-        baseColor= '#01b6f5'
-        textColor='white'
+        value='border-filled'
         icon={faPlus}
         onClickAction={incColumn}
         buttonText='Add Column'

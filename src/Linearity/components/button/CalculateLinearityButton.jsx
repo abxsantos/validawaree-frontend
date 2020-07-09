@@ -10,6 +10,7 @@ const CalculateLinearityButton = (props) => {
   return (
     <BaseButton
       tooltipText='Calculate the linearity of the given data'
+      variant='border-filled'
       textColor=''
       onClickAction={props.handleLinearityCalculation}
       buttonText='Calculate Linearity'
