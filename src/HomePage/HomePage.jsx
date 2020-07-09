@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
-import { Grid } from '@material-ui/core/';
+import { Grid, Typography, Divider, makeStyles } from '@material-ui/core/';
+
+import './HomePage.css';
 
 function HomePage() {
   return (
@@ -8,43 +10,78 @@ function HomePage() {
         container
         className='LinearityInput'
         spacing={3}
-        direction='row'
-        justify='justify'
+        direction='column'
+        alignItems='center'
       >
-        <div id='mainTitle'>
-          <h1>VALIDWARE</h1>
-          <h6 id='subtitle'>Analytical method validator</h6>
-          <h3>Go to the validation section</h3>
-          <h2>The App</h2>
-          <p id='intro'>
-            An open source tool to validate your method using various
-            statistical analytsis without any complications. Just input your
-            data and interpret the results! There is no magic or blackbox, all
-            the code, statistical methods and calculations are availiable at
-            your disposal.
-          </p>
-          <p>Source code repository</p>
-          <h2>Proposal</h2>
-          <p id='proposal'>
-            When validating a analytical method, planning the experiments, doing
-            quantifications and managing the results can be a very difficult
-            process.
-          </p>
-          <p id='proposal'>
-            The results analisys itself consists of passing your experiment data
-            through many statistical tests, wich can be a very time consuming
-            processes.
-          </p>
-          <p id='proposal'>
-            The main idea of this project is to build a free easy to use and
-            integrate with existing tools web app, that will be following the
-            latest ANVISA legislation for validating an analytical method.
-          </p>
-          <p id='proposal'>
-            There are paid softwares and the option to build your own table in
-            existing softwares, but this leads to a very time consuming task,
-            and also can lead to the usage of incorrect treatment of the data.
-          </p>
+        <div>
+          <section id='main-title'>
+            <h1>VALIDWAREE</h1>
+            <h6 id='subtitle'>A free analytical method validator</h6>
+          </section>
+          <section id='app-section'>
+            <h2>The App</h2>
+            <p id='app-text'>
+              An open source tool to validate your method<br></br>using various
+              statistical analysis without any complications.<br></br> Just input your
+              data and interpret the results!<br></br>There is no magic or blackbox, all
+              the code,<br></br>statistical methods and calculations are availiable at
+              your disposal.
+            </p>
+            <div style={{ textAlign: 'center' }}>
+              <a
+                href='https://github.com/abxsantos/analytical-validation-backend'
+                id='code-reference'
+              >
+                Source code repository
+              </a>
+            </div>
+          </section>
+          <section id='proposal-title'>
+            <h2>Proposal</h2>
+            <Grid
+              container
+              direction='column'
+              justify='space-evenly'
+              alignItems='center'
+            >
+              <Grid item lg={3}>
+                <p class='proposal-text-left'>
+                  When validating a analytical method, planning the experiments,
+                  doing quantifications and managing the results can be a very
+                  difficult process.
+                </p>
+              </Grid>
+              <Grid item lg={3}>
+                <Divider variant='middle' />
+
+                <p class='proposal-text-right'>
+                  The results analisys itself consists of passing your
+                  experiment data through many statistical tests, wich can be
+                  time consuming.
+                </p>
+              </Grid>
+              <Grid item lg={3}>
+                <Divider variant='middle' />
+
+                <p class='proposal-text-left'>
+                  The main idea of this project is to build a free easy to use
+                  and integrate with existing tools web app, that will be
+                  following the latest ANVISA legislation for validating an
+                  analytical method.
+                </p>
+              </Grid>
+              <Grid item lg={3}>
+                <Divider variant='middle' />
+
+                <p class='proposal-text-right'>
+                  There are paid softwares and the option to build your own
+                  table in existing softwares, but this leads to a very time
+                  consuming task, and also can lead to the usage of incorrect
+                  treatment of the data.
+                </p>
+              </Grid>
+            </Grid>
+          </section>
         </div>
       </Grid>
     </>
