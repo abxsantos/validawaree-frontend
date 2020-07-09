@@ -23,14 +23,22 @@ import { BaseInputTableCell } from './BaseInputTableCell';
 
 function LinearitySampleInputTable(props) {
   return (
-    <Table aria-label='sticky table' >
-      <TableHead >
+    <Table aria-label='sticky table'>
+      <TableHead>
         <TableRow>
           <TableCell
             id='starter-column'
             align='left'
             padding='dense'
             size='normal'
+            variant='head'
+            style={{
+              fontWeight: 600,
+              fontSize: 16,
+              background: '#1c2541',
+              color: 'white',
+              textSizeAdjust: 'auto',
+            }}
           >
             Volume
           </TableCell>
@@ -40,6 +48,7 @@ function LinearitySampleInputTable(props) {
       <TableBody>
         <TableRow key={'volume'}>
           <BaseInputTableCell
+            variant='body'
             id='starter-column'
             label='Volume'
             value={props.volume}
@@ -50,14 +59,50 @@ function LinearitySampleInputTable(props) {
       </TableBody>
       <TableHead>
         <TableRow>
-          <TableCell align='left' padding='dense' size='normal'>
+          <TableCell
+            style={{
+              fontWeight: 600,
+              fontSize: 16,
+              background: '#1c2541',
+              color: 'white',
+              textSizeAdjust: 'auto',
+            }}
+            variant='head'
+            align='left'
+            padding='dense'
+            size='small'
+          >
             Dilution Factor
           </TableCell>
           {buildColumns(props.columns, 'Sample')}
-          <TableCell align='center' padding='dense' size='normal'>
+          <TableCell
+            style={{
+              fontWeight: 600,
+              fontSize: 16,
+              background: '#1c2541',
+              color: 'white',
+              textSizeAdjust: 'auto',
+            }}
+            variant='head'
+            align='center'
+            padding='dense'
+            size='small'
+          >
             Average
           </TableCell>
-          <TableCell align='center' padding='dense' size='normal'>
+          <TableCell
+            style={{
+              fontWeight: 600,
+              fontSize: 16,
+              background: '#1c2541',
+              color: 'white',
+              textSizeAdjust: 'auto',
+            }}
+            variant='head'
+            align='center'
+            padding='dense'
+            size='small'
+          >
             Standard Deviation
           </TableCell>
         </TableRow>

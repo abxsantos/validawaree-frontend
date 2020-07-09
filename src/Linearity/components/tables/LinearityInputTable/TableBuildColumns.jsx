@@ -11,7 +11,18 @@ export const buildColumns = (columns, dataType, isHeader = true, props) => {
     for (let i = 1; i <= columns; ++i) {
         isHeader
             ? items.push(
-                <TableCell align='left' padding='dense' size="normal">
+                <TableCell style={{
+                    fontWeight: 600,
+                    fontSize: 16,
+                    background: '#1c2541',
+                    color: 'white',
+                    textSizeAdjust: 'auto',
+                  }}
+                  variant='head'
+                  align='center'
+                  padding='dense'
+                  size='small'
+                >
                     {dataType} {i}
                 </TableCell>
             )
