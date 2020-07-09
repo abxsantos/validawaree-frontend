@@ -58,9 +58,9 @@ export function getLinearityResults() {
     };
     fetch(REACT_APP_BACKEND_URL + '/linearity_result', {
       method: 'POST',
-      cache: 'no-cache',
       headers: {
-        content_type: 'application/json',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(jsonLinearityInputData),
     })
