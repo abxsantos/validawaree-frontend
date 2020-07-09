@@ -1,11 +1,9 @@
-import {REACT_APP_BACKEND_URL} from '../../environment'
+import { REACT_APP_BACKEND_URL } from '../../environment';
 
 import {
   organizeResiduesChartData,
   organizeLinearityGraphData,
 } from './ActionsLinearityResultAuxiliarFunctions';
-
-
 
 export const UPD_LINEARITY_RESULT = 'UPD_LINEARITY_RESULT';
 
@@ -50,30 +48,27 @@ export function updateLinearityResults(jsonLinearityResultData) {
 
 export function getLinearityResults() {
   return (dispatch, getState) => {
-    const { samples } = getState();
+    const { state } = getState();
 
-    try {
-      const jsonLinearityInputData = {
-        analytical_data: JSON.stringify(samples.analyticalData),
-        concentration_data: JSON.stringify(samples.concentrations),
-      };
-      fetch(REACT_APP_BACKEND_URL+'/linearity_result', {
-        method: 'POST',
-        cache: 'no-cache',
-        headers: {
-          content_type: 'application/json',
-        },
-        body: JSON.stringify(jsonLinearityInputData),
+    console.log(state);
+
+    const jsonLinearityInputData = {
+      analytical_data: JSON.stringify(state.analyticalData),
+      concentration_data: JSON.stringify(state.concentrations),
+    };
+    fetch(REACT_APP_BACKEND_URL + '/linearity_result', {
+      method: 'POST',
+      cache: 'no-cache',
+      headers: {
+        content_type: 'application/json',
+      },
+      body: JSON.stringify(jsonLinearityInputData),
+    })
+      .then((response) => {
+        return response.json();
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((jsonLinearityResultData) => {
-          dispatch(updateLinearityResults(jsonLinearityResultData));
-        });
-    } catch (error) {
-      window.alert('There is something wrong, check your data again!');
-      console.error(error);
-    }
+      .then((jsonLinearityResultData) => {
+        dispatch(updateLinearityResults(jsonLinearityResultData));
+      });
   };
 }
