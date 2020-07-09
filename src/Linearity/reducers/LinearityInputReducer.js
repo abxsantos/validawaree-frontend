@@ -25,7 +25,7 @@ import {
 } from './ReducersLinearityInputAuxiliarFunctions';
 
 const initialState = {
-  numRows: 5,
+  numRows: 1,
   numColumns: 3,
   volume: undefined,
   volumeUnit: 1e-3,
@@ -33,22 +33,16 @@ const initialState = {
   mass: [undefined, undefined, undefined],
   analyticalData: [
     [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
+
   ],
   dilutionFactor: [],
   concentrations: [
     [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
-    [undefined, undefined, undefined],
+
   ],
   initialConcentrations: [undefined, undefined, undefined],
-  averages: [undefined, undefined, undefined, undefined, undefined],
-  stdDeviations: [undefined, undefined, undefined, undefined, undefined],
+  averages: [undefined],
+  stdDeviations: [undefined],
 };
 
 const samples = (state = initialState, action) => {

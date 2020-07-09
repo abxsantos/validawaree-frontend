@@ -1,7 +1,11 @@
+import {REACT_APP_BACKEND_URL} from '../../environment'
+
 import {
   organizeResiduesChartData,
   organizeLinearityGraphData,
 } from './ActionsLinearityResultAuxiliarFunctions';
+
+
 
 export const UPD_LINEARITY_RESULT = 'UPD_LINEARITY_RESULT';
 
@@ -53,7 +57,7 @@ export function getLinearityResults() {
         analytical_data: JSON.stringify(samples.analyticalData),
         concentration_data: JSON.stringify(samples.concentrations),
       };
-      fetch('/linearity_result', {
+      fetch(REACT_APP_BACKEND_URL+'/linearity_result', {
         method: 'POST',
         cache: 'no-cache',
         headers: {
