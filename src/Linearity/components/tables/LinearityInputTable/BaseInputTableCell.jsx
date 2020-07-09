@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../../style.css';
 
 import { TableCell, TextField, makeStyles, Tooltip } from '@material-ui/core';
 
@@ -12,12 +11,6 @@ const useStyles = makeStyles({
       borderBottom: 'none',
     },
   },
-  inputRoot: {
-    fontSize: '14px',
-  },
-  labelRoot: {
-    fontSize: '14px',
-  },
 });
 
 export const BaseInputTableCell = ({
@@ -29,7 +22,14 @@ export const BaseInputTableCell = ({
 }) => {
   const classes = useStyles();
   return (
-    <TableCell align='center' padding='dense' size='small'>
+    <TableCell
+      style={{
+        borderLeft: '1px solid #E0E0E0',
+        borderRight: '1px solid #E0E0E0',
+      }}
+      variant='body'
+      align='right'
+    >
       <Tooltip
         title={tooltipText}
         placement='bottom'
@@ -38,11 +38,18 @@ export const BaseInputTableCell = ({
         disableTouchListener
       >
         <TextField
-          InputProps={{ classes: { root: classes.inputRoot }, classes }}
-          InputLabelProps={{ classes: { root: classes.labelRoot }, classes }}
-          size='small'
+          InputProps={{
+            style: { fontSize: '16px' },
+            classes: { root: classes.inputRoot, root: classes.underline },
+          }}
+          InputLabelProps={{
+            variant: 'filled',
+            style: { fontSize: '12px' },
+            classes: { root: classes.labelRoot, root: classes.underline },
+          }}
+          size='normal'
           helperText={helperText}
-          label={label}
+          label=''
           value={value}
           onChange={onChangeAction}
         />
