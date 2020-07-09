@@ -13,6 +13,7 @@ const RemoveRowButton = ({ removeRow }) => {
         icon={faTrash}
         onClickAction={removeRow}
         buttonText='Remove Row'
+        value='border-filled'
         />
     );
 }

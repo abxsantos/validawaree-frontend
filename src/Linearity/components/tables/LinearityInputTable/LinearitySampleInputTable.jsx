@@ -33,8 +33,21 @@ function LinearitySampleInputTable(props) {
             size='normal'
             variant='head'
             style={{
-              fontWeight: 600,
-              fontSize: 16,
+              fontFamily: [
+                '-apple-system',
+                'BlinkMacSystemFont',
+                'Segoe UI',
+                'Roboto',
+                'Oxygen',
+                'Ubuntu',
+                'Cantarell',
+                'Fira Sans',
+                'Droid Sans',
+                'Helvetica Neue',
+                'sans-serif',
+              ],
+              fontWeight: 400,
+              fontSize: 22,
               background: '#1c2541',
               color: 'white',
               textSizeAdjust: 'auto',
@@ -61,8 +74,21 @@ function LinearitySampleInputTable(props) {
         <TableRow>
           <TableCell
             style={{
-              fontWeight: 600,
-              fontSize: 16,
+              fontFamily: [
+                '-apple-system',
+                'BlinkMacSystemFont',
+                'Segoe UI',
+                'Roboto',
+                'Oxygen',
+                'Ubuntu',
+                'Cantarell',
+                'Fira Sans',
+                'Droid Sans',
+                'Helvetica Neue',
+                'sans-serif',
+              ],
+              fontWeight: 400,
+              fontSize: 22,
               background: '#1c2541',
               color: 'white',
               textSizeAdjust: 'auto',
@@ -77,8 +103,21 @@ function LinearitySampleInputTable(props) {
           {buildColumns(props.columns, 'Sample')}
           <TableCell
             style={{
-              fontWeight: 600,
-              fontSize: 16,
+              fontFamily: [
+                '-apple-system',
+                'BlinkMacSystemFont',
+                'Segoe UI',
+                'Roboto',
+                'Oxygen',
+                'Ubuntu',
+                'Cantarell',
+                'Fira Sans',
+                'Droid Sans',
+                'Helvetica Neue',
+                'sans-serif',
+              ],
+              fontWeight: 400,
+              fontSize: 22,
               background: '#1c2541',
               color: 'white',
               textSizeAdjust: 'auto',
@@ -92,8 +131,21 @@ function LinearitySampleInputTable(props) {
           </TableCell>
           <TableCell
             style={{
-              fontWeight: 600,
-              fontSize: 16,
+              fontFamily: [
+                '-apple-system',
+                'BlinkMacSystemFont',
+                'Segoe UI',
+                'Roboto',
+                'Oxygen',
+                'Ubuntu',
+                'Cantarell',
+                'Fira Sans',
+                'Droid Sans',
+                'Helvetica Neue',
+                'sans-serif',
+              ],
+              fontWeight: 400,
+              fontSize: 22,
               background: '#1c2541',
               color: 'white',
               textSizeAdjust: 'auto',
