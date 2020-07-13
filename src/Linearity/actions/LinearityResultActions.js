@@ -68,7 +68,13 @@ export function getLinearityResults() {
         return response.json();
       })
       .then((jsonLinearityResultData) => {
-        dispatch(updateLinearityResults(jsonLinearityResultData));
+        if (jsonLinearityResultData.status == 200){
+          dispatch(updateLinearityResults(jsonLinearityResultData));
+        }
+        else{
+          alert(jsonLinearityResultData.message)
+        }
+          
       });
   };
 }
