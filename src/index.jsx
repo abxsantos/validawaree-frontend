@@ -8,8 +8,8 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import './index.css';
 
-import HomePage from './HomePage/HomePage';
-import LinearityApp from './Linearity/LinearityApp';
+import App from './App';
+
 
 const middlewares = [thunk];
 
@@ -22,8 +22,7 @@ ReactDOM.render(
         composeWithDevTools(applyMiddleware(...middlewares))
       )}
     >
-      <HomePage />
-      <LinearityApp />
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
