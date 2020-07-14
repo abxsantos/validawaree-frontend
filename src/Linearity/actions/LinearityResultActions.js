@@ -57,7 +57,7 @@ export function getLinearityResults() {
       concentration_data: JSON.stringify(samples.concentrations),
     };
 
-    fetch(REACT_APP_BACKEND_URL + '/linearity_result', {
+    fetch(REACT_APP_BACKEND_URL + '/linearity', {
       type: "no-cors",
       method: 'POST',
       headers: {

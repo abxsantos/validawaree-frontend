@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Grid, Typography, Divider, makeStyles } from '@material-ui/core/';
+import { Grid, Divider } from '@material-ui/core/';
 
 import './HomePage.css';
 
