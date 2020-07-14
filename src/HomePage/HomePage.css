@@ -23,6 +23,17 @@ h1 {
   padding-left: 480px;
 }
 
+#nav-link {
+  font-size: 1.95rem;
+  color: #0b132b;
+  text-decoration: none;
+}
+
+#nav-link:hover {
+  color: #5bc0be;
+  text-decoration: none;
+}
+
 #code-reference {
   font-size: 1.95rem;
   color: #0b132b;
