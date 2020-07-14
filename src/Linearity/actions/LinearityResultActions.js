@@ -56,7 +56,9 @@ export function getLinearityResults() {
       analytical_data: JSON.stringify(samples.analyticalData),
       concentration_data: JSON.stringify(samples.concentrations),
     };
+
     fetch(REACT_APP_BACKEND_URL + '/linearity_result', {
+      type: "no-cors",
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -68,7 +70,13 @@ export function getLinearityResults() {
         return response.json();
       })
       .then((jsonLinearityResultData) => {
-        dispatch(updateLinearityResults(jsonLinearityResultData));
-      });
-  };
-}
+        if (jsonLinearityResultData.status === 201){
+          dispatch(updateLinearityResults(jsonLinearityResultData));
+        } else {
+          alert(jsonLinearityResultData.body)
+        }
+        
+      })
+  }
+};
+
