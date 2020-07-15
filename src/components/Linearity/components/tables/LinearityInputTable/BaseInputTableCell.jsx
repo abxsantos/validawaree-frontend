@@ -16,6 +16,7 @@ const useStyles = makeStyles({
 export const BaseInputTableCell = ({
   tooltipText = '',
   helperText = '',
+  hasBorder = false,
   label,
   value,
   onChangeAction,
@@ -23,10 +24,11 @@ export const BaseInputTableCell = ({
   const classes = useStyles();
   return (
     <TableCell
-      style={{
+    
+      style={hasBorder ? {
         borderLeft: '1px solid #E0E0E0',
         borderRight: '1px solid #E0E0E0',
-      }}
+      } : {} }
       variant='body'
       align='right'
     >

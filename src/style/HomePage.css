@@ -23,15 +23,22 @@ h1 {
   padding-left: 480px;
 }
 
+#link-linearity {
+  margin-top: 100px;
+  text-align: center;
+}
+
 #nav-link {
   font-size: 1.95rem;
   color: #0b132b;
+  text-align: 'center';
   text-decoration: none;
 }
 
 #nav-link:hover {
   color: #5bc0be;
   text-decoration: none;
+  text-align: 'center'
 }
 
 #code-reference {

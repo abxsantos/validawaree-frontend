@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
-import { Link, withRouter, Switch } from "react-router-dom"
+import { Link, withRouter } from "react-router-dom"
 
 import { Grid, Divider } from '@material-ui/core/';
 
-import './HomePage.css';
+import '../../style/HomePage.css';
 
-function HomePage(props) {
+function HomePage() {
   return (
     <>
       <Grid
@@ -20,7 +20,7 @@ function HomePage(props) {
             <h1>VALIDWAREE</h1>
             <h6 id='subtitle'>A free analytical method validator</h6>
           </section>
-          <div style={{ textAlign: 'center' }}><Link id='nav-link' to="/linearity">Go check the linearity regression of your data</Link></div>
+          <div id="link-linearity" ><Link id='nav-link' to="/linearity">Go check the linearity regression of your data</Link></div>
 
           <section id='app-section'>
             <h2>The App</h2>
