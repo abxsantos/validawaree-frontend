@@ -1,8 +1,11 @@
 import React from "react";
+import { connect } from 'react-redux';
 
 import { Grid, Typography, TextField, withStyles } from "@material-ui/core";
 import Fade from "react-reveal";
 import LinearityVolumeUnitSelector from "./components/selector/LinearityVolumeUnitSelector";
+
+import {changeVolume} from './actions'
 
 const StyledTextField = withStyles({
   root: {
@@ -12,7 +15,7 @@ const StyledTextField = withStyles({
   },
 })(TextField);
 
-function LinearityInputVolume() {
+function LinearityInputVolume(props) {
   return (
     <>
       <Fade left cascade duration={1000} delay={500} distance="30px">
@@ -42,6 +45,8 @@ function LinearityInputVolume() {
                   style: { fontSize: "16px" },
                 }}
                 label="Volume"
+                value={props.volume}
+                onChange={(e) => handleVolumeChange(e, props)}
               />
               <LinearityVolumeUnitSelector />
             </Grid>
@@ -52,4 +57,20 @@ function LinearityInputVolume() {
   );
 }
 
-export default LinearityInputVolume;
+const mapStateToProps = (state) => ({
+  volume: state.samples.volume,
+});
+
+function handleVolumeChange(event, props) {
+  props.updateVolumeValue(event.target.value);
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateVolumeValue: (updatedValue) => {
+      dispatch(changeVolume(updatedValue));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LinearityInputVolume);

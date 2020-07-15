@@ -9,6 +9,8 @@ import {
   REMOVE_COLUMN,
   CHANGE_VOLUME_UNIT,
   CHANGE_MASS_UNIT,
+  
+  CHANGE_VOLUME,
 } from '../actions';
 
 import {
@@ -47,6 +49,12 @@ const initialState = {
 
 const samples = (state = initialState, action) => {
   switch (action.type) {
+    case CHANGE_VOLUME:
+      return {
+        ...state,
+        volume: action.updatedVolume 
+      };
+    
     case INC_ROW:
       return {
         ...state,

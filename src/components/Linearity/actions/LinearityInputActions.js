@@ -9,6 +9,13 @@ export const REMOVE_COLUMN = 'REMOVE_COLUMN';
 export const CHANGE_VOLUME_UNIT = 'CHANGE_VOLUME_UNIT';
 export const CHANGE_MASS_UNIT = 'CHANGE_MASS_UNIT';
 
+export const CHANGE_VOLUME = 'CHANGE_VOLUME';
+
+export const changeVolume = (updatedValue) =>({
+  type: CHANGE_VOLUME,
+  updatedVolume: updatedValue,
+})
+
 export const incRow = () => ({
   type: INC_ROW,
 });
