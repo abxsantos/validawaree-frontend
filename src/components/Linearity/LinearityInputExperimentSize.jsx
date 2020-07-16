@@ -65,7 +65,8 @@ function LinearityInputExperimentSize(props) {
                   variant: "filled",
                   style: { fontSize: "16px" },
                 }}
-                label=""
+                label="Dilutions"
+                type="number"
                 value={props.numRows}
                 onChange={(e) => handleRowsChange(e, props)}
               />

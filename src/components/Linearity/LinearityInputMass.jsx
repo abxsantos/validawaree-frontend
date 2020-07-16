@@ -18,8 +18,9 @@ import { changeMass } from "./actions";
 const useStyles = makeStyles({
   table: {
     maxWidth: 650,
-    maxHeight: 300
-  }
+    maxHeight: 300,
+    margin: "30px"
+  },
 });
 
 function LinearityInputMass(props) {
@@ -27,6 +28,7 @@ function LinearityInputMass(props) {
 
   return (
     <>
+      <h2>Linearity Inputs</h2>
       <Fade left cascade duration={1000} delay={500} distance="30px">
         <Grid
           container
@@ -67,11 +69,11 @@ function buildMassColumns(props) {
       <TableCell align="right">
         <TextField
           InputProps={{
-            style: { fontSize: "16px" }
+            style: { fontSize: "16px" },
           }}
           InputLabelProps={{
             variant: "filled",
-            style: { fontSize: "12px" }
+            style: { fontSize: "12px" },
           }}
           type="number"
           size="normal"
@@ -87,10 +89,10 @@ function buildMassColumns(props) {
 
 const mapStateToProps = (state) => ({
   mass: state.samples.mass,
-  numColumns: state.samples.numColumns
+  numColumns: state.samples.numColumns,
 });
 
-function handleMassChange(event, column,  props) {
+function handleMassChange(event, column, props) {
   props.updateMassValue(event.target.value, column);
 }
 

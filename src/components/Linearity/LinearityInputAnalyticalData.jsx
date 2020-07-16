@@ -79,6 +79,7 @@ function buildAnalticalDataRows(rows, columns, props) {
               variant: "filled",
               style: { fontSize: "12px" },
             }}
+            type="number"
             size="normal"
             label="Dilution Factor"
             onChange={(e) => handleDilutionFactorChange(e, row, props)}
@@ -104,6 +105,7 @@ function buildAnalticalDataColumns(columns, row, props) {
             variant: "filled",
             style: { fontSize: "12px" },
           }}
+          type="number"
           size="normal"
           label="Signal"
           value={props.analyticalData[row][column]}
