@@ -65,7 +65,7 @@ export default function Footer(props) {
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()} , made with{" "}
           <FreeBreakfastIcon className={classes.icon} /> by Alexandre Xavier for
-          an open-source web.
+          an open-source science.
         </div>
       </div>
     </footer>
