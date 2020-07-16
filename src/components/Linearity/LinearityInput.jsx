@@ -55,9 +55,15 @@ class LinearityInputApp extends React.Component {
             justify="flex-end"
             alignItems="center"
           >
-            <Button color="primary" onClick={() => this.handleClick(i)}>
-              Next
-            </Button>
+            {this.state.count < components.length - 1 ? (
+              <Button color="primary" onClick={() => this.handleClick(i)}>
+                Next
+              </Button>
+            ) : (
+              <Button color="primary" onClick={() => this.handleClick(i)}>
+                Calculate Linearity
+              </Button>
+            )}
           </Grid>
         </Grid>
       </>
