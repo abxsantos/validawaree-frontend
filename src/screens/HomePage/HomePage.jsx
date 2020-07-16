@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
-import { Link, withRouter, Switch } from "react-router-dom"
+import React, { Fragment } from 'react'; // eslint-disable-line
+import { Link, withRouter } from "react-router-dom"
 
 import { Grid, Divider } from '@material-ui/core/';
 
-import './HomePage.css';
+import '../../style/HomePage.css';
 
-function HomePage(props) {
+function HomePage() {
   return (
     <>
       <Grid
@@ -20,7 +20,7 @@ function HomePage(props) {
             <h1>VALIDWAREE</h1>
             <h6 id='subtitle'>A free analytical method validator</h6>
           </section>
-          <div style={{ textAlign: 'center' }}><Link id='nav-link' to="/linearity">Go check the linearity regression of your data</Link></div>
+          <div id="link-linearity" ><Link id='nav-link' to="/linearity">Go check the linearity of your data</Link></div>
 
           <section id='app-section'>
             <h2>The App</h2>
@@ -78,7 +78,6 @@ function HomePage(props) {
               </Grid>
               <Grid item lg={3}>
                 <Divider variant='middle' />
-
                 <p class='proposal-text-right'>
                   There are paid softwares and the option to build your own
                   table in existing softwares, but this leads to a very time

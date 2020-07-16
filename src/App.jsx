@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from "react"; // eslint-disable-line
 import { BrowserRouter, Route, Switch } from "react-router-dom"
-import LinearityApp from "./Linearity/LinearityApp"
-import HomePage from "./HomePage/HomePage"
-import ScrollToTop from "./ScrollToTop";
+import LinearityPage from "./screens/Linearity/LinearityPage"
+import HomePage from "./screens/HomePage/HomePage"
+import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
     return (
@@ -11,7 +11,7 @@ export default function App() {
                 <Switch>
                     <ScrollToTop>
                         <Route path="/" exact component={() => <HomePage />} />
-                        <Route path="/linearity" exact component={() => <LinearityApp />} />
+                        <Route path="/linearity" exact component={() => <LinearityPage />} />
                     </ScrollToTop>
                 </Switch>
             </BrowserRouter>

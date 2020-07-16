@@ -1,4 +1,4 @@
-import { REACT_APP_BACKEND_URL } from '../../environment';
+import { REACT_APP_BACKEND_URL } from '../../../environment';
 
 import {
   organizeResiduesChartData,

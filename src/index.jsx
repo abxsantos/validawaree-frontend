@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
-import reducers from './Linearity/reducers';
+import reducers from './components/Linearity/reducers';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import thunk from 'redux-thunk';

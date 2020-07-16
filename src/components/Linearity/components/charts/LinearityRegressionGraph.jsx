@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 
 import {
   ResponsiveContainer,
@@ -10,17 +10,14 @@ import {
   Line,
   CartesianGrid,
   Tooltip,
-} from 'recharts';
+} from "recharts";
 
 const LinearityRegressionChart = (props) => {
   return (
     <div>
-      <ResponsiveContainer height={400}>
-        <ComposedChart
-          data={props.linearityChartData}
-
-        >
-          <CartesianGrid stroke='#f5f5f5' />
+      <ResponsiveContainer height={400} width={800}>
+        <ComposedChart data={props.linearityChartData}>
+          <CartesianGrid stroke="#f5f5f5" />
           <Tooltip
             labelStyle={{ fontWeight: 600 }}
             itemStyle={{ fontWeight: 600 }}
@@ -31,49 +28,48 @@ const LinearityRegressionChart = (props) => {
               return `Concentration: ${value}`;
             }}
           />
-
           <XAxis
             height={100}
-            dataKey='concentration'
-            type='number'
+            dataKey="concentration"
+            type="number"
             axisLine={false}
             style={{
-              fontFamily: 'Roboto',
-              color: 'gray',
+              fontFamily: "Roboto",
+              color: "gray",
             }}
             label={{
-              position: 'insideBottomRight',
+              position: "insideBottomRight",
               offset: 0,
             }}
           />
           <YAxis
             height={200}
             allowDecimals={true}
-            unit=''
-            type='number'
+            unit=""
+            type="number"
             axisLine={false}
             label={{
               angle: -90,
-              position: 'insideLeft',
+              position: "insideLeft",
             }}
             style={{
-              fontFamily: 'Roboto',
-              color: 'gray',
+              fontFamily: "Roboto",
+              color: "gray",
             }}
           />
-          <CartesianGrid stroke='#eee' strokeDasharray='5 5' />
+          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
           <Scatter
-            dataKey='analyticalSignal'
-            fill='#01b6f5'
-            legendType='line'
+            dataKey="analyticalSignal"
+            fill="#01b6f5"
+            legendType="line"
           />
           <Line
-            type='monotone'
-            dataKey='RegressionLine'
-            stroke='#01b6f5'
+            type="monotone"
+            dataKey="RegressionLine"
+            stroke="#01b6f5"
             dot={false}
             activeDot={false}
-            legendType='none'
+            legendType="none"
           />
         </ComposedChart>
       </ResponsiveContainer>
