@@ -1,29 +1,5 @@
-#main-title {
-  background-color: #272727;
-}
-
-h1 {
-  font-size: 10rem;
-  font-weight: 100;
-  text-align: center;
-  color: #faf9f9;
-  margin-top: 0px;
-  padding-top: 300px;
-  margin-bottom: -30px;
-  text-shadow: 1px 1px 5px #faf9f9;
-}
-
-#subtitle {
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding-bottom: 400px;
-  font-weight: 300;
-  font-size: 1.75rem;
-  text-align: center;
-  color: #faf9f9;
-  padding-left: 480px;
-  text-shadow: 0.5px 0.5px 2px #faf9f9;
-
+body {
+  margin: 0;
 }
 
 #link-linearity {
@@ -35,7 +11,7 @@ h1 {
 #nav-link {
   font-size: 1.95rem;
   color: #0b132b;
-  text-align: 'center';
+  text-align: "center";
   text-decoration: none;
   text-shadow: 0.5px 1px 2px #a7a7a7;
 }
@@ -43,9 +19,8 @@ h1 {
 #nav-link:hover {
   color: #5bc0be;
   text-decoration: none;
-  text-align: 'center';
+  text-align: "center";
   text-shadow: 0.5px 1px 2px #ebf1f1;
-
 }
 
 #code-reference {
@@ -53,24 +28,20 @@ h1 {
   color: #0b132b;
   text-decoration: none;
   text-shadow: 0.5px 1px 2px #a7a7a7;
-
 }
 
 #code-reference:hover {
   color: #5bc0be;
   text-decoration: none;
   text-shadow: 0.5px 1px 2px #ebf1f1;
-
 }
 
 h3 {
   font-size: 2rem;
   font-weight: 200;
-
   text-align: center;
   color: #0b132b;
   text-shadow: 0.5px 1px 2px #a7a7a7;
-
 }
 
 h2 {
@@ -79,15 +50,12 @@ h2 {
   font-weight: 100;
   color: #5bc0be;
   text-shadow: 1px 1.5px 3px #ebf1f1;
-
 }
 
 p {
   font-size: 1.5rem;
   font-weight: 200;
-
   text-align: center;
   color: #0b132b;
   text-shadow: 0.5px 1px 2px #a7a7a7;
-
 }

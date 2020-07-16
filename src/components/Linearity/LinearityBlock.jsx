@@ -41,8 +41,8 @@ class LinearityBlock extends React.Component {
 
   handleDispatch = (callback) => {
     this.props.handleLinearityCalculation();
-    callback()
-  }
+    callback();
+  };
 
   render() {
     return (
@@ -69,7 +69,10 @@ class LinearityBlock extends React.Component {
                 Next
               </Button>
             ) : this.state.count < components.length - 1 ? (
-              <Button color="primary" onClick={() => this.handleDispatch(this.handleClick)}>
+              <Button
+                color="primary"
+                onClick={() => this.handleDispatch(this.handleClick)}
+              >
                 Calculate Linearity
               </Button>
             ) : (
