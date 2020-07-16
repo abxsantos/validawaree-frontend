@@ -18,6 +18,8 @@ const StyledTextField = withStyles({
 function LinearityInputVolume(props) {
   return (
     <>
+      <h2>Linearity Inputs</h2>
+
       <Fade left cascade duration={1000} delay={500} distance="30px">
         <Grid
           container
