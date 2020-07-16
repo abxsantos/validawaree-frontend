@@ -9,9 +9,13 @@ import {
   REMOVE_COLUMN,
   CHANGE_VOLUME_UNIT,
   CHANGE_MASS_UNIT,
-  
   CHANGE_VOLUME,
-} from '../actions';
+  CHANGE_ROWS,
+  CHANGE_COLUMNS,
+  CHANGE_MASS,
+  CHANGE_DILUTION_FACTOR,
+  CHANGE_ANALYTICAL_VALUE,
+} from "../actions";
 
 import {
   addRow,
@@ -24,37 +28,152 @@ import {
   updateDilutionFactorValue,
   changeVolumeUnit,
   changeMassUnit,
-} from './ReducersLinearityInputAuxiliarFunctions';
+} from "./ReducersLinearityInputAuxiliarFunctions";
 
 const initialState = {
-  numRows: 1,
-  numColumns: 3,
-  volume: undefined,
+  numRows: "1",
+  numColumns: "3",
+  volume: "",
   volumeUnit: 1e-3,
   massUnit: 1e-3,
-  mass: [undefined, undefined, undefined],
-  analyticalData: [
-    [undefined, undefined, undefined],
-
-  ],
-  dilutionFactor: [],
-  concentrations: [
-    [undefined, undefined, undefined],
-
-  ],
-  initialConcentrations: [undefined, undefined, undefined],
-  averages: [undefined],
-  stdDeviations: [undefined],
+  mass: ["", "", ""],
+  analyticalData: [["", "", ""]],
+  dilutionFactor: [""],
+  concentrations: [["", "", ""]],
+  initialConcentrations: ["", "", ""],
+  averages: [""],
+  stdDeviations: [""],
 };
+
+const createAndFillListWithUndefined = (list, numberOfUndefined) => {
+  list = [];
+  list = new Array(numberOfUndefined).fill(undefined, 0, numberOfUndefined);
+  return list;
+};
+
+const changeAnalyticalStateSize = (
+  rows,
+  columns,
+  analyticalData,
+  concentrations
+) => {
+  concentrations = [];
+  analyticalData = [];
+  for (let row = 0; row < rows; ++row) {
+    concentrations.push(
+      createAndFillListWithUndefined(concentrations, columns)
+    );
+    analyticalData.push(
+      createAndFillListWithUndefined(analyticalData, columns)
+    );
+  }
+  return {
+    concentrations: concentrations,
+    analyticalData: analyticalData,
+  };
+};
+
+const changeColumnOnlyDependantItems = (
+  columns,
+  mass,
+  initialConcentrations
+) => {
+  return {
+    mass: createAndFillListWithUndefined(mass, columns),
+    initialConcentrations: createAndFillListWithUndefined(
+      initialConcentrations,
+      columns
+    ),
+  };
+};
+
+const changeRowOnlyDependantItems = (
+  rows,
+  dilutionFactor,
+  averages,
+  stdDeviations
+) => {
+  return {
+    dilutionFactor: createAndFillListWithUndefined(dilutionFactor, rows),
+    averages: createAndFillListWithUndefined(averages, rows),
+    stdDeviations: createAndFillListWithUndefined(stdDeviations, rows),
+  };
+};
+
+function changeMassStateValue(action, state) {
+  let mass = [...state.mass];
+  mass[action.column] = action.updatedMass;
+  return { mass: mass };
+}
+
+function changeDilutionFactorStateValue(action, state) {
+  let dilutionFactor = [...state.dilutionFactor];
+  dilutionFactor[action.row] = action.updatedDilutionFactor;
+  return { dilutionFactor: dilutionFactor };
+}
+
+function changeAnalyticalDataStateValue(action, state) {
+  debugger;
+  let analyticalData = [...state.analyticalData];
+  analyticalData[action.row][action.column] = action.updatedAnalyticalValue;
+  return { analyticalData: analyticalData };
+}
 
 const samples = (state = initialState, action) => {
   switch (action.type) {
     case CHANGE_VOLUME:
       return {
         ...state,
-        volume: action.updatedVolume 
+        volume: action.updatedVolume,
       };
-    
+    case CHANGE_ROWS:
+      return {
+        ...state,
+        numRows: action.updatedRows,
+        ...changeAnalyticalStateSize(
+          parseInt(action.updatedRows),
+          parseInt(state.numColumns),
+          state.analyticalData,
+          state.concentrations
+        ),
+        ...changeRowOnlyDependantItems(
+          parseInt(action.updatedRows),
+          state.dilutionFactor,
+          state.averages,
+          state.stdDeviations
+        ),
+      };
+    case CHANGE_COLUMNS:
+      return {
+        ...state,
+        numColumns: action.updatedColumns,
+        ...changeAnalyticalStateSize(
+          parseInt(state.numRows),
+          parseInt(action.updatedColumns),
+          state.analyticalData,
+          state.concentrations
+        ),
+        ...changeColumnOnlyDependantItems(
+          parseInt(action.updatedColumns),
+          state.mass,
+          state.initialConcentrations
+        ),
+      };
+    case CHANGE_MASS:
+      return {
+        ...state,
+        ...changeMassStateValue(action, state),
+      };
+    case CHANGE_DILUTION_FACTOR:
+      return {
+        ...state,
+        ...changeDilutionFactorStateValue(action, state),
+      };
+    case CHANGE_ANALYTICAL_VALUE:
+      return {
+        ...state,
+        ...changeAnalyticalDataStateValue(action, state),
+      };
     case INC_ROW:
       return {
         ...state,

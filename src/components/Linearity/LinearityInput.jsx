@@ -1,11 +1,18 @@
 import React, { Fragment } from "react";
 
-import {Grid, Button} from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 
 import LinearityInputVolume from "./LinearityInputVolume";
+import LinearityInputExperimentSize from "./LinearityInputExperimentSize";
 import LinearityInputMass from "./LinearityInputMass";
+import LinearityInputAnalyticalData from "./LinearityInputAnalyticalData";
 
-const components = [<LinearityInputVolume />, <LinearityInputMass />];
+const components = [
+  <LinearityInputVolume />,
+  <LinearityInputExperimentSize />,
+  <LinearityInputMass />,
+  <LinearityInputAnalyticalData />,
+];
 
 class LinearityInputApp extends React.Component {
   constructor(props) {
@@ -48,7 +55,9 @@ class LinearityInputApp extends React.Component {
             justify="flex-end"
             alignItems="center"
           >
-              <Button color="primary" onClick={() => this.handleClick(i)}>Next</Button>
+            <Button color="primary" onClick={() => this.handleClick(i)}>
+              Next
+            </Button>
           </Grid>
         </Grid>
       </>

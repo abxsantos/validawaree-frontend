@@ -44,6 +44,7 @@ function LinearityInputVolume(props) {
                   variant: "filled",
                   style: { fontSize: "16px" },
                 }}
+                type="number"
                 label="Volume"
                 value={props.volume}
                 onChange={(e) => handleVolumeChange(e, props)}
