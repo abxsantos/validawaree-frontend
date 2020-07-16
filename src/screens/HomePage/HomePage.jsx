@@ -20,7 +20,7 @@ function HomePage() {
             <h1>VALIDWAREE</h1>
             <h6 id='subtitle'>A free analytical method validator</h6>
           </section>
-          <div id="link-linearity" ><Link id='nav-link' to="/linearity">Go check the linearity regression of your data</Link></div>
+          <div id="link-linearity" ><Link id='nav-link' to="/linearity">Go check the linearity of your data</Link></div>
 
           <section id='app-section'>
             <h2>The App</h2>
@@ -78,7 +78,6 @@ function HomePage() {
               </Grid>
               <Grid item lg={3}>
                 <Divider variant='middle' />
-
                 <p class='proposal-text-right'>
                   There are paid softwares and the option to build your own
                   table in existing softwares, but this leads to a very time
