@@ -41,7 +41,7 @@ function HomePage() {
             </div>
           </section>
 
-          <section id="proposal-title">
+          {/* <section id="proposal-title">
             <h2>Proposal</h2>
             <Grid
               container
@@ -85,7 +85,7 @@ function HomePage() {
                 </p>
               </Grid>
             </Grid>
-          </section>
+          </section> */}
         </div>
       </Grid>
     </div>
