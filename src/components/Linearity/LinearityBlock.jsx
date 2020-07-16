@@ -40,9 +40,9 @@ class LinearityBlock extends React.Component {
   };
 
   handleDispatch = (callback) => {
-    this.props.handleLinearityCalculation();
-    callback()
-  }
+    this.props.handleLinearityCalculation(callback);
+    ;
+  };
 
   render() {
     return (
@@ -69,7 +69,10 @@ class LinearityBlock extends React.Component {
                 Next
               </Button>
             ) : this.state.count < components.length - 1 ? (
-              <Button color="primary" onClick={() => this.handleDispatch(this.handleClick)}>
+              <Button
+                color="primary"
+                onClick={() => this.handleDispatch(this.handleClick)}
+              >
                 Calculate Linearity
               </Button>
             ) : (
@@ -82,12 +85,21 @@ class LinearityBlock extends React.Component {
   }
 }
 
+const mapStateToProps = function (state) {
+  return {
+    responseStatus: state.linearity.responseStatus,
+    responseMessage: state.linearity.responseMessage,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleLinearityCalculation: () => {
-      dispatch(getLinearityResults());
+    handleLinearityCalculation: (callback) => {
+      dispatch(
+        getLinearityResults(callback)
+      );
     },
   };
 };
 
-export default connect(null, mapDispatchToProps)(LinearityBlock);
+export default connect(mapStateToProps, mapDispatchToProps)(LinearityBlock);
