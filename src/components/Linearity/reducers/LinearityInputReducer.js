@@ -113,10 +113,14 @@ function changeDilutionFactorStateValue(action, state) {
 }
 
 function changeAnalyticalDataStateValue(action, state) {
-  debugger;
   let analyticalData = [...state.analyticalData];
   analyticalData[action.row][action.column] = action.updatedAnalyticalValue;
-  return { analyticalData: analyticalData };
+  let concentrations = [...state.concentrations];
+  concentrations[action.row][action.column] =
+    parseFloat(state.mass[action.column]) /
+    parseFloat(state.volume) /
+    parseFloat(state.dilutionFactor[action.row]);
+  return { analyticalData: analyticalData, concentrations: concentrations};
 }
 
 const samples = (state = initialState, action) => {

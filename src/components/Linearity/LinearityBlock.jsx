@@ -1,12 +1,15 @@
 import React, { Fragment } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 import { Grid, Button } from "@material-ui/core";
+
+import { getLinearityResults } from "./actions";
 
 import LinearityInputVolume from "./LinearityInputVolume";
 import LinearityInputExperimentSize from "./LinearityInputExperimentSize";
 import LinearityInputMass from "./LinearityInputMass";
 import LinearityInputAnalyticalData from "./LinearityInputAnalyticalData";
-import CalculateLinearityButton from "./components/button/CalculateLinearityButton";
 import LinearityResultBlock from "./LinearityResutBlock";
 
 const components = [
@@ -14,7 +17,7 @@ const components = [
   <LinearityInputExperimentSize />,
   <LinearityInputMass />,
   <LinearityInputAnalyticalData />,
-  <LinearityResultBlock />
+  <LinearityResultBlock />,
 ];
 
 class LinearityBlock extends React.Component {
@@ -26,7 +29,7 @@ class LinearityBlock extends React.Component {
     };
   }
 
-  handleClick = (i) => {
+  handleClick = () => {
     this.setState((prevState) => {
       if (prevState.count < components.length - 1) {
         return {
@@ -37,8 +40,11 @@ class LinearityBlock extends React.Component {
     });
   };
 
+  handleDispatch = () => {
+    this.props.handleLinearityCalculation()
+  }
+
   render() {
-    const { i } = this.state;
     return (
       <>
         <Grid
@@ -59,12 +65,16 @@ class LinearityBlock extends React.Component {
             alignItems="center"
           >
             {this.state.count < components.length - 2 ? (
-              <Button color="primary" onClick={() => this.handleClick(i)}>
+              <Button color="primary" onClick={() => this.handleClick()}>
                 Next
               </Button>
             ) : this.state.count < components.length - 1 ? (
-              <CalculateLinearityButton />
-            ) : ``}
+              <Button color="primary" onClick={() => {this.handleDispatch(); this.handleClick();}}>
+                Calculate Linearity
+              </Button>
+            ) : (
+              ``
+            )}
           </Grid>
         </Grid>
       </>
@@ -72,4 +82,12 @@ class LinearityBlock extends React.Component {
   }
 }
 
-export default LinearityBlock;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    handleLinearityCalculation: () => {
+      dispatch(getLinearityResults());
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(LinearityBlock);

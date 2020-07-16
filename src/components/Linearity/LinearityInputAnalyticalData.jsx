@@ -13,7 +13,12 @@ import Paper from "@material-ui/core/Paper";
 import Fade from "react-reveal";
 
 import LinearityMassUnitSelector from "./components/selector/LinearityMassUnitSelector";
-import { changeDilutionFactor, changeAnalyticalValue } from "./actions";
+import CalculateLinearityButton from "./components/button/CalculateLinearityButton";
+
+import {
+  changeDilutionFactor,
+  changeAnalyticalValue,
+} from "./actions";
 
 const useStyles = makeStyles({
   table: {
@@ -21,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-function LinearityInputAnalyticalData(props) {
+function LinearityInputAnalyticalData(props, handleClickFunction) {
   const classes = useStyles();
 
   return (
