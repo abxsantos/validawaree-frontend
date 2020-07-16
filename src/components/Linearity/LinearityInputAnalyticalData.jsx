@@ -56,7 +56,6 @@ function LinearityInputAnalyticalData(props, handleClickFunction) {
                   )}
                 </Table>
               </TableContainer>
-              <LinearityMassUnitSelector />
             </Grid>
           </>
         </Grid>
