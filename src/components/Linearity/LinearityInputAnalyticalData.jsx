@@ -12,9 +12,6 @@ import TextField from "@material-ui/core/TextField";
 import Paper from "@material-ui/core/Paper";
 import Fade from "react-reveal";
 
-import LinearityMassUnitSelector from "./components/selector/LinearityMassUnitSelector";
-import CalculateLinearityButton from "./components/button/CalculateLinearityButton";
-
 import {
   changeDilutionFactor,
   changeAnalyticalValue,
