@@ -46,9 +46,13 @@ const initialState = {
 };
 
 const createAndFillListWithUndefined = (list, numberOfUndefined) => {
-  list = [];
-  list = new Array(numberOfUndefined).fill(undefined, 0, numberOfUndefined);
-  return list;
+  try {
+    list = [];
+    list = new Array(numberOfUndefined).fill(undefined, 0, numberOfUndefined);
+    return list;
+  } catch {
+    return [];
+  }
 };
 
 const changeAnalyticalStateSize = (
@@ -120,7 +124,7 @@ function changeAnalyticalDataStateValue(action, state) {
     parseFloat(state.mass[action.column]) /
     parseFloat(state.volume) /
     parseFloat(state.dilutionFactor[action.row]);
-  return { analyticalData: analyticalData, concentrations: concentrations};
+  return { analyticalData: analyticalData, concentrations: concentrations };
 }
 
 const samples = (state = initialState, action) => {
@@ -178,6 +182,7 @@ const samples = (state = initialState, action) => {
         ...state,
         ...changeAnalyticalDataStateValue(action, state),
       };
+    //older actions
     case INC_ROW:
       return {
         ...state,
