@@ -1,7 +1,6 @@
 import React, { Fragment } from "react"; // eslint-disable-line
 import { Link, withRouter } from "react-router-dom";
 
-import Paper from "@material-ui/core/Paper";
 import { Grid, Divider } from "@material-ui/core/";
 import TitlePage from "../TitlePage/TitlePage";
 import "./HomePage.css";
