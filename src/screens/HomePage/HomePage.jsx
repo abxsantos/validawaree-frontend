@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment } from 'react'; // eslint-disable-line
 import { Link, withRouter } from "react-router-dom"
 
 import { Grid, Divider } from '@material-ui/core/';

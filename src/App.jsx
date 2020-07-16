@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from "react"; // eslint-disable-line
 import { BrowserRouter, Route, Switch } from "react-router-dom"
 import LinearityPage from "./screens/Linearity/LinearityPage"
 import HomePage from "./screens/HomePage/HomePage"

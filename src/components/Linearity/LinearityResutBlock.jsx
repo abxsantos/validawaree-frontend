@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from "react"; // eslint-disable-line
 
 import Grid from "@material-ui/core/Grid";
 import Fade from "react-reveal";

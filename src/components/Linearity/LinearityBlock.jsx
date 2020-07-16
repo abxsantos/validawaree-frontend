@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment } from "react"; // eslint-disable-line
 import { connect } from "react-redux";
 
 import { Grid, Button } from "@material-ui/core";
