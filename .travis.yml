@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+    - node_modules
+script:
+  - npm install
+  - npm test
+  - npm run build
+  
+deploy:
+  provider: heroku
+  api_key: $HEROKU_API_KEY
+  app: validawaree-frontend
+  on:
+    tags: true
+    branch: master
