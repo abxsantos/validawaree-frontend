@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import React from "react";
 
 import Table from "@material-ui/core/Table";
@@ -8,8 +9,10 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import { makeStyles } from "@material-ui/core/styles";
+
 import parseDecimals from './parseDecimals'
-import { connect } from "react-redux";
+
+
 const useStyles = makeStyles({
   table: {
     maxWidth: 650,
@@ -31,9 +34,15 @@ function LinearityCoefficientsTable(props) {
         </TableHead>
         <TableBody>
           <TableRow key={"data-statistics"}>
-            <TableCell align="center">{props.intercept}</TableCell>
-            <TableCell align="center">{props.slope}</TableCell>
-            <TableCell align="center">{props.rSquared}</TableCell>
+            <TableCell align="center">{props.intercept !== undefined
+                ? parseDecimals(props.intercept)
+                : undefined}</TableCell>
+            <TableCell align="center">{props.slope !== undefined
+                ? parseDecimals(props.slope)
+                : undefined}</TableCell>
+            <TableCell align="center">{props.rSquared !== undefined
+                ? parseDecimals(props.rSquared)
+                : undefined }</TableCell>
           </TableRow>
         </TableBody>
       </Table>
@@ -43,13 +52,13 @@ function LinearityCoefficientsTable(props) {
 
 const mapStateToProps = function (state) {
   return {
-    intercept: parseDecimals(state.linearity.regressionCoefficients.intercept),
+    intercept: state.linearity.regressionCoefficients.intercept,
     insignificantIntercept:
-    parseDecimals(state.linearity.regressionCoefficients.insignificant_intercept),
-    slope: parseDecimals(state.linearity.regressionCoefficients.slope),
-    significantSlope: parseDecimals(state.linearity.regressionCoefficients.significant_slope),
-    rSquared: parseDecimals(state.linearity.regressionCoefficients.r_squared),
-    validRegresion: parseDecimals(state.linearity.regressionCoefficients.valid_regression),
+    state.linearity.regressionCoefficients.insignificant_intercept,
+    slope: state.linearity.regressionCoefficients.slope,
+    significantSlope: state.linearity.regressionCoefficients.significant_slope,
+    rSquared: state.linearity.regressionCoefficients.r_squared,
+    validRegresion: state.linearity.regressionCoefficients.valid_regression,
   };
 };
 

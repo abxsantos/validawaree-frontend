@@ -106,7 +106,7 @@ function buildAnalticalDataColumns(columns, row, props) {
           }}
           type="number"
           size="normal"
-          label="Signal"
+          label="Analytical signal"
           value={props.analyticalData[row][column]}
           onChange={(e) => handleAnalyticalDataChange(e, row, column, props)}
         />
