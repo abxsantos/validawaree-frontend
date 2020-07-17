@@ -45,13 +45,20 @@ export function updateLinearityResults(jsonLinearityResultData) {
 
       regressionChartData: residuesChartData,
       linearityChartData: linearityChartData,
-    };
-  } else {
+    }
+  }else if (jsonLinearityResultData.status === 400) {
+      return {
+        type: UPD_RESPONSE_ERROR,
+        responseStatus: jsonLinearityResultData.status,
+        responseMessage: jsonLinearityResultData.body,
+      }
+  }
+  else if (jsonLinearityResultData.status === 500) {
     return {
       type: UPD_RESPONSE_ERROR,
-      responseStatus: jsonLinearityResultData.status,
-      responseMessage: jsonLinearityResultData.body,
-    };
+      responseStatus: 500,
+      responseMessage: "There is a problem with the server, try contacting ale.bxsantos@gmail.com",
+    }
   }
 }
 
@@ -76,7 +83,7 @@ export function getLinearityResults(callback) {
       body: JSON.stringify(jsonLinearityInputData),
     })
       .then((response) => {
-        return response.json();
+        return response.json()
       })
       .then((jsonLinearityResultData) => {
         if (jsonLinearityResultData.status === 201) {
