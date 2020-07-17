@@ -10,13 +10,11 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
-import { Container } from "@material-ui/core";
 
 const LinearityRegressionChart = (props) => {
   return (
     <div>
-      <Container height={400} width={800}>
-        <ComposedChart data={props.linearityChartData}>
+        <ComposedChart height={400} width={700} data={props.linearityChartData}>
           <CartesianGrid stroke="#f5f5f5" />
           <Tooltip
             labelStyle={{ fontWeight: 600 }}
@@ -72,7 +70,6 @@ const LinearityRegressionChart = (props) => {
             legendType="none"
           />
         </ComposedChart>
-      </Container>
     </div>
   );
 };

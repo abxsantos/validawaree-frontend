@@ -17,27 +17,23 @@ function LinearityResultBlock() {
         <Grid
           container
           direction="row"
-          justify="center"
+          justify="space-between"
           alignItems="center"
-          spacing={3}
+          spacing={0}
         >
-          <Grid item xs={8}>
+          <Grid item >
             <Grid
               container
               direction="column"
-              justify="center"
-              alignItems="center"
             >
               <LinearityRegressionGraph />
               <LinearityRegressionAnovaTable />
             </Grid>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item >
             <Grid
               container
               direction="column"
-              justify="center"
-              alignItems="center"
             >
               <LinearityResiduesChart />
               <LinearityDataStatisticsTable />

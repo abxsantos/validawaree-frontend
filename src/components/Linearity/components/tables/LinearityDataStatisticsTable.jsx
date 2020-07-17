@@ -9,6 +9,8 @@ import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import { makeStyles } from "@material-ui/core/styles";
 
+import parseDecimals from './parseDecimals'
+
 import { connect } from 'react-redux';
 const useStyles = makeStyles({
   table: {
@@ -48,11 +50,11 @@ function LinearityDataStatisticsTable(props) {
 
 const mapStateToProps = function (state) {
   return {
-    isNormalDistribution: state.linearity.isNormalDistribution,
-    isHomokedastic: state.linearity.isHomokedastic,
-    durbinWatsonValue: state.linearity.durbinWatsonValue,
-    shapiropValue: state.linearity.shapiropValue,
-    breuschPaganpValue: state.linearity.breuschPaganpValue,
+    isNormalDistribution: parseDecimals(state.linearity.isNormalDistribution),
+    isHomokedastic: parseDecimals(state.linearity.isHomokedastic),
+    durbinWatsonValue: parseDecimals(state.linearity.durbinWatsonValue),
+    shapiropValue: parseDecimals(state.linearity.shapiropValue),
+    breuschPaganpValue: parseDecimals(state.linearity.breuschPaganpValue),
   };
 };
 
