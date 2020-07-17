@@ -24,8 +24,6 @@ export const removeRow = (
   removedDilutionFactorValue.splice(-1);
   removedAverages.splice(-1);
   removedStdDeviations.splice(-1);
-  console.log(removedAnalyticalData);
-  console.log(removedConcentrationData);
   return {
     removedAnalyticalData,
     removedConcentrationData,

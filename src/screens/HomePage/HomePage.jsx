@@ -4,6 +4,7 @@ import { Link, withRouter } from "react-router-dom";
 import { Grid, Divider, Paper } from "@material-ui/core/";
 import TitlePage from "../TitlePage/TitlePage";
 import "./HomePage.css";
+import TryNowButton from "../../components/Linearity/components/button/TryNowButton";
 
 function HomePage() {
   return (
@@ -14,13 +15,17 @@ function HomePage() {
         className="LinearityInput"
         direction="column"
         alignItems="center"
-        style={{padding: '0px 80px 0px 80px', marginTop: '-120px', marginBottom: '10px'}}
+        style={{
+          padding: "0px 80px 0px 80px",
+          marginTop: "-120px",
+          marginBottom: "10px",
+        }}
       >
-        <Paper elevation={12}style={{paddingBottom: '40px'}} >
+        <Paper elevation={12} style={{ paddingBottom: "40px", marginTop: '-120 px'}}>
           <div>
             <div id="link-linearity">
               <Link id="nav-link" to="/linearity">
-                Go check the linearity of your data
+                <TryNowButton/>
               </Link>
             </div>
 
@@ -47,7 +52,7 @@ function HomePage() {
               <h2>Proposal</h2>
               <Grid
                 container
-                direction="column"
+                direction="row"
                 justify="space-evenly"
                 alignItems="center"
               >
@@ -59,7 +64,6 @@ function HomePage() {
                   </p>
                 </Grid>
                 <Grid item lg={4}>
-                  <Divider variant="middle" />
 
                   <p class="proposal-text-right">
                     The results analisys itself consists of passing your
@@ -67,24 +71,31 @@ function HomePage() {
                     time consuming.
                   </p>
                 </Grid>
-                <Grid item lg={4}>
-                  <Divider variant="middle" />
+                <Grid
+                  container
+                  direction="row"
+                  justify="space-evenly"
+                  alignItems="center"
+                >
+                  <Grid item lg={4}>
+                    <Divider variant="middle" />
 
-                  <p class="proposal-text-left">
-                    The main idea of this project is to build a free easy to use
-                    and integrate with existing tools web app, that will be
-                    following the latest ANVISA legislation for validating an
-                    analytical method.
-                  </p>
-                </Grid>
-                <Grid item lg={4}>
-                  <Divider variant="middle" />
-                  <p class="proposal-text-right">
-                    There are paid softwares and the option to build your own
-                    table in existing softwares, but this leads to a very time
-                    consuming task, and also can lead to the usage of incorrect
-                    treatment of the data.
-                  </p>
+                    <p class="proposal-text-left">
+                      The main idea of this project is to build a free easy to
+                      use and integrate with existing tools web app, that will
+                      be following the latest ANVISA legislation for validating
+                      an analytical method.
+                    </p>
+                  </Grid>
+                  <Grid item lg={4}>
+                    <Divider variant="middle" />
+                    <p class="proposal-text-right">
+                      There are paid softwares and the option to build your own
+                      table in existing softwares, but this leads to a very time
+                      consuming task, and also can lead to the usage of
+                      incorrect treatment of the data.
+                    </p>
+                  </Grid>
                 </Grid>
               </Grid>
             </section>

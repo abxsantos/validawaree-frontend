@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"; // eslint-disable-line
 import { connect } from "react-redux";
 
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, withStyles } from "@material-ui/core";
 
 import { getLinearityResults } from "./actions";
 
@@ -10,6 +10,12 @@ import LinearityInputExperimentSize from "./LinearityInputExperimentSize";
 import LinearityInputMass from "./LinearityInputMass";
 import LinearityInputAnalyticalData from "./LinearityInputAnalyticalData";
 import LinearityResultBlock from "./LinearityResutBlock";
+
+const TextButton = withStyles({
+  root: {
+    fontSize: "2.5rem",
+  },
+})(Button);
 
 const components = [
   <LinearityInputVolume />,
@@ -50,23 +56,21 @@ class LinearityBlock extends React.Component {
           container
           spacing={3}
           direction="column"
-          justify="center"
-          alignItems="center"
-          style={{position:'relative', minHeight: '80vh'}}
+          style={{ minHeight: "80vh" }}
         >
-          <div style={{margin: '40px'}}>{components[this.state.count]}</div>
-          <div style={{position: 'absolute', bottom: '5%', right: '35%'}}>
+          <div style={{ margin: "40px" }}>{components[this.state.count]}</div>
+          <div style={{textAlign: "center"}}>
             {this.state.count < components.length - 2 ? (
-              <Button color="primary" onClick={() => this.handleClick()}>
+              <TextButton color="primary" onClick={() => this.handleClick()}>
                 Next
-              </Button>
+              </TextButton>
             ) : this.state.count < components.length - 1 ? (
-              <Button
+              <TextButton
                 color="primary"
                 onClick={() => this.handleDispatch(this.handleClick)}
               >
                 Calculate Linearity
-              </Button>
+              </TextButton>
             ) : (
               ``
             )}
