@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 
 import {
-  ResponsiveContainer,
   ComposedChart,
   XAxis,
   YAxis,
@@ -11,11 +10,12 @@ import {
   CartesianGrid,
   Tooltip,
 } from "recharts";
+import { Container } from "@material-ui/core";
 
 const LinearityRegressionChart = (props) => {
   return (
     <div>
-      <ResponsiveContainer height={400} width={800}>
+      <Container height={400} width={800}>
         <ComposedChart data={props.linearityChartData}>
           <CartesianGrid stroke="#f5f5f5" />
           <Tooltip
@@ -72,7 +72,7 @@ const LinearityRegressionChart = (props) => {
             legendType="none"
           />
         </ComposedChart>
-      </ResponsiveContainer>
+      </Container>
     </div>
   );
 };
