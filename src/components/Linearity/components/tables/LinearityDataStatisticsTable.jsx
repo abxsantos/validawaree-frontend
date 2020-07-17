@@ -9,7 +9,7 @@ import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import { makeStyles } from "@material-ui/core/styles";
 
-import parseDecimals from './parseDecimals'
+import parseDecimals from "./parseDecimals"
 
 import { connect } from 'react-redux';
 const useStyles = makeStyles({
@@ -38,9 +38,15 @@ function LinearityDataStatisticsTable(props) {
       </TableHead>
       <TableBody>
         <TableRow key={'data-statistics'}>
-          <TableCell align='center'>{props.breuschPaganpValue}</TableCell>
-          <TableCell align='center'>{props.shapiropValue}</TableCell>
-          <TableCell align='center'>{props.durbinWatsonValue}</TableCell>
+          <TableCell align='center'>{props.breuschPaganpValue !== undefined
+                ? parseDecimals(props.breuschPaganpValue)
+                : undefined}</TableCell>
+          <TableCell align='center'>{props.shapiropValue !== undefined
+                ? parseDecimals(props.shapiropValue)
+                : undefined}</TableCell>
+          <TableCell align='center'>{props.durbinWatsonValue !== undefined
+                ? parseDecimals(props.durbinWatsonValue)
+                : undefined}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
@@ -50,11 +56,11 @@ function LinearityDataStatisticsTable(props) {
 
 const mapStateToProps = function (state) {
   return {
-    isNormalDistribution: parseDecimals(state.linearity.isNormalDistribution),
-    isHomokedastic: parseDecimals(state.linearity.isHomokedastic),
-    durbinWatsonValue: parseDecimals(state.linearity.durbinWatsonValue),
-    shapiropValue: parseDecimals(state.linearity.shapiropValue),
-    breuschPaganpValue: parseDecimals(state.linearity.breuschPaganpValue),
+    isNormalDistribution: state.linearity.isNormalDistribution,
+    isHomokedastic: state.linearity.isHomokedastic,
+    durbinWatsonValue: state.linearity.durbinWatsonValue,
+    shapiropValue: state.linearity.shapiropValue,
+    breuschPaganpValue: state.linearity.breuschPaganpValue,
   };
 };
 

@@ -77,7 +77,7 @@ function buildMassColumns(props) {
           }}
           type="number"
           size="normal"
-          label={`Sample ${i}`}
+          label={`Sample ${i+1}`}
           value={props.mass[i]}
           onChange={(e) => handleMassChange(e, i, props)}
         />
