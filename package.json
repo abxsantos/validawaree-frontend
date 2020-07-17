@@ -48,7 +48,10 @@
   },
   "devDependencies": {
     "core-js": "^3.6.5",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "jest-each": "^26.1.0",
+    "jest-enzyme": "^7.1.2",
     "redux-devtools-extension": "^2.13.8"
   }
 }
