@@ -41,7 +41,6 @@ class LinearityBlock extends React.Component {
 
   handleDispatch = (callback) => {
     this.props.handleLinearityCalculation(callback);
-    ;
   };
 
   render() {
@@ -53,17 +52,10 @@ class LinearityBlock extends React.Component {
           direction="column"
           justify="center"
           alignItems="center"
+          style={{position:'relative', minHeight: '80vh'}}
         >
-          <Grid item xs={12}>
-            {components[this.state.count]}
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            direction="row"
-            justify="flex-end"
-            alignItems="center"
-          >
+          <div style={{margin: '40px'}}>{components[this.state.count]}</div>
+          <div style={{position: 'absolute', bottom: '5%', right: '35%'}}>
             {this.state.count < components.length - 2 ? (
               <Button color="primary" onClick={() => this.handleClick()}>
                 Next
@@ -78,7 +70,7 @@ class LinearityBlock extends React.Component {
             ) : (
               ``
             )}
-          </Grid>
+          </div>
         </Grid>
       </>
     );
@@ -95,9 +87,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleLinearityCalculation: (callback) => {
-      dispatch(
-        getLinearityResults(callback)
-      );
+      dispatch(getLinearityResults(callback));
     },
   };
 };
