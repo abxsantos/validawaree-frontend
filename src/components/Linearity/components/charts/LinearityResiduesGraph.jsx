@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-  ResponsiveContainer,
   ComposedChart,
   XAxis,
   YAxis,
@@ -15,8 +14,7 @@ import {
 const LinearityResiduesChart = (props) => {
   return (
     <div>
-      <ResponsiveContainer width={400} height={400}>
-        <ComposedChart data={props.regressionChartData}>
+        <ComposedChart width={400} height={400} data={props.regressionChartData}>
           <CartesianGrid stroke='#f5f5f5' />
           <Tooltip
             labelStyle={{ fontWeight: 600 }}
@@ -71,7 +69,6 @@ const LinearityResiduesChart = (props) => {
             legendType='none'
           />
         </ComposedChart>
-      </ResponsiveContainer>
     </div>
   );
 };

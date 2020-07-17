@@ -1,6 +1,6 @@
 # VALIDAWAREE(font-end) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/abxsantos/validawaree-frontend.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/abxsantos/validawaree-frontend/context:javascript)
+[![Build Status](https://travis-ci.org/abxsantos/validawaree-frontend.svg?branch=master)](https://travis-ci.org/abxsantos/validawaree-frontend) [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/abxsantos/validawaree-frontend.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/abxsantos/validawaree-frontend/context:javascript)
 
 [VALIDAWAREE](https://fast-badlands-43198.herokuapp.com/) is an open-source plataform to validate experimental analytical data according to the latest ANVISA legislation, which is based on the ICH denominations for drug registering.
 

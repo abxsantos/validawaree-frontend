@@ -1,4 +1,42 @@
-import { container, primaryColor } from "./material-kit-react.js";
+/*!
+
+ =========================================================
+ * Material Kit React - v1.9.0 based on Material Kit - v2.0.2
+ =========================================================
+
+ * Product Page: https://www.creative-tim.com/product/material-kit-react
+ * Copyright 2020 Creative Tim (https://www.creative-tim.com)
+ * Licensed under MIT (https://github.com/creativetimofficial/material-kit-react/blob/master/LICENSE.md)
+
+ =========================================================
+
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+ */
+// With edits
+
+const containerFluid = {
+  paddingRight: "15px",
+  paddingLeft: "15px",
+  marginRight: "auto",
+  marginLeft: "auto",
+  width: "100%"
+};
+const container = {
+  ...containerFluid,
+  "@media (min-width: 576px)": {
+    maxWidth: "540px"
+  },
+  "@media (min-width: 768px)": {
+    maxWidth: "720px"
+  },
+  "@media (min-width: 992px)": {
+    maxWidth: "960px"
+  },
+  "@media (min-width: 1200px)": {
+    maxWidth: "1140px"
+  }
+};
 
 const footerStyle = {
   block: {
@@ -29,15 +67,11 @@ const footerStyle = {
     position: "relative"
   },
   a: {
-    color: primaryColor,
+    color: "#9c27b0",
     textDecoration: "none",
     backgroundColor: "transparent"
   },
-  footerWhiteFont: {
-    "&,&:hover,&:focus": {
-      color: "#FFFFFF"
-    }
-  },
+
   container,
   list: {
     position: "absolute",

@@ -8,7 +8,7 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import TableContainer from "@material-ui/core/TableContainer";
 import { makeStyles } from "@material-ui/core/styles";
-
+import parseDecimals from './parseDecimals'
 import { connect } from "react-redux";
 const useStyles = makeStyles({
   table: {
@@ -43,13 +43,13 @@ function LinearityCoefficientsTable(props) {
 
 const mapStateToProps = function (state) {
   return {
-    intercept: state.linearity.regressionCoefficients.intercept,
+    intercept: parseDecimals(state.linearity.regressionCoefficients.intercept),
     insignificantIntercept:
-      state.linearity.regressionCoefficients.insignificant_intercept,
-    slope: state.linearity.regressionCoefficients.slope,
-    significantSlope: state.linearity.regressionCoefficients.significant_slope,
-    rSquared: state.linearity.regressionCoefficients.r_squared,
-    validRegresion: state.linearity.regressionCoefficients.valid_regression,
+    parseDecimals(state.linearity.regressionCoefficients.insignificant_intercept),
+    slope: parseDecimals(state.linearity.regressionCoefficients.slope),
+    significantSlope: parseDecimals(state.linearity.regressionCoefficients.significant_slope),
+    rSquared: parseDecimals(state.linearity.regressionCoefficients.r_squared),
+    validRegresion: parseDecimals(state.linearity.regressionCoefficients.valid_regression),
   };
 };
 
