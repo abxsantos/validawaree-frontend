@@ -1,7 +1,7 @@
 import React, { Fragment } from "react"; // eslint-disable-line
 import { connect } from "react-redux";
 
-import { Grid, Button } from "@material-ui/core";
+import { Grid, Button, withStyles } from "@material-ui/core";
 
 import { getLinearityResults } from "./actions";
 
@@ -10,6 +10,12 @@ import LinearityInputExperimentSize from "./LinearityInputExperimentSize";
 import LinearityInputMass from "./LinearityInputMass";
 import LinearityInputAnalyticalData from "./LinearityInputAnalyticalData";
 import LinearityResultBlock from "./LinearityResutBlock";
+
+const TextButton = withStyles({
+  root: {
+    fontSize: "2.5rem",
+  },
+})(Button);
 
 const components = [
   <LinearityInputVolume />,
@@ -41,7 +47,6 @@ class LinearityBlock extends React.Component {
 
   handleDispatch = (callback) => {
     this.props.handleLinearityCalculation(callback);
-    ;
   };
 
   render() {
@@ -51,34 +56,25 @@ class LinearityBlock extends React.Component {
           container
           spacing={3}
           direction="column"
-          justify="center"
-          alignItems="center"
+          style={{ minHeight: "80vh" }}
         >
-          <Grid item xs={12}>
-            {components[this.state.count]}
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            direction="row"
-            justify="flex-end"
-            alignItems="center"
-          >
+          <div style={{ margin: "40px" }}>{components[this.state.count]}</div>
+          <div style={{textAlign: "center"}}>
             {this.state.count < components.length - 2 ? (
-              <Button color="primary" onClick={() => this.handleClick()}>
+              <TextButton color="primary" onClick={() => this.handleClick()}>
                 Next
-              </Button>
+              </TextButton>
             ) : this.state.count < components.length - 1 ? (
-              <Button
+              <TextButton
                 color="primary"
                 onClick={() => this.handleDispatch(this.handleClick)}
               >
                 Calculate Linearity
-              </Button>
+              </TextButton>
             ) : (
               ``
             )}
-          </Grid>
+          </div>
         </Grid>
       </>
     );
@@ -95,9 +91,7 @@ const mapStateToProps = function (state) {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleLinearityCalculation: (callback) => {
-      dispatch(
-        getLinearityResults(callback)
-      );
+      dispatch(getLinearityResults(callback));
     },
   };
 };
