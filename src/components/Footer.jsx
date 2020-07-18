@@ -24,10 +24,6 @@ export default function Footer(props) {
     [classes.footer]: true,
     [classes.footerWhiteFont]: whiteFont,
   });
-  const aClasses = classNames({
-    [classes.a]: true,
-    [classes.footerWhiteFont]: whiteFont,
-  });
   return (
     <footer className={footerClasses}>
       <div className={classes.container}>
@@ -35,6 +31,7 @@ export default function Footer(props) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
+                id="gitHubLink"
                 href="https://github.com/abxsantos?tab=repositories"
                 className={classes.block}
                 target="_blank"
@@ -44,6 +41,7 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
+                id="linkedinLink"
                 href="https://www.linkedin.com/in/alexandrebxs/"
                 className={classes.block}
                 target="_blank"
@@ -53,6 +51,7 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
+                id="emailLink"
                 href="mailto:ale.bxsantos@gmail.com"
                 className={classes.block}
                 target="_blank"
@@ -62,8 +61,8 @@ export default function Footer(props) {
             </ListItem>
           </List>
         </div>
-        <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
+        <div id="copyright" className={classes.right}>
+          &copy; {new Date().getFullYear()} , made with{" "}
           <FreeBreakfastIcon className={classes.icon} /> by Alexandre Xavier for
           an open-source science.
         </div>

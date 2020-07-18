@@ -3,16 +3,17 @@ import { Link, withRouter } from "react-router-dom";
 
 import { Grid, Divider, Paper } from "@material-ui/core/";
 import TitlePage from "../TitlePage/TitlePage";
-import "./HomePage.css";
 import TryNowButton from "../../components/Linearity/components/button/TryNowButton";
+
+import "./HomePage.css";
 
 function HomePage() {
   return (
     <div>
-      <TitlePage />
+      <TitlePage className="titlePage"/>
       <Grid
         container
-        className="LinearityInput"
+        className="LinearityMainContainer"
         direction="column"
         alignItems="center"
         style={{
@@ -22,7 +23,7 @@ function HomePage() {
         }}
       >
         <Paper elevation={12} style={{ paddingBottom: "40px", marginTop: '-120 px'}}>
-          <div>
+          <>
             <div id="link-linearity">
               <Link id="nav-link" to="/linearity">
                 <TryNowButton/>
@@ -99,7 +100,7 @@ function HomePage() {
                 </Grid>
               </Grid>
             </section>
-          </div>
+          </>
         </Paper>
       </Grid>
     </div>
