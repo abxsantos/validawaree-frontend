@@ -19,7 +19,7 @@ const useStyles = makeStyles({
     maxHeight: 300,
   },
 });
-function LinearityCoefficientsTable(props) {
+export function LinearityCoefficientsTable(props) {
   const classes = useStyles();
 
   return (

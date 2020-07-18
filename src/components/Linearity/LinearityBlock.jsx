@@ -9,7 +9,7 @@ import LinearityInputVolume from "./LinearityInputVolume";
 import LinearityInputExperimentSize from "./LinearityInputExperimentSize";
 import LinearityInputMass from "./LinearityInputMass";
 import LinearityInputAnalyticalData from "./LinearityInputAnalyticalData";
-import LinearityResultBlock from "./LinearityResutBlock";
+import LinearityResults from "./LinearityResults";
 
 const TextButton = withStyles({
   root: {
@@ -22,7 +22,7 @@ const components = [
   <LinearityInputExperimentSize data-test="inputExperimentSize"/>,
   <LinearityInputMass data-test="inputMass"/>,
   <LinearityInputAnalyticalData data-test="inputAnalyticalData"/>,
-  <LinearityResultBlock data-test="resultBlock"/>,
+  <LinearityResults data-test="resultBlock"/>,
 ];
 
 export class LinearityBlock extends React.Component {

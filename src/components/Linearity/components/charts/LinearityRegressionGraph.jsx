@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from "recharts";
 
-const LinearityRegressionChart = (props) => {
+export const LinearityRegressionChart = (props) => {
   return (
     <div>
         <ComposedChart height={400} width={700} data={props.linearityChartData}>

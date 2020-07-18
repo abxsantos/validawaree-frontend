@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     maxHeight: 300
   }
 });
-function LinearityDataStatisticsTable(props) {
+export function LinearityDataStatisticsTable(props) {
   const classes = useStyles();
 
   return (

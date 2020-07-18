@@ -17,7 +17,7 @@ const useStyles = makeStyles({
     maxHeight: 300,
   },
 });
-function LinearityRegressionAnovaTable(props) {
+export function LinearityRegressionAnovaTable(props) {
   const classes = useStyles();
   return (
     <TableContainer className={classes.table} component={Paper}>
