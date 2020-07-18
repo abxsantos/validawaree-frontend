@@ -11,7 +11,7 @@ function LinearityPage() {
     <div id="page-container">
       <Grid
         container
-        className="Linearity"
+        className="LinearityMainContainer"
         justify="justify"
         direction="column"
         alignItems="center"
@@ -23,9 +23,7 @@ function LinearityPage() {
             width: "90%",
           }}
         >
-          <section id="linearity-section">
             <LinearityBlock />
-          </section>
         </Paper>
       </Grid>
     </div>
