@@ -3,7 +3,7 @@ body{
     margin: 0px;
     padding: 0px;
   }
-  #main-title {
+  #main-title-background {
     background-color: #272727;
   }
   
@@ -17,7 +17,7 @@ body{
     text-shadow: 1px 1px 5px #faf9f9;
   }
   
-  #subtitle {
+  .subtitle {
     margin-top: 0px;
     margin-bottom: 0px;
     padding-bottom: 400px;

@@ -9,14 +9,14 @@ function TilePage() {
     <>
       <Grid
         container
-        className='LinearityInput'
+        className='LinearityInputComponent'
         direction='column'
         alignItems='stretch'
       >
         <>
-          <section id='main-title'>
-            <h1>VALIDWAREE</h1>
-            <h6 id='subtitle'>A free analytical method validator</h6>
+          <section id='main-title-background'>
+            <h1 className='mainTitle'>VALIDWAREE</h1>
+            <h6 className='subtitle'>A free analytical method validator</h6>
           </section>
         </>
       </Grid>
