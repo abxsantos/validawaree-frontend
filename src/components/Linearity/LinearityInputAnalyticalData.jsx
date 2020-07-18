@@ -23,12 +23,12 @@ const useStyles = makeStyles({
   },
 });
 
-function LinearityInputAnalyticalData(props, handleClickFunction) {
+export function LinearityInputAnalyticalData(props) {
   const classes = useStyles();
 
   return (
     <>
-      <h2>Linearity Inputs</h2>
+      <h2 data-test="title">Linearity Inputs</h2>
 
       <Fade left cascade duration={1000} delay={500} distance="30px">
         <Grid
@@ -47,7 +47,7 @@ function LinearityInputAnalyticalData(props, handleClickFunction) {
               alignContents="row"
             >
               <TableContainer className={classes.table} component={Paper}>
-                <Table aria-label="simple table">
+                <Table data-test="simpleTable" aria-label="simple table">
                   {buildAnalticalDataRows(
                     props.numRows,
                     props.numColumns,
@@ -95,7 +95,7 @@ function buildAnalticalDataColumns(columns, row, props) {
   let tableCells = [];
   for (let column = 0; column < columns; ++column) {
     tableCells.push(
-      <TableCell align="right">
+      <TableCell  align="right">
         <TextField
           InputProps={{
             style: { fontSize: "16px" },
