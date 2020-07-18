@@ -6,7 +6,7 @@ import TitlePage from "./TitlePage";
 describe("TitlePage component", () => {
   describe("Must have a grid container", () => {
     const wrapper = shallow(<TitlePage />);
-    const gridComponent = wrapper.find(".LinearityInputComponent");
+    const gridComponent = wrapper.find(".LinearityMainContainer");
     it("The Grid component must be rendered", () => {
       expect(gridComponent.exists()).toBe(true);
     });

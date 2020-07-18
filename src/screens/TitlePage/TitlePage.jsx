@@ -9,7 +9,7 @@ function TilePage() {
     <>
       <Grid
         container
-        className='LinearityInputComponent'
+        className='LinearityMainContainer'
         direction='column'
         alignItems='stretch'
       >
