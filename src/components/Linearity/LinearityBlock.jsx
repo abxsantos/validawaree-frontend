@@ -18,14 +18,14 @@ const TextButton = withStyles({
 })(Button);
 
 const components = [
-  <LinearityInputVolume />,
-  <LinearityInputExperimentSize />,
-  <LinearityInputMass />,
-  <LinearityInputAnalyticalData />,
-  <LinearityResultBlock />,
+  <LinearityInputVolume data-test="inputVolume"/>,
+  <LinearityInputExperimentSize data-test="inputExperimentSize"/>,
+  <LinearityInputMass data-test="inputMass"/>,
+  <LinearityInputAnalyticalData data-test="inputAnalyticalData"/>,
+  <LinearityResultBlock data-test="resultBlock"/>,
 ];
 
-class LinearityBlock extends React.Component {
+export class LinearityBlock extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -53,6 +53,7 @@ class LinearityBlock extends React.Component {
     return (
       <>
         <Grid
+        data-test="MainContainer"
           container
           spacing={3}
           direction="column"
@@ -61,11 +62,12 @@ class LinearityBlock extends React.Component {
           <div style={{ margin: "40px" }}>{components[this.state.count]}</div>
           <div style={{textAlign: "center"}}>
             {this.state.count < components.length - 2 ? (
-              <TextButton color="primary" onClick={() => this.handleClick()}>
+              <TextButton data-test="nextButton"color="primary" onClick={() => this.handleClick()}>
                 Next
               </TextButton>
             ) : this.state.count < components.length - 1 ? (
               <TextButton
+                data-test="calculateLinearityButton"
                 color="primary"
                 onClick={() => this.handleDispatch(this.handleClick)}
               >
