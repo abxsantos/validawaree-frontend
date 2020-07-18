@@ -9,14 +9,14 @@ function TilePage() {
     <>
       <Grid
         container
-        className='LinearityMainContainer'
+        data-test='LinearityMainContainer'
         direction='column'
         alignItems='stretch'
       >
         <>
           <section id='main-title-background'>
-            <h1 className='mainTitle'>VALIDWAREE</h1>
-            <h6 className='subtitle'>A free analytical method validator</h6>
+            <h1 data-test='mainTitle'>VALIDWAREE</h1>
+            <h6 data-test='subtitle'>A free analytical method validator</h6>
           </section>
         </>
       </Grid>

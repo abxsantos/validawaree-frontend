@@ -6,7 +6,7 @@ import TitlePage from "./TitlePage";
 describe("TitlePage component", () => {
   describe("Must have a grid container", () => {
     const wrapper = shallow(<TitlePage />);
-    const gridComponent = wrapper.find(".LinearityMainContainer");
+    const gridComponent = wrapper.find(`[data-test="LinearityMainContainer"]`);
     it("The Grid component must be rendered", () => {
       expect(gridComponent.exists()).toBe(true);
     });
@@ -16,11 +16,11 @@ describe("TitlePage component", () => {
     });
     describe("The Grid component must have as children", () => {
       it("A Main title component that must be rendered", () => {
-        const mainTitleCompoment = gridComponent.find(".mainTitle");
+        const mainTitleCompoment = gridComponent.find(`[data-test="mainTitle"]`);
         expect(mainTitleCompoment.exists()).toBe(true);
       });
       it("A subtitle component that must be rendered", () => {
-        const subtitleCompoment = gridComponent.find(".subtitle");
+        const subtitleCompoment = gridComponent.find(`[data-test="subtitle"]`);
         expect(subtitleCompoment.exists()).toBe(true);
       });
     });

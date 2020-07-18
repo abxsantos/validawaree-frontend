@@ -13,20 +13,20 @@ export default function App() {
     <>
       <BrowserRouter>
         <Switch>
-          <ScrollToTop className="scrollToTopComponent">
+          <ScrollToTop data-test="scrollToTopComponent">
             <Route
-              className="homePageRoute"
+              data-test="homePageRoute"
               path="/"
               exact
               component={HomePage}
             />
             <Route
-            className="linearityPageRoute"
+            data-test="linearityPageRoute"
               path="/linearity"
               exact
               component={LinearityPage}
             />
-            <Footer className='footerComponent'/>
+            <Footer data-test='footerComponent'/>
           </ScrollToTop>
         </Switch>
       </BrowserRouter>

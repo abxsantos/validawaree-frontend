@@ -7,7 +7,7 @@ import LinearityBlock from "../../components/Linearity/LinearityBlock"
 describe("LinearityPage component", () => {
   describe("Must have a grid container", () => {
     const wrapper = shallow(<LinearityPage />);
-    const gridComponent = wrapper.find(".LinearityMainContainer");
+    const gridComponent = wrapper.find(`[data-test="LinearityMainContainer"]`);
     it("The grid container should be rendered", () => {
       expect(gridComponent.exists()).toBe(true);
     });

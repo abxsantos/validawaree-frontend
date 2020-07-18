@@ -31,7 +31,7 @@ export default function Footer(props) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                id="gitHubLink"
+                data-test="gitHubLink"
                 href="https://github.com/abxsantos?tab=repositories"
                 className={classes.block}
                 target="_blank"
@@ -41,7 +41,7 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                id="linkedinLink"
+                data-test="linkedinLink"
                 href="https://www.linkedin.com/in/alexandrebxs/"
                 className={classes.block}
                 target="_blank"
@@ -51,7 +51,7 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                id="emailLink"
+                data-test="emailLink"
                 href="mailto:ale.bxsantos@gmail.com"
                 className={classes.block}
                 target="_blank"
@@ -61,7 +61,7 @@ export default function Footer(props) {
             </ListItem>
           </List>
         </div>
-        <div id="copyright" className={classes.right}>
+        <div data-test="copyright" className={classes.right}>
           &copy; {new Date().getFullYear()} , made with{" "}
           <FreeBreakfastIcon className={classes.icon} /> by Alexandre Xavier for
           an open-source science.
